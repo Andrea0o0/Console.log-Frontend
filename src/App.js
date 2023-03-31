@@ -9,6 +9,8 @@ import Signup from './views/auth/Signup';
 import Login from './views/auth/Login';
 import PrivateView from './views/PrivateView';
 import IsPrivate from './components/IsPrivate';
+import Katas from './views/Katas';
+import KataDetail from './views/KataDetail';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/katas" element={<Katas />}/>
+        <Route path="/katas/:kataId" element={<KataDetail />}/>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />

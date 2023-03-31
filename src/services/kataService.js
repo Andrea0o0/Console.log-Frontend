@@ -34,9 +34,6 @@ class KataService {
   deleteKata(id) {
     return this.api.delete(`/${id}`).then(({ data }) => data).catch(err => console.error(err));
   }
-
-
-
 }
 
 const kataService = new KataService();

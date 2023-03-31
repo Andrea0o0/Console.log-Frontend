@@ -1,3 +1,116 @@
-.active {
-  color: green;
+ html {
+  margin: 0;
+  padding: 0;
+  background-color: #141a1f;
 }
+
+.active {
+  color: rgb(255, 255, 255);
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.Kata a, .home, .home > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.home > * {
+  width: 80%;
+}
+
+.level {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.Kata a h3{
+  width: 80%;
+  padding-left: 4%;
+}
+
+.Kata a h3:hover{
+  color: white;
+}
+
+
+.Kata a div {
+  width: 15%;
+  font-size: small;
+  font-weight: bold;
+}
+
+.Kata a div img, .Kata a div div{
+  width: 100%;
+}
+
+.Kata {
+  width: 100%;
+  margin: 3%;
+  padding: 2%;
+  border-radius: 20px;
+  background-color: #212a33;
+}
+
+.img_level {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* LEVELS COLORS HOVER & NOT */
+/* LEVEL 5 */
+.hover_5 a div div, .hover_5 a h3, .hover_5 a h3:hover {
+  color: #A8D2F2;
+}
+
+._5 a div div, ._5 a h3, ._5 a h3:hover {
+  color: #5DA0D7;
+}
+
+/* LEVEL 4 */
+.hover_4 a div div, .hover_4 a h3, .hover_4 a h3:hover {
+  color: #C5A3CD;
+}
+
+._4 a div div, ._4 a h3, ._4 a h3:hover {
+  color: #9264A7;
+}
+
+/* LEVEL 3 */
+.hover_3 a div div, .hover_3 a h3, .hover_3 a h3:hover {
+  color: #F08DB9;
+}
+
+._3 a div div, ._3 a h3, ._3 a h3:hover {
+  color: #E94792;
+}
+
+/* LEVEL 2 */
+.hover_2 a div div, .hover_2 a h3, .hover_2 a h3:hover {
+  color: #F4B67D;
+}
+
+._2 a div div, ._2 a h3, ._2 a h3:hover {
+  color: #F6A240;
+}
+
+/* LEVEL 1 */
+.hover_1 a div div, .hover_1 a h3, .hover_1 a h3:hover {
+  color: #B5CF89;
+}
+
+._1 a div div, ._1 a h3, ._1 a h3:hover {
+  color: #9CC763;
+}
+
