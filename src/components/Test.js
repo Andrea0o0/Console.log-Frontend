@@ -1,32 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default function Test({ input,setAddSolution,setJs,test_function,output}) {
-  // const test = [
-  //   {
-  //     arguments:'[2,3]',
-  //     return:5
-  //   },
-  //   {
-  //     arguments:'[2,1]',
-  //     return:3
-  //   },
-  //   {
-  //     arguments:'[2,3,1]',
-  //     return:6
-  //   },
-  //   {
-  //     arguments:'[5,3]',
-  //     return:8
-  //   },
-  // ]
-
-  // function input (array) {
-  //   const sum = array.reduce(
-  //     (accum, cValue) => accum + cValue,
-  //     0)
-  //   return sum
-  //   }
- 
+export default function Test({ input,setAddSolution,setJs,test_function,output}) { 
 
   const [newfunction, setNewFunction] = useState(input);
   const [validation,setValidation] = useState(0)
@@ -42,11 +16,8 @@ useEffect(()=> {
     try {
       output.map((elem,i) => {
       const input = test_function.split('${input}')
-      // const function_input = eval(`${input}${elem[0]}${input[1]}`)
-      console.log(`${input[0]}${elem[0]}${input[1]}`)
-      // let input = elem.arguments
-      console.log(test_function)
-      const response = eval(test_function)
+      const function_input = `${newfunction} ${input[0]}'${elem[0]}'${input[1]}`
+      const response = eval(function_input)
       response === elem[1] && setValidation(prev => prev + 1)
       response === undefined && setError('undefined try again')
     })
