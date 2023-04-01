@@ -114,3 +114,8 @@ a {
   color: #9CC763;
 }
 
+.border {
+  border: 0.3px solid rgba(147, 143, 143, 0.743);
+  border-radius: 5px;
+  padding: 1% 1%;
+}

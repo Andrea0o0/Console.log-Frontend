@@ -1,87 +1,68 @@
-import React, { useState, useEffect } from 'react'
+import React,{useEffect, useState} from "react";
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/material.css'
+import 'codemirror/mode/javascript/javascript'
+import { Controlled as ControlledEditor } from 'react-codemirror2'
 
-export default function Form({ input,setAddFunction,reset}) {
-  const test = [
-    {
-      arguments:'[2,3]',
-      return:5
-    },
-    {
-      arguments:'[2,1]',
-      return:3
-    },
-    {
-      arguments:'[2,3,1]',
-      return:6
-    },
-    {
-      arguments:'[5,3]',
-      return:8
-    },
-  ]
 
-  // function input (array) {
-  //   const sum = array.reduce(
-  //     (accum, cValue) => accum + cValue,
-  //     0)
-  //   return sum
-  //   }
- 
+export default function Editor({ displayName,value,onChange }){
 
-  const [newfunction, setNewFunction] = useState(input);
-  const [validation,setValidation] = useState(0)
-  const [error,setError] = useState(false)
+    const [open,setOpen] = useState(true)
+    const [selected,setSelected] = useState('')
+    const [key,setKey] = useState('')
+    const [input,setInput] = useState(value)
 
-useEffect(()=> {
-  setNewFunction(input)
-  },[input])
-  
-  const handleTestInput = (e) => {
-    e.preventDefault()
-    setValidation(0)
-    try {
-      test.map((elem,i) => {
-      let function_validation = `${newfunction} input(${elem.arguments})`
-      const response = eval(function_validation)
-      response === elem.return && setValidation(prev => prev + 1)
-      response === undefined && setError('undefined try again')
-    })
-    } catch (error) {
-      setError(error.message)
+    const handleChange = (editor,data,value) => {
+        onChange(value)
     }
-    finally{
-      validation === test.length && e.target.name ==='submit' ?handleSubmit(): validation === test.length && handleRunTest()
-    } 
-  }
 
-  const handleReset = () => {
-    setAddFunction(reset)
-  }
+    const handleSelect = (event,cursor) => {
+        setSelected({
+            head:cursor.ranges[0].head.line,
+            tail:cursor.ranges[0].anchor.line})
+    }
 
-  const handleRunTest = () => {
-    // console.log(true)
-    setError(false)
-  }
+    const handleKey = (key) => setKey(prev => key === "ControlLeft" ? key:prev === "ControlLeft" && key === "Backslash" ? [prev,key]:'' )
+  
+    const handleKeyPress = (n,event) => {
+        handleKey(event.code)
+    }
+    
+    const handleComment = () => {
+        let lines = value.split(/[\n\r]+/)
+        let newvalue = ''
+        lines.forEach((elem,i) => newvalue += i>=selected.head && i<=selected.tail ? elem.includes('//') ? i===lines.length-1 ? `${elem.replaceAll('//','')}`: `${elem.replaceAll('//','')}\n`: i===lines.length-1 ? `// ${elem}`:`// ${elem}\n`: i===lines.length-1 ? `${elem}`:`${elem}\n`)
+        onChange(newvalue)
+    }
 
-  const handleSubmit = () => {
-    // console.log('submit')
-    setError(false)
-    setAddFunction(newfunction)
-  }
+    useEffect(() => {
+        key.length === 2 && handleComment()
+    },[key])
+    
 
-  return (
-    <div className="form_container">
-      <form onSubmit={handleTestInput}>
-        <p>Add up all the arguments</p>
-        <button type="submit" className="btn">Run test</button>
-        {validation === test.length ? 
-      <button type="sumbit" name="submit" onClick={handleSubmit} style={{backgroundColor:'green'}}>Submit</button>:
-      <button style={{backgroundColor:'red'}}>Submit</button>}
-      </form>
-      <button onClick={handleReset}>Reset</button>
-      {validation === test.length && <h1 style={{color:'green'}}>WELL DONE</h1> }
-      {error !== false && <h3 style={{color:'red'}}>{error}</h3>}
-      
-    </div>
-  )
+    return (
+        <>
+            <div className="pane top-pane">
+                <div className={`editor-container ${open ? '':'collapsed'}`}>
+                    <div className="editor-title">
+                    {displayName}
+                    </div>
+                    <ControlledEditor
+                    onBeforeChange={handleChange}
+                    onSelection={handleSelect}
+                    onKeyUp={handleKeyPress}
+                    value={value}
+                    className='code-mirror-wrapper'
+                    options={{
+                        lineWrapping:true,
+                        lint:true,
+                        mode:'javascript',
+                        theme: 'material',
+                        lineNumbers:true
+                    }}
+                    />
+                </div>
+            </div>
+        </>
+    )
 }

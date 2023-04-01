@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams,Link } from 'react-router-dom';
 import kataService from '../services/kataService';
+import { Controlled as ControlledEditor } from 'react-codemirror2'
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/material.css'
+import 'codemirror/mode/javascript/javascript'
+import ReactDOMServer from "react-dom/server"
 
 export default function KataDetail() {
   const { kataId } = useParams();
@@ -11,10 +16,9 @@ export default function KataDetail() {
   const getKata = async () => {
     try {
       const response = await kataService.getOneKata(kataId);
-      setLoading(false);
       setkata(response);
+      setLoading(false);
       setError(false);
-      console.log(response);
     } catch (error) {
       console.error(error)
       setLoading(false);

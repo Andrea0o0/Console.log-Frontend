@@ -1,68 +1,91 @@
-import React,{useEffect, useState} from "react";
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/material.css'
-import 'codemirror/mode/javascript/javascript'
-import { Controlled as ControlledEditor } from 'react-codemirror2'
+import React, { useState, useEffect } from 'react'
 
+export default function Test({ input,setAddSolution,setJs,test_function,output}) {
+  // const test = [
+  //   {
+  //     arguments:'[2,3]',
+  //     return:5
+  //   },
+  //   {
+  //     arguments:'[2,1]',
+  //     return:3
+  //   },
+  //   {
+  //     arguments:'[2,3,1]',
+  //     return:6
+  //   },
+  //   {
+  //     arguments:'[5,3]',
+  //     return:8
+  //   },
+  // ]
 
-export default function Test({ displayName,value,onChange }){
+  // function input (array) {
+  //   const sum = array.reduce(
+  //     (accum, cValue) => accum + cValue,
+  //     0)
+  //   return sum
+  //   }
+ 
 
-    const [open,setOpen] = useState(true)
-    const [selected,setSelected] = useState('')
-    const [key,setKey] = useState('')
-    // const [input,setInput] = useState(value)
+  const [newfunction, setNewFunction] = useState(input);
+  const [validation,setValidation] = useState(0)
+  const [error,setError] = useState(false)
 
-    const handleChange = (editor,data,value) => {
-        onChange(value)
-    }
-
-    const handleSelect = (event,cursor) => {
-        setSelected({
-            head:cursor.ranges[0].head.line,
-            tail:cursor.ranges[0].anchor.line})
-    }
-
-    const handleKey = (key) => setKey(prev => key === "ControlLeft" ? key:prev === "ControlLeft" && key === "Backslash" ? [prev,key]:'' )
+useEffect(()=> {
+  setNewFunction(input)
+  },[input])
   
-    const handleKeyPress = (n,event) => {
-        handleKey(event.code)
+  const handleTestInput = (e) => {
+    e.preventDefault()
+    setValidation(0)
+    try {
+      output.map((elem,i) => {
+      const input = test_function.split('${input}')
+      // const function_input = eval(`${input}${elem[0]}${input[1]}`)
+      console.log(`${input[0]}${elem[0]}${input[1]}`)
+      // let input = elem.arguments
+      console.log(test_function)
+      const response = eval(test_function)
+      response === elem[1] && setValidation(prev => prev + 1)
+      response === undefined && setError('undefined try again')
+    })
+    } catch (error) {
+      setError(error.message)
     }
-    
-    const handleComment = () => {
-        let lines = value.split(/[\n\r]+/)
-        let newvalue = ''
-        lines.forEach((elem,i) => newvalue += i>=selected.head && i<=selected.tail ? elem.includes('//') ? i===lines.length-1 ? `${elem.replaceAll('//','')}`: `${elem.replaceAll('//','')}\n`: i===lines.length-1 ? `// ${elem}`:`// ${elem}\n`: i===lines.length-1 ? `${elem}`:`${elem}\n`)
-        onChange(newvalue)
-    }
+    finally{
+      validation === output.length && e.target.name ==='submit' ?handleSubmit(): validation === output.length && handleRunTest()
+    } 
+  }
 
-    useEffect(() => {
-        key.length === 2 && handleComment()
-    },[key])
-    
+  const handleReset = () => {
+    setJs()
+  }
 
-    return (
-        <>
-            <div className="pane top-pane">
-                <div className={`editor-container ${open ? '':'collapsed'}`}>
-                    <div className="editor-title">
-                    {displayName}
-                    </div>
-                    <ControlledEditor
-                    onBeforeChange={handleChange}
-                    onSelection={handleSelect}
-                    onKeyUp={handleKeyPress}
-                    value={value}
-                    className='code-mirror-wrapper'
-                    options={{
-                        lineWrapping:true,
-                        lint:true,
-                        mode:'javascript',
-                        theme: 'material',
-                        lineNumbers:true
-                    }}
-                    />
-                </div>
-            </div>
-        </>
-    )
+  const handleRunTest = () => {
+    // console.log(true)
+    setError(false)
+  }
+
+  const handleSubmit = () => {
+    // console.log('submit')
+    setError(false)
+    setAddSolution(newfunction)
+  }
+
+  return (
+    <div className="form_container">
+      <form onSubmit={handleTestInput}>
+        <p>Add up all the arguments</p>
+        <button type="submit" className="btn">Run test</button>
+        {validation === output.length ? 
+      <button type="sumbit" name="submit" onClick={handleSubmit} style={{backgroundColor:'green'}}>Submit</button>:
+      <button style={{backgroundColor:'red'}}>Submit</button>}
+      </form>
+      <button onClick={handleReset}>Reset</button>
+      {validation === output.length && <h1 style={{color:'green'}}>WELL DONE</h1> }
+      {error !== false && <h3 style={{color:'red'}}>{error}</h3>}
+      
+    </div>
+  )
 }

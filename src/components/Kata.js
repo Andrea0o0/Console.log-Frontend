@@ -20,7 +20,6 @@ export default function Kata({ kata : {name, level, _id} }) {
     }
 
     const handleHover = () => {
-        console.log(true)
         setHover(prev => !prev)
     }
 
