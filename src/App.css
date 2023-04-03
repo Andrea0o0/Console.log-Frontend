@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   background-color: #141a1f;
+  color: white;
 }
 
 .active {
@@ -118,4 +119,59 @@ a {
   border: 0.3px solid rgba(147, 143, 143, 0.743);
   border-radius: 5px;
   padding: 1% 1%;
+}
+
+.highlight {
+  color: rgb(120, 161, 196);
+}
+
+/* CODEMIRROR */
+
+
+.top-pane {
+  background-color: hsl(225,6%,25%);
+}
+
+.pane {
+  height: 50vh;
+  display: flex;
+}
+
+.editor-container {
+  flex-grow: 1;
+  flex-basis: 0;
+  display: flex;
+  flex-direction: column;
+  padding: .5rem;
+  background-color: hsl(225,6%,25%);
+}
+
+.editor-container.collapsed {
+  flex-grow: 0;
+}
+
+.editor-container.collapsed .CodeMirror-scroll {
+  position: absolute;
+
+}
+
+.editor-title {
+  display: flex;
+  justify-content: space-between;
+  background-color: hsl(225,6%,13%);
+  color: white;
+  padding: .5rem;
+  border-top-right-radius: .5rem;
+  border-top-left-radius: .5rem;
+}
+
+.CodeMirror {
+  height: 100% !important;
+}
+
+.code-mirror-wrapper {
+  flex-grow: 1;
+  border-bottom-right-radius: .5rem;
+  border-bottom-left-radius: .5rem;
+  overflow: hidden;
 }

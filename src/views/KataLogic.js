@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import { useParams,Link } from 'react-router-dom';
+import { useParams,Link, Outlet } from 'react-router-dom';
 import Editor from '../components/Editor'
 import useLocalStorage from "../hooks/useLocalStorage";
 import Test from "../components/Test";
@@ -53,6 +53,7 @@ export default function KataLogic(){
         {loading && <p>Loading...</p>}
       {!loading && kata && 
       <>   
+      <Outlet/>
       <Test input={js} 
         // input,setAddFunction,reset
         setAddSolution={handleAddSolution} reset={initialState}  setJs={handleReset} test_function={kata.input} output={kata.output}></Test> 
