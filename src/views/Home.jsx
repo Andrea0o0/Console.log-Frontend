@@ -3,6 +3,7 @@ import kataService from '../services/kataService';
 import SearchInput from '../components/SearchInput';
 import Kata from '../components/Kata';
 
+
 export default function Home() {
 
   const [katas,setKatas] = useState([])
@@ -13,7 +14,6 @@ export default function Home() {
     try {
       const response = await kataService.getKatas()
       setKatas(response)
-      console.log(response)
       setLoading(false)
     } catch (error) {
       console.error(error)

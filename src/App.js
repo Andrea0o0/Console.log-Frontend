@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Home from './views/Home';
 import Navbar from './components/Navbar';
@@ -9,8 +9,15 @@ import Signup from './views/auth/Signup';
 import Login from './views/auth/Login';
 import PrivateView from './views/PrivateView';
 import IsPrivate from './components/IsPrivate';
-import Katas from './views/KataLogic';
+import KataLogic from './views/KataLogic';
 import KataDetail from './views/KataDetail';
+import Output from './components/Output';
+import Instructions from './components/Instructions';
+import Pastsolutions from './components/PastSolutions';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
 
 function App() {
   return (
@@ -19,7 +26,11 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/katas/:kataId" element={<KataDetail />}/><Route path="/kata/practise/:kataId" element={<Katas />}/>
+        <Route path="/katas/:kataId" element={<KataDetail />}/><Route path="/kata/practise/:kataId/output" element={<KataLogic />}>
+          <Route path="" element={<Output />}/>
+          <Route path="instructions" element={<Instructions />}/>
+          <Route path="pastsolutions" element={<Pastsolutions />}/>
+        </Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
@@ -31,3 +42,4 @@ function App() {
 }
 
 export default App;
+library.add(fab, fas, far)

@@ -44,11 +44,11 @@ export default function KataDetail() {
         return (
           <div  key={i}>
             <div dangerouslySetInnerHTML={{__html: elem}}></div>
-            {i+1 !== instructions.length && <ControlledEditor value={example[0]} options={{    lineWrapping:true, mode:'javascript', theme: 'material', readOnly:true}}/>}
+            {i+1 !== instructions.length && <ControlledEditor value={example[i]} options={{    lineWrapping:true, mode:'javascript', theme: 'material', readOnly:true}}/>}
           </div>
           )
       })}
-      <button className="btn" style={{ marginLeft: '10px' }}><Link to={`/kata/practise/${kata._id}`}>Start</Link></button>
+      <button className="btn" style={{ marginLeft: '10px' }}><Link to={`/kata/practise/${kata._id}/output`}>Start</Link></button>
     </div>}
       {error && <p>Something went wrong. Couldn't find your kata</p>}
     </div>

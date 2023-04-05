@@ -5,12 +5,12 @@ import 'codemirror/mode/javascript/javascript'
 import { Controlled as ControlledEditor } from 'react-codemirror2'
 
 
-export default function Editor({ displayName,value,onChange }){
+export default function Editor({ displayName,value,onChange,level }){
 
     const [open,setOpen] = useState(true)
     const [selected,setSelected] = useState('')
     const [key,setKey] = useState('')
-    const [input,setInput] = useState(value)
+    const [hover,setHover] = useState(false)
 
     const handleChange = (editor,data,value) => {
         onChange(value)
@@ -39,13 +39,17 @@ export default function Editor({ displayName,value,onChange }){
         key.length === 2 && handleComment()
     },[key])
     
+    const handleHover = () => {
+        setHover(prev => !prev)
+    }
 
     return (
         <>
             <div className="pane top-pane">
                 <div className={`editor-container ${open ? '':'collapsed'}`}>
-                    <div className="editor-title">
-                    {displayName}
+                    <div className={`editor-title ${hover ? `hover_${level}`:`_${level}`}`} onMouseEnter={handleHover}
+    onMouseLeave={handleHover}>
+                    <p>{displayName}</p>
                     </div>
                     <ControlledEditor
                     onBeforeChange={handleChange}

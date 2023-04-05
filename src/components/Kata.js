@@ -25,6 +25,7 @@ export default function Kata({ kata : {name, level, _id} }) {
 
     useEffect(() => {
         handleSrcImage()
+        // eslint-disable-next-line
     },[hover])
 
   return (    
