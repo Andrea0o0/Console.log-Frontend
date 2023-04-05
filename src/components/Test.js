@@ -11,11 +11,9 @@ useEffect(()=> {
   },[input])
 
   const handleOutput = (output,name,response) => {
-    console.log(output,name,response)
-    let result = Object.assign({}, newoutput)
-    output === 0 ? result[name] = response:
-    name === 'result' ? result.output[output] = {[name]:response}:
-    result.output[output][name] = response 
+    let result = Object.assign({}, initialOutput)
+    output === initialOutput ? setNewOutput(initialOutput):output === 0 ? result[name] = response:
+    name === 'result' ? result.output[output] = {[name]:response}:result.output[output][name] = response 
     setNewOutput(result)
     
   }
@@ -26,13 +24,11 @@ useEffect(()=> {
   
 
   useEffect(()=> {
-    // console.log(newoutput)
     setOutput(newoutput)
     },[newoutput])
 
   const handleResetOutput = () => {
-    handleOutput(0,'error','newerror')
-    setNewOutput(initialOutput)
+    handleOutput(initialOutput)
     setValidation(0)
   }
 

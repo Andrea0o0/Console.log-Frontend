@@ -6,6 +6,7 @@
 :root {
   --output-color-red: #c05c48;
   --output-color-green: #67b04b;
+  --output-color-no-select:#384655;
   --dark-color-red-bg: rgba(168, 64, 64, 0.356);
   --background-color: #1a1e24;
   --background-kata: #212a33;
@@ -31,7 +32,7 @@
 }
 
 .active {
-  color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255) !important;
 }
 
 li {
@@ -100,7 +101,7 @@ a {
   color: var(--level-5-hover-blue);
 }
 
-._5 a div div, ._5 a h3, ._5 a h3:hover, ._5 p {
+._5 a div div, ._5 a h3, ._5 a h3:hover, ._5 p, ._5, ._5 ul li a {
   color: var(--level-5-blue);
 }
 
@@ -109,7 +110,7 @@ a {
   color: var(--level-4-hover-purple);
 }
 
-._4 a div div, ._4 a h3, ._4 a h3:hover, ._4 p {
+._4 a div div, ._4 a h3, ._4 a h3:hover, ._4 p, ._4, ._4 ul li a {
   color: var(--level-4-purple);
 }
 
@@ -118,7 +119,7 @@ a {
   color: var(--level-3-hover-pink);
 }
 
-._3 a div div, ._3 a h3, ._3 a h3:hover, ._3 p {
+._3 a div div, ._3 a h3, ._3 a h3:hover, ._3 p, ._3, ._3 ul li a {
   color: var(--level-3-pink);
 }
 
@@ -127,7 +128,7 @@ a {
   color: var(--level-2-hover-orange);
 }
 
-._2 a div div, ._2 a h3, ._2 a h3:hover, ._2 p {
+._2 a div div, ._2 a h3, ._2 a h3:hover, ._2 p, ._2, ._2 ul li a {
   color: var(--level-2-orange);
 }
 
@@ -136,7 +137,7 @@ a {
   color: var(--level-1-hover-green);
 }
 
-._1 a div div, ._1 a h3, ._1 a h3:hover, ._1 p {
+._1 a div div, ._1 a h3, ._1 a h3:hover, ._1 p, ._1,._1 ul li a {
   color: var(--level-1-green);
 }
 
@@ -162,7 +163,6 @@ a {
   flex-basis: 0;
   display: flex;
   flex-direction: column;
-  padding: .5rem;
   background-color: var(--background-color);
 }
 
@@ -181,12 +181,13 @@ a {
   background-color: var(--background-kata);
   color: white;
   padding: .5rem;
-  border-top-right-radius: .5rem;
-  border-top-left-radius: .5rem;
+  margin: 1%;
+  border-radius: .6rem;
 }
 
 .CodeMirror {
   height: 100% !important;
+  border-radius: .5rem;
 }
 
 .code-mirror-wrapper {
@@ -194,10 +195,31 @@ a {
   border-bottom-right-radius: .5rem;
   border-bottom-left-radius: .5rem;
   overflow: hidden;
+  margin: 0% 1%;
 }
 
 
 /* OUTPUT */
+@media only screen and (min-width: 768px) {
+.kata_display {
+    display: flex;
+    width: 97%;
+    justify-content: space-evenly;
+  }
+
+.kata_display_1, .kata_display_2 {
+  width: 50%;
+  padding: 1%;
+}
+}
+
+.kata_display_1 ul li {
+  text-align: center;
+}
+
+.kata_display_1 ul li a {
+  padding: 1%;
+}
 
 .output_red {
   color:var(--output-color-red);
@@ -240,11 +262,14 @@ a {
   border: 1px solid gray;
 }
 
-.output {
+.output, .output_empty {
   margin: 1%;
   border: solid 1.5px;
   border-radius: 10px;
-  padding: 2% 0%;
+  padding: 2%;
+}
+
+.output {
   color: white;
 }
 

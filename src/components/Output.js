@@ -7,7 +7,7 @@ import { useOutletContext } from "react-router-dom";
 // #67b04b green 
 
 export default function Output(){
-    const {output,name} = useOutletContext();
+    const {output,kata} = useOutletContext();
 
     const [newOutput,setNewOutput] = useState(false)
     // const [newError,setNewError] = useState('')
@@ -53,7 +53,6 @@ export default function Output(){
         // setCollapsible()
 
     },[])
-    console.log(output)
 
     return (
         <>
@@ -67,7 +66,7 @@ export default function Output(){
         </div>
 
         {/* Your results will be shown here. */}
-        {Object.keys(newOutput).length > 0 && 
+        {Object.keys(newOutput).length > 0 ? 
         <div className={`output ${newValidation === Object.keys(newOutput).length ? 'output_border_green':'output_border_red'}`}>
             <div className="outputpane">
                 <p>Time: {Math.floor(Math.random()*400)+400}</p>
@@ -87,7 +86,7 @@ export default function Output(){
                 <div>
                     <div className="flex_icon">
                         <FontAwesomeIcon icon="fa-solid fa-angle-right" size="sm"/>
-                        <p>{name}</p>
+                        <p>{kata.name}</p>
                     </div>
                     {Object.keys(newOutput).map((key,i) =>
                     (<div key={i}>
@@ -124,7 +123,8 @@ export default function Output(){
                 </div>
                 {newValidation === Object.keys(newOutput).length && <div className="output_green output_congratulations">{`You have passed all of the tests! :)`}</div>}
             </div>
-        </div>
+        </div>:
+        <div className={`output_empty _${kata.level}`} style={{height:'42vh'}}>Your results will be shown here.</div>
         }
         </>
     )

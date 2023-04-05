@@ -59,27 +59,27 @@ export default function KataLogic(){
         <>     
         {loading && <p>Loading...</p>}
       {!loading && kata && 
-      <>   
       <div>
-      <Kata kata={kata}/>
-        <ul>
-          <li><NavLink to={`/kata/practise/${kata._id}/output`}>Output</NavLink></li>
-          {/* <li onClick={()=>setOutputToggle(prev => !prev)}>Output</li> */}
-          <li><NavLink to={`/kata/practise/${kata._id}/instructions`}>Instructions</NavLink></li>
-          <li><NavLink to={`/kata/practise/${kata._id}/pastsolutions`}>Past Solutions</NavLink></li>
-        </ul>
-        {/* {outputToggle && <Output name={kata.name} output={output}/>} */}
-        <Outlet context={{example:kata.example,instructions:kata.instructions.split("<ControlledEditor/>"),output:output,name:kata.name}} />
-      </div>
-      <div> 
-        <Editor language='javascript' displayName={`Solution => ${kata.name}`} value={js} onChange={setJs} level={kata.level}/>
-        <Test input={js} 
-        setAddSolution={handleAddSolution} reset={initialState}  setJs={handleReset} test_function={kata.input} output={kata.output} kata={kata} setOutput={handleOutput} initialOutput={initialOutput}></Test>
-      </div>
-        
-      </>  
-      }   
-            
+        <Kata kata={kata}/>
+        <div className='kata_display'>
+          <div className={`kata_display_1 _${kata.level}`}>
+            <ul className='editor-title'>
+              <li style={{width:'24%'}}><NavLink to={`/kata/practise/${kata._id}/output`}>Output</NavLink></li>
+              {/* <li onClick={()=>setOutputToggle(prev => !prev)}>Output</li> */}
+              <li><NavLink to={`/kata/practise/${kata._id}/instructions`}>Instructions</NavLink></li>
+              <li style={{width:'38%'}}><NavLink to={`/kata/practise/${kata._id}/pastsolutions`}>Past Solutions</NavLink></li>
+            </ul>
+            {/* {outputToggle && <Output name={kata.name} output={output}/>} */}
+            <Outlet context={{example:kata.example,instructions:kata.instructions.split("<ControlledEditor/>"),output:output,kata:kata}} />
+          </div>          
+          <div className='kata_display_2'> 
+              <Editor language='javascript' displayName={`Solution => ${kata.name}`} value={js} onChange={setJs} level={kata.level}/>
+              <Test input={js} 
+              setAddSolution={handleAddSolution} reset={initialState}  setJs={handleReset} test_function={kata.input} output={kata.output} kata={kata} setOutput={handleOutput} initialOutput={initialOutput}></Test>
+          </div>
+        </div>
+      </div>          
+      }     
         </>
     )
 }
