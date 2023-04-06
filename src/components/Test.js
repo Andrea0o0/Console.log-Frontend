@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default function Test({ input,setAddSolution,setJs,test_function,output,setOutput,initialOutput}) { 
+export default function Test({ input,setAddSolution,setJs,test_function,output,setOutput,initialOutput,level}) { 
 
   const [newfunction, setNewFunction] = useState(input);
   const [newoutput,setNewOutput] = useState(initialOutput)
@@ -40,9 +40,7 @@ useEffect(()=> {
       outputValidation.map((elem,i) => {
       const callfunction = test_function.split('${input}')
       const input = elem[0]
-      console.log(typeof input)
       const function_input = `${newfunction} ${callfunction[0]}${input}${callfunction[1]}`
-      console.log(function_input)
       const response = eval(function_input)
       let consolesfunction = ''
       if(function_input.includes('return')){
@@ -62,10 +60,9 @@ useEffect(()=> {
     })
     } catch (error) {
       handleOutput(0,'error',`SyntaxError: ${error.message}`)
-      console.log(error)
     }
     finally{
-      outputValidation.length === Object.keys(newoutput.output).length && e.nativeEvent.submitter.name ==='Submit' ? handleSubmit():setAddSolution(newfunction,false)
+      validation === Object.keys(newoutput.output).length && e.nativeEvent.submitter.name ==='Submit' ? handleSubmit():setAddSolution(newfunction,false)
     } 
   }
 
@@ -74,17 +71,21 @@ useEffect(()=> {
   }
 
   const handleSubmit = () => {
-    setAddSolution(newfunction,true)
-  }
+      setAddSolution(newfunction,true)
+    }
 
+  const handleBtns = (e) => {
+    e.nativeEvent.submitter.name = 'Reset' ? handleReset():handleTestInput(e)
+  }
+  
   return (
     <div className="form_container">
-      <form onSubmit={handleTestInput}>
+      <form className={`btns_output btn_${level}`} onSubmit={handleBtns}>
         <button name='Run' type="submit" className="btn">Run test</button>
-      <button>Submit</button>
+      <button className={`${Object.keys(newoutput.output).length <= 0 ? "":  validation === Object.keys(newoutput.output).length ? 'btn_green':'btn_red'}`} name='Submit'>Submit</button>
+      <button name='Reset'>Reset</button>
       </form>
-      <button onClick={handleReset}>Reset</button>
-      
+           
       {/* nativeEvent.submitter.name */}
       
     </div>

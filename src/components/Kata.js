@@ -11,7 +11,7 @@ import L3_hover from '../assets/images/levels/3 HOVER.svg'
 import L4_hover from '../assets/images/levels/4 HOVER.svg'
 import L5_hover from '../assets/images/levels/5 HOVER.svg'
 
-export default function Kata({ kata : {name, level, _id} }) {
+export default function Kata({ kata : {name, level, _id},practise }) {
     const [hover,setHover] = useState(false)
     const [srcImage,setSrcImage] = useState('')
 
@@ -31,13 +31,21 @@ export default function Kata({ kata : {name, level, _id} }) {
   return (    
     <div className={`Kata card ${hover ? `hover_${level}`:`_${level}`}`} onMouseEnter={handleHover}
     onMouseLeave={handleHover}>
-        <Link to={`/katas/${_id}`}>
+        {!practise ? 
+        (<Link to={`/katas/${_id}`}>
             <div className='level'>
                 <img src={srcImage} alt={`Level${level}`}/>
                 <div className='img_level'>{`${level}JS`}</div>
             </div>
             <h3>{name}</h3> 
-        </Link>
+        </Link>):
+        (<a>
+            <div className='level'>
+                <img src={srcImage} alt={`Level${level}`}/>
+                <div className='img_level'>{`${level}JS`}</div>
+            </div>
+            <h3>{name}</h3> 
+        </a>)}
     </div>
    
       
