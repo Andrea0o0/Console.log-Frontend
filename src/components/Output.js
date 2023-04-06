@@ -43,16 +43,7 @@ export default function Output(){
         handleValidation(output.validation)
         handleError(output.error)        
         // setCollapsible()
-
     },[output])
-
-    useEffect(()=>{
-        handleOutput(output.output)
-        handleValidation(output.validation)
-        handleError(output.error)        
-        // setCollapsible()
-
-    },[])
 
     return (
         <>
@@ -69,7 +60,7 @@ export default function Output(){
         {Object.keys(newOutput).length > 0 || newError !== '' ? 
         <div className={`output ${newValidation === Object.keys(newOutput).length && newError === '' ? 'output_border_green':'output_border_red'}`}>
             <div className="outputpane">
-                <p>Time: {Math.floor(Math.random()*400)+400}</p>
+                <p>Time: {output.random}</p>
                 <p className={newValidation === Object.keys(newOutput).length && newError === '' ? 'output_green':''}>Passed: {newValidation} </p>
                 <p className={newValidation !== Object.keys(newOutput).length || newError !== '' ? 'output_red':''}>Failed: {Object.keys(newOutput).length-newValidation + (newError === '' ? 0:1)} </p>
             </div>
@@ -97,7 +88,7 @@ export default function Output(){
                                         <FontAwesomeIcon icon="fa-solid fa-angle-right" size="sm"/>
                                         <p>{`Should return ${newOutput[key].result[1]} for (${newOutput[key].result[0]}) `}</p>
                                     </div> 
-                                    {newError === '' ? (<div className="flex_icon">
+                                    {newError === '' && newOutput[key].result[1] === newOutput[key].return  ? (<div className="flex_icon">
                                     <FontAwesomeIcon icon="fa-solid fa-circle-check" style={{color: "#67b04b",}} size="sm"/>
                                     <p className="output_green">Test Passed</p>
                                     </div> ):

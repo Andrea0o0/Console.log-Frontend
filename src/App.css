@@ -97,7 +97,7 @@ a {
 
 /* LEVELS COLORS HOVER & NOT */
 /* LEVEL 5 */
-.hover_5 a div div, .hover_5 a h3, .hover_5 a h3:hover, .hover_5 p {
+.hover_5 a div div, .hover_5 a h3, .hover_5 a h3:hover, .hover_5 p, .instructions_5, .instructions_5 button a {
   color: var(--level-5-hover-blue);
 }
 
@@ -106,7 +106,7 @@ a {
 }
 
 /* LEVEL 4 */
-.hover_4 a div div, .hover_4 a h3, .hover_4 a h3:hover, .hover_4 p {
+.hover_4 a div div, .hover_4 a h3, .hover_4 a h3:hover, .hover_4 p, .instructions_4, .instructions_4 button a {
   color: var(--level-4-hover-purple);
 }
 
@@ -115,7 +115,7 @@ a {
 }
 
 /* LEVEL 3 */
-.hover_3 a div div, .hover_3 a h3, .hover_3 a h3:hover, .hover_3 p {
+.hover_3 a div div, .hover_3 a h3, .hover_3 a h3:hover, .hover_3 p, .instructions_3, .instructions_3 button a {
   color: var(--level-3-hover-pink);
 }
 
@@ -124,7 +124,7 @@ a {
 }
 
 /* LEVEL 2 */
-.hover_2 a div div, .hover_2 a h3, .hover_2 a h3:hover, .hover_2 p {
+.hover_2 a div div, .hover_2 a h3, .hover_2 a h3:hover, .hover_2 p, .instructions_2, .instructions_2 button a {
   color: var(--level-2-hover-orange);
 }
 
@@ -133,7 +133,7 @@ a {
 }
 
 /* LEVEL 1 */
-.hover_1 a div div, .hover_1 a h3, .hover_1 a h3:hover, .hover_1 p {
+.hover_1 a div div, .hover_1 a h3, .hover_1 a h3:hover, .hover_1 p, .instructions_1, .instructions_1 button a {
   color: var(--level-1-hover-green);
 }
 
@@ -196,6 +196,10 @@ a {
   border-bottom-left-radius: .5rem;
   overflow: hidden;
   margin: 0% 1%;
+}
+
+.CodeMirror-lines {
+  padding: 6px !important;
 }
 
 
@@ -368,3 +372,49 @@ hr {
   padding: 2%;
 }
 
+.solution_green,.solution_red {
+  margin: 3%;
+  border: solid;
+  border-radius: .5rem;
+}
+
+.solution_green {
+  border-color: var(--output-color-green);
+}
+
+.solution_red {
+  border-color: var(--output-color-red);
+}
+
+
+/* INSTRUCTIONS */
+
+.instructions_5, .instructions_4, .instructions_3, .instructions_2, .instructions_1{
+ background-color: var(--background-kata);
+ border-radius: .9rem;
+ border: solid;
+ padding: 3% 4%;
+ margin: 3%;
+}
+
+
+.instructions_5 > * > *, .instructions_4 > * > *, .instructions_3 > * > *, .instructions_2 > * > *, .instructions_1 > * > *{
+  margin: 4% 0%;
+ }
+
+ .start_btn {
+  margin: 2%;
+  width: 90%;
+  text-align: center;
+  border:none;
+  border-radius: .8rem;
+  padding: 2% 4%;
+  background-color: var(--background-color);
+}
+
+.instructions_5 button a, .instructions_4 button a , .instructions_3 button a , .instructions_2 button a , .instructions_1 button a   {
+  margin: 0;
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+}

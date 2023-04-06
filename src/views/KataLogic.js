@@ -16,9 +16,17 @@ export default function KataLogic(){
     const initialOutput = {
       output:{},
       error:'',
-      validation:0
+      validation:0,
+      random:0
+    }
+
+    const initialSolution = {
+      "function": '',
+      "status":'',
+      "kata":''
     }
     const [loading, setLoading] = useState(true);
+    const [newSolution,setNewSolution] = useState(initialSolution)
     const [error, setError] = useState(false);
     const [kata,setkata] = useState(null)
     const [solutions,setSolutions] = useState(null)
@@ -33,7 +41,6 @@ export default function KataLogic(){
       try {
         const response = await solutionService.getSolutionsUserKata(kataId);
         setSolutions(response);
-        console.log(response)
       } catch (error) {
         console.error(error)
         setLoading(false);
@@ -46,7 +53,12 @@ export default function KataLogic(){
           setkata(response);
           setJs(response.initialValue)
           setInitialState(response.initialValue)
-          console.log(response)
+          setNewSolution(prev => {
+            return {
+              ...prev,
+              kata:kataId
+            }
+          })
           setLoading(false);
           setError(false);
           navigate(`/kata/practise/${response._id}/output`)
@@ -66,9 +78,27 @@ export default function KataLogic(){
       setJs(initialState)
     }
 
+    const createSolution = async () => {
+    try {
+      console.log(newSolution)
+      const response = await solutionService.createSolution(newSolution);
+      console.log(response)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
     const handleAddSolution = (newfunction,completed) => {
       setJs(newfunction)
+      setNewSolution(prev => {
+        return {
+          ...prev,
+          function:newfunction,
+          status:completed
+        }
+      })
       //SOLUTION
+      createSolution()
     }
 
     const handleOutput = (newoutput) => {

@@ -10,13 +10,19 @@ useEffect(()=> {
   setNewFunction(input)
   },[input])
 
+  useEffect(()=> {
+    return () => {
+      setAddSolution(newfunction,false)
+    }
+    },[])
+
   const handleOutput = (output,name,response) => {
     let result = Object.assign({}, initialOutput)
     output === initialOutput ? setNewOutput(initialOutput):output === 0 ? result[name] = response:
     name === 'result' ? result.output[output] = {[name]:response}:result.output[output][name] = response 
     result.validation = validation
+    result.random = Math.floor(Math.random()*400)+400
     setNewOutput(result)
-    
   } 
 
   useEffect(()=> {
@@ -33,11 +39,11 @@ useEffect(()=> {
   } 
 
   const handleTestInput = (e) => {
-    e.preventDefault()
     handleResetOutput()
     const outputValidation = e.nativeEvent.submitter.name === 'Run' ? ([...output].slice(0,3)): [...output]
     try {
-      outputValidation.map((elem,i) => {
+      outputValidation.map((elem,index) => {
+      let i
       const callfunction = test_function.split('${input}')
       const input = elem[0]
       const function_input = `${newfunction} ${callfunction[0]}${input}${callfunction[1]}`
@@ -50,9 +56,9 @@ useEffect(()=> {
       function extractconsoles(){return consoles}
       extractconsoles()`)
       }
-      handleOutput(`output_${i+1}`,'result',elem)
-      handleOutput(`output_${i+1}`,'return',response)
-      consolesfunction !== undefined && consolesfunction.length > 0  ? handleOutput(`output_${i+1}`,'consoleslog',consolesfunction): handleOutput(`output_${i+1}`,'consoleslog','')
+      handleOutput(`output_${index+1}`,'result',elem)
+      handleOutput(`output_${index+1}`,'return',response)
+      consolesfunction !== undefined && consolesfunction.length > 0  ? handleOutput(`output_${index+1}`,'consoleslog',consolesfunction): handleOutput(`output_${index+1}`,'consoleslog','')
       response === elem[1] && setValidation(prev => prev+1)
       response === undefined && handleOutput(0,'error',`ReferenceError: undefined try again
       MANDATORY: the function has to to return something  
@@ -62,7 +68,7 @@ useEffect(()=> {
       handleOutput(0,'error',`SyntaxError: ${error.message}`)
     }
     finally{
-      validation === Object.keys(newoutput.output).length && e.nativeEvent.submitter.name ==='Submit' ? handleSubmit():setAddSolution(newfunction,false)
+      validation === outputValidation.length && e.nativeEvent.submitter.name ==='Submit' && handleSubmit()
     } 
   }
 
@@ -71,11 +77,13 @@ useEffect(()=> {
   }
 
   const handleSubmit = () => {
+    console.log('in')
       setAddSolution(newfunction,true)
     }
 
   const handleBtns = (e) => {
-    e.nativeEvent.submitter.name = 'Reset' ? handleReset():handleTestInput(e)
+    e.preventDefault()
+    e.nativeEvent.submitter.name === 'Reset' ? handleReset():handleTestInput(e)
   }
   
   return (
@@ -84,43 +92,7 @@ useEffect(()=> {
         <button name='Run' type="submit" className="btn">Run test</button>
       <button className={`${Object.keys(newoutput.output).length <= 0 ? "":  validation === Object.keys(newoutput.output).length ? 'btn_green':'btn_red'}`} name='Submit'>Submit</button>
       <button name='Reset'>Reset</button>
-      </form>
-           
-      {/* nativeEvent.submitter.name */}
-      
+      </form>      
     </div>
   )
 }
-
-
-
-    // output === 0 ? setNewOutput(prev => {
-    //   return {
-    //     ...prev,
-    //     [name]: response
-    //   }
-    // }):
-    // name === 'result' ? setNewOutput(prev => {
-    //   return {
-    //     ...prev,
-    //     output: {
-    //       [output]:{
-    //         [name]:response}
-    //     }
-    //   }
-    // }):
-    // setNewOutput(prev => {
-    //   return {
-    //     ...prev,
-    //     output: {
-    //       [output]:{
-    //         [name]:response
-    //       }
-    //     }
-    //   }
-    // })
-
-    // output === 0 ? newoutput[name] = response:
-    // name === 'result' ? newoutput.output[output] = {[name]:response}:
-    // newoutput.output[output][name] = response   
-    // setNewOutput(newoutput)

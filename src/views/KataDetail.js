@@ -5,7 +5,7 @@ import { Controlled as ControlledEditor } from 'react-codemirror2'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 import 'codemirror/mode/javascript/javascript'
-import ReactDOMServer from "react-dom/server"
+import Kata from '../components/Kata';
 
 export default function KataDetail() {
   const { kataId } = useParams();
@@ -13,7 +13,7 @@ export default function KataDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [instructions,setInstructions] = useState('')
-  const [example,setExample] = useState(null)
+  const [example,setExample] = useState('')
 
   const getKata = async () => {
     try {
@@ -38,19 +38,22 @@ export default function KataDetail() {
     <div>
       {loading && <p>Loading...</p>}
       {!loading && kata && 
-      <div className="card">
-      <h3>{kata.name}</h3>
-      {instructions.length > 0 && instructions.map((elem,i) => {
-        return (
-          <div  key={i}>
-            <div dangerouslySetInnerHTML={{__html: elem}}></div>
-            {i+1 !== instructions.length && <ControlledEditor value={example[i]} options={{    lineWrapping:true, mode:'javascript', theme: 'material', readOnly:true}}/>}
-          </div>
-          )
-      })}
-      <button className="btn" style={{ marginLeft: '10px' }}><Link to={`/kata/practise/${kata._id}`}>Start</Link></button>
-    </div>}
-      {error && <p>Something went wrong. Couldn't find your kata</p>}
-    </div>
+      <>
+        <Kata kata={kata} practise={true}/>
+        <div className={`instructions_${kata.level}`}>
+        <h4>DESCRIPTION:</h4>
+        {instructions.length > 0 && instructions.map((elem,i) => {
+          return (
+            <div  key={i}>
+              <div dangerouslySetInnerHTML={{__html: elem}}></div>
+              {i+1 !== instructions.length && <ControlledEditor value={example[i]} options={{    lineWrapping:true, mode:'javascript', theme: 'material', readOnly:true}}/>}
+            </div>
+            )
+        })}
+        <button className="start_btn" style={{ marginLeft: '10px' }}><Link to={`/kata/practise/${kata._id}`}>Start</Link></button>
+      </div>
+      </>}
+        {error && <p>Something went wrong. Couldn't find your kata</p>}
+      </div>       
   )
 }
