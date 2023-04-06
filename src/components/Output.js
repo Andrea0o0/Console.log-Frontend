@@ -37,7 +37,7 @@ export default function Output(){
     const handleError = (error) => {
         setNewError(error)
     }
-
+   
     useEffect(()=>{
         handleOutput(output.output)
         handleValidation(output.validation)
@@ -66,19 +66,19 @@ export default function Output(){
         </div>
 
         {/* Your results will be shown here. */}
-        {Object.keys(newOutput).length > 0 ? 
-        <div className={`output ${newValidation === Object.keys(newOutput).length ? 'output_border_green':'output_border_red'}`}>
+        {Object.keys(newOutput).length > 0 || newError !== '' ? 
+        <div className={`output ${newValidation === Object.keys(newOutput).length && newError === '' ? 'output_border_green':'output_border_red'}`}>
             <div className="outputpane">
                 <p>Time: {Math.floor(Math.random()*400)+400}</p>
-                <p className={newValidation === Object.keys(newOutput).length ? 'output_green':''}>Passed: {newValidation} </p>
-                <p className={newValidation !== Object.keys(newOutput).length ? 'output_red':''}>Failed: {Object.keys(newOutput).length-newValidation} </p>
+                <p className={newValidation === Object.keys(newOutput).length && newError === '' ? 'output_green':''}>Passed: {newValidation} </p>
+                <p className={newValidation !== Object.keys(newOutput).length || newError !== '' ? 'output_red':''}>Failed: {Object.keys(newOutput).length-newValidation + (newError === '' ? 0:1)} </p>
             </div>
             <hr/>
             <div className="output_results">
                 <div>
                     <div className="flex_icon">
                         <img 
-                        src={newValidation === Object.keys(newOutput).length ? green_seccion:red_seccion} style={{width:"10px"}} alt='red'/>
+                        src={newValidation === Object.keys(newOutput).length && newError === '' ? green_seccion:red_seccion} style={{width:"10px"}} alt='red'/>
                         <p>Test Results:</p>
                     </div>
                     {newError > '' && <div className="result-type--error">{newError}</div>}
@@ -121,10 +121,10 @@ export default function Output(){
                         </div>
                     </div>))}
                 </div>
-                {newValidation === Object.keys(newOutput).length && <div className="output_green output_congratulations">{`You have passed all of the tests! :)`}</div>}
+                {newValidation === Object.keys(newOutput).length && newError === '' && <div className="output_green output_congratulations">{`You have passed all of the tests! :)`}</div>}
             </div>
         </div>:
-        <div className={`output_empty _${kata.level}`} style={{height:'42vh'}}>Your results will be shown here.</div>
+        <div className={`output_empty _output_${kata.level}`} style={{height:'42vh'}}>Your results will be shown here.</div>
         }
         </>
     )

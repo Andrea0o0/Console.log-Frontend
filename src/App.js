@@ -26,8 +26,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/katas/:kataId" element={<KataDetail />}/><Route path="/kata/practise/:kataId/output" element={<KataLogic />}>
-          <Route path="" element={<Output />}/>
+        <Route path="/katas/:kataId" element={<KataDetail />} /><Route path="/kata/practise/:kataId" element={<KataLogic />}>
+          <Route path="output" element={<Output />}/>
           <Route path="instructions" element={<Instructions />}/>
           <Route path="pastsolutions" element={<Pastsolutions />}/>
         </Route>

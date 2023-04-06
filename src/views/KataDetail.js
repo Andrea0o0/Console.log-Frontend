@@ -48,7 +48,7 @@ export default function KataDetail() {
           </div>
           )
       })}
-      <button className="btn" style={{ marginLeft: '10px' }}><Link to={`/kata/practise/${kata._id}/output`}>Start</Link></button>
+      <button className="btn" style={{ marginLeft: '10px' }}><Link to={`/kata/practise/${kata._id}`}>Start</Link></button>
     </div>}
       {error && <p>Something went wrong. Couldn't find your kata</p>}
     </div>

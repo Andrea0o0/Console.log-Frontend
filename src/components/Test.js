@@ -14,9 +14,10 @@ useEffect(()=> {
     let result = Object.assign({}, initialOutput)
     output === initialOutput ? setNewOutput(initialOutput):output === 0 ? result[name] = response:
     name === 'result' ? result.output[output] = {[name]:response}:result.output[output][name] = response 
+    result.validation = validation
     setNewOutput(result)
     
-  }
+  } 
 
   useEffect(()=> {
     handleOutput(0,'validation',validation)
@@ -28,9 +29,8 @@ useEffect(()=> {
     },[newoutput])
 
   const handleResetOutput = () => {
-    handleOutput(initialOutput)
     setValidation(0)
-  }
+  } 
 
   const handleTestInput = (e) => {
     e.preventDefault()
@@ -40,22 +40,29 @@ useEffect(()=> {
       outputValidation.map((elem,i) => {
       const callfunction = test_function.split('${input}')
       const input = elem[0]
+      console.log(typeof input)
       const function_input = `${newfunction} ${callfunction[0]}${input}${callfunction[1]}`
+      console.log(function_input)
       const response = eval(function_input)
       let consolesfunction = ''
       if(function_input.includes('return')){
-        const toconsoles = function_input.replaceAll('console.log','consoles.push').split('return')[0]
-      consolesfunction = eval(`let consoles = []
-      ${toconsoles} return consoles} ${callfunction[0]}${input}${callfunction[1]}`)
+        const toconsoles = function_input.replaceAll('console.log','consoles.push')
+        consolesfunction = eval(`let consoles = []
+      ${toconsoles} 
+      function extractconsoles(){return consoles}
+      extractconsoles()`)
       }
       handleOutput(`output_${i+1}`,'result',elem)
       handleOutput(`output_${i+1}`,'return',response)
       consolesfunction !== undefined && consolesfunction.length > 0  ? handleOutput(`output_${i+1}`,'consoleslog',consolesfunction): handleOutput(`output_${i+1}`,'consoleslog','')
-      response === elem[1] && setValidation(prev => prev + 1)
-      response === undefined && handleOutput(0,'error',`ReferenceError: undefined try again`)
+      response === elem[1] && setValidation(prev => prev+1)
+      response === undefined && handleOutput(0,'error',`ReferenceError: undefined try again
+      MANDATORY: the function has to to return something  
+      TIP => return :)`)
     })
     } catch (error) {
-      handleOutput(0,'error',`ReferenceError: ${error.message}`)
+      handleOutput(0,'error',`SyntaxError: ${error.message}`)
+      console.log(error)
     }
     finally{
       outputValidation.length === Object.keys(newoutput.output).length && e.nativeEvent.submitter.name ==='Submit' ? handleSubmit():setAddSolution(newfunction,false)
