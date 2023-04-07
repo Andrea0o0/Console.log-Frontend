@@ -46,7 +46,7 @@ export default function KataDetail() {
       {!loading && kata && 
       <>
         <Kata kata={kata} practise={true}/>
-        <div className={`instructions_${kata.level}`}>
+        <div className={`instructions instructions_${kata.level}`} style={{height:'100%'}}>
         <h4>DESCRIPTION:</h4>
         {instructions.length > 0 && instructions.map((elem,i) => {
           return (

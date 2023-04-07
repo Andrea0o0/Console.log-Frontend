@@ -9,7 +9,7 @@ export default function Instructions(){
     const {example,instructions,kata} = useOutletContext();
 
     return (
-        <div className={`instructions_${kata.level}`}>
+        <div className={`instructions_output instructions_${kata.level}`}>
             <h4>DESCRIPTION:</h4>
             {instructions.map((elem,i) => {
                 return (

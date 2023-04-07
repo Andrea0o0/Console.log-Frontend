@@ -93,7 +93,6 @@ export default function KataLogic(){
     }    
 
     const handleAddSolution = async (newfunction,completed) => {
-      console.log('yes')
       await setNewSolution(prev => {
         return {
           ...prev,
@@ -117,12 +116,11 @@ export default function KataLogic(){
         <div className='kata_display'>
           <div className={`kata_display_1 _kata_${kata.level}`}>
             <ul className='editor-title'>
-              <li style={{width:'24%'}}><NavLink to={`/kata/practise/${kata._id}/output`}>Output</NavLink></li>
-              {/* <li onClick={()=>setOutputToggle(prev => !prev)}>Output</li> */}
-              <li><NavLink to={`/kata/practise/${kata._id}/instructions`}>Instructions</NavLink></li>
-              <li style={{width:'38%'}}><NavLink to={`/kata/practise/${kata._id}/pastsolutions`}>Past Solutions</NavLink></li>
+              <li style={{width:solutions.length === 0 || solutions === null ? '53%' :'24%'}}><NavLink to={`/kata/practise/${kata._id}/output`}>Output</NavLink></li>
+              <li style={{width:solutions.length === 0 || solutions === null? '48%' :''}}><NavLink to={`/kata/practise/${kata._id}/instructions`}>Instructions</NavLink></li>
+              {solutions.length !== 0 &&
+              <li style={{width:'38%'}}><NavLink to={`/kata/practise/${kata._id}/pastsolutions`}>Past Solutions</NavLink></li>}
             </ul>
-            {/* {outputToggle && <Output name={kata.name} output={output}/>} */}
             <Outlet context={{example:kata.example,instructions:kata.instructions.split("<ControlledEditor/>"),output:output,kata:kata,solutions:solutions}} />
           </div>          
           <div className='kata_display_2'> 

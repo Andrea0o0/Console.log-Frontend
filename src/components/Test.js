@@ -79,7 +79,6 @@ useEffect(()=> {
   }
 
   const handleSubmit = () => {
-    console.log('sub')
       setAddSolution(newfunction,true)
     }
 
