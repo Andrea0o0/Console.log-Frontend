@@ -17,14 +17,14 @@ export default function Output(){
     const [collapsible,setCollapsible] = useState({})
 
 
-    // const handleCollapsible = (id) => {
-    //     setCollapsible(prev => {
-    //         return {
-    //             ...prev,
-    //             [id]:collapsible[id] ? false:true
-    //         }
-    //     })
-    // }
+    const handleCollapsible = (id) => {
+        let result = Object.assign({}, collapsible)
+        result[id] ? result[id]=false:result[id]=true
+        setCollapsible(result)
+    }
+
+    useEffect(() => {
+    },[collapsible])
 
     const handleOutput = (output) => {
         setNewOutput(output)
@@ -37,23 +37,28 @@ export default function Output(){
     const handleError = (error) => {
         setNewError(error)
     }
+
+    const handleFirstCollapsible = () => {
+        const firstCollapsible = {name:false}
+        Object.keys(output.output).map((key,i) => {
+            firstCollapsible[`should_${i}`] = false
+            firstCollapsible[`log_${i}`] = false
+        })
+        setCollapsible(firstCollapsible)
+    }
    
     useEffect(()=>{
         handleOutput(output.output)
         handleValidation(output.validation)
-        handleError(output.error)        
+        handleError(output.error)   
+        handleFirstCollapsible()     
         // setCollapsible()
     },[output])
+
 
     return (
         <>
         <div>
-        {/* <img src={red_seccion} style={{width:"8px"}} alt='red'/>
-         <FontAwesomeIcon className='output_red' icon="fa-solid fa-angle-down" />
-         <FontAwesomeIcon icon="fa-solid fa-angle-right"/>
-         <FontAwesomeIcon icon="fa-solid fa-circle-check" style={{color: "#67b04b",}}/>
-         <FontAwesomeIcon icon="fa-solid fa-circle-xmark" style={{color: "#c05c48"}} />
-         <FontAwesomeIcon icon="fa-solid fa-circle-exclamation" style={{color: "#c05c48"}} /> */}
         </div>
 
         {/* Your results will be shown here. */}
@@ -75,42 +80,52 @@ export default function Output(){
                     {newError > '' && <div className="result-type--error">{newError}</div>}
                 </div>
                 <div>
-                    <div className="flex_icon">
-                        <FontAwesomeIcon icon="fa-solid fa-angle-right" size="sm"/>
+                    <div className="flex_icon" onClick={()=>handleCollapsible('name')}>
+                        <FontAwesomeIcon className={newValidation === Object.keys(newOutput).length && newError === '' ? 'output_green':'output_red'} icon={`fa-solid fa-angle-${collapsible.name ? 'down':'right'}`} size="sm"/>
                         <p>{kata.name}</p>
                     </div>
-                    {Object.keys(newOutput).map((key,i) =>
+                    {collapsible.name &&
+                    <>
+    {Object.keys(newOutput).map((key,i) =>
                     (<div key={i}>
                         <div>
                             <div>
                                 <div>
-                                    <div className="flex_icon">
-                                        <FontAwesomeIcon icon="fa-solid fa-angle-right" size="sm"/>
-                                        <p>{`Should return ${newOutput[key].result[1]} for (${newOutput[key].result[0]}) `}</p>
+                                    <div onClick={()=>handleCollapsible(`should_${i}`)} className="flex_icon">
+                                        <FontAwesomeIcon className={JSON.stringify(newOutput[key].result[1]) === JSON.stringify(newOutput[key].return)  ? 'output_green':'output_red'} icon={`fa-solid fa-angle-${collapsible[`should_${i}`] ? 'down':'right'}`} size="sm"/>
+                                        <p>{`Should return ${(typeof newOutput[key].result[1]) === 'object' ? JSON.stringify(newOutput[key].result[1]):newOutput[key].result[1] } for ${typeof newOutput[key].result[0] === 'object' ? JSON.stringify(newOutput[key].result[0]):newOutput[key].result[0]} `}</p>
                                     </div> 
-                                    {newError === '' && newOutput[key].result[1] === newOutput[key].return  ? (<div className="flex_icon">
+                                    { collapsible[`should_${i}`] && 
+                                    <>
+                                    {newError === '' && JSON.stringify(newOutput[key].result[1]) === JSON.stringify(newOutput[key].return)  ? (<div className="flex_icon">
                                     <FontAwesomeIcon icon="fa-solid fa-circle-check" style={{color: "#67b04b",}} size="sm"/>
                                     <p className="output_green">Test Passed</p>
                                     </div> ):
                                     (<div className="flex_icon">
                                     <FontAwesomeIcon icon="fa-solid fa-circle-exclamation" style={{color: "#c05c48"}} size="sm"/>
-                                    <p>{`expected ${newOutput[key].return} to equal ${newOutput[key].result[1]}`}</p>
+                                    <p>{`expected ${typeof newOutput[key].return === 'object' ? JSON.stringify(newOutput[key].return):newOutput[key].return} to equal ${typeof newOutput[key].result[1] === 'object' ? JSON.stringify(newOutput[key].result[1]):newOutput[key].result[1]}`}</p>
                                     </div> )}
                                     {newOutput[key].consoleslog.length > 0 && newError === '' &&
                                     <div>
-                                        <div className="flex_icon">
-                                            <FontAwesomeIcon icon="fa-solid fa-angle-right" size="sm"/>
+                                        <div onClick={()=>handleCollapsible(`log_${i}`)}className="flex_icon">
+                                            <FontAwesomeIcon icon={`fa-solid fa-angle-${collapsible[`log_${i}`] ? 'down':'right'}`} size="sm"/>
                                             <p>Logs</p>
                                         </div> 
-                                        <div 
-                                        className="result-type--console">
-                                            {newOutput[key].consoleslog.map((elem,i) => <p key={i}>{elem}</p>)}
-                                        </div> 
+                                        { collapsible[`log_${i}`] && 
+                                        <>
+                                            <div                 className="result-type--console">
+                                                {newOutput[key].consoleslog.map((elem,i) => <p key={i}>{typeof elem === 'object' ? JSON.stringify(elem).split(',').map(elem=><p>{elem}</p>):elem}</p>)}
+                                            </div>  
+                                        </>}
+                                        
                                     </div>}     
+                                    </>}
                                 </div>                           
                             </div>
                         </div>
                     </div>))}
+                    </>}
+                
                 </div>
                 {newValidation === Object.keys(newOutput).length && newError === '' && <div className="output_green output_congratulations">{`You have passed all of the tests! :)`}</div>}
             </div>

@@ -10,6 +10,7 @@
   --dark-color-red-bg: rgba(168, 64, 64, 0.356);
   --background-color: #1a1e24;
   --background-kata: #212a33;
+  --a-color: #9d9d9d;
   --level-5-hover-blue: #A8D2F2;
   --level-5-blue: #5DA0D7;
   --level-4-hover-purple: #C5A3CD;
@@ -22,8 +23,10 @@
   --level-1-green: #9CC763;
 }
 
+a{
+  color:  var(--a-color);
+}
   
-
 .App {
   /* background-color: #183153; */
   background-color: var(--background-color);
@@ -159,6 +162,7 @@ a {
 }
 
 .editor-container {
+  width: 90%;
   flex-grow: 1;
   flex-basis: 0;
   display: flex;

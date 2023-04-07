@@ -28,6 +28,12 @@ export default function KataDetail() {
       setLoading(false);
     }
   }
+    {/* <img src={red_seccion} style={{width:"8px"}} alt='red'/>
+         <FontAwesomeIcon className='output_red' icon="fa-solid fa-angle-down" />
+         <FontAwesomeIcon icon="fa-solid fa-angle-right"/>
+         <FontAwesomeIcon icon="fa-solid fa-circle-check" style={{color: "#67b04b",}}/>
+         <FontAwesomeIcon icon="fa-solid fa-circle-xmark" style={{color: "#c05c48"}} />
+         <FontAwesomeIcon icon="fa-solid fa-circle-exclamation" style={{color: "#c05c48"}} /> */}
 
   useEffect(() => {
     getKata();

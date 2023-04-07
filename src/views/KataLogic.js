@@ -74,23 +74,27 @@ export default function KataLogic(){
         // eslint-disable-next-line
       }, [kataId])
 
+      useEffect(() => {
+        createSolution()
+        // eslint-disable-next-line
+      }, [newSolution])
+
     const handleReset = () => {
       setJs(initialState)
     }
 
     const createSolution = async () => {
-    try {
-      console.log(newSolution)
-      const response = await solutionService.createSolution(newSolution);
-      console.log(response)
-    } catch (error) {
-      console.error(error)
-    }
-  }
+      try {
+        const response = await solutionService.createSolution(newSolution);
+        console.log(response)
+      } catch (error) {
+        console.error(error)
+      }
+    }    
 
-    const handleAddSolution = (newfunction,completed) => {
-      setJs(newfunction)
-      setNewSolution(prev => {
+    const handleAddSolution = async (newfunction,completed) => {
+      console.log('yes')
+      await setNewSolution(prev => {
         return {
           ...prev,
           function:newfunction,
@@ -98,7 +102,6 @@ export default function KataLogic(){
         }
       })
       //SOLUTION
-      createSolution()
     }
 
     const handleOutput = (newoutput) => {
