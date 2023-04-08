@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Home from './views/Home';
 import Navbar from './components/Navbar';
@@ -18,8 +18,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
+import Github from './views/auth/GitHubLogin';
+import Google from './views/auth/Google';
 
 function App() {
+
+  
+
   return (
     <div className="App">
       <Toaster/>
@@ -33,6 +38,8 @@ function App() {
         </Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/login/github" element={<Github/>} />
+        <Route path="/login/google" element={<Google/>} />
         <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<NotFound />} />
@@ -40,6 +47,8 @@ function App() {
     </div>
   );
 }
+
+
 
 export default App;
 library.add(fab, fas, far)

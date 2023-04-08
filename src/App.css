@@ -460,3 +460,69 @@ hr {
   width: 100%;
   font-size: 1rem;
 }
+
+
+/* GOOGLE BTN */
+#signInDiv iframe {
+  width: 500px !important;
+}
+
+/* LOG IN */
+.login div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.login form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.login div form , .login div form > *{
+  width: 80%;
+  text-align: center;
+}
+
+.login div form > *{
+  color: white;
+}
+
+.signup form {
+  color: white;
+  text-align: center;
+}
+
+.signup form input {
+  text-align: center;
+  padding: 1.5%;
+  width: 90%;
+}
+
+.signup form div label {
+  padding: 2% 0%;
+  width: 90%;
+}
+
+.signup form div div {
+  display: flex;
+  width: 100%;
+}
+
+.signup form button {
+  width: 90%;
+}
+
+.validInput {
+  border: solid var(--output-color-green);
+  background: url('./assets/images/inputsvalidation/circle-check-solid.svg') no-repeat right;
+  background-size:contain;
+}
+
+.invalidInput {
+  border: solid var(--output-color-red);
+  background: url('./assets/images/inputsvalidation/circle-xmark-solid.svg') no-repeat right;
+  background-size:contain;
+}

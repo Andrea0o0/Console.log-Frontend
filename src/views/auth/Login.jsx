@@ -3,6 +3,8 @@ import toast from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
+import Github from './GitHubLogin';
+import Google from './Google';
 
 export default function Login() {
   const { storeToken, authenticateUser, isLoggedIn } = useAuth(); 
@@ -48,8 +50,9 @@ export default function Login() {
   }, [isLoggedIn])
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className='login'>
+      <div>
+        <form onSubmit={handleSubmit}>
         <label>Email</label>
         <input required type="email" name="email" value={user.email} onChange={handleChange} />
         <label>Password</label>
@@ -57,6 +60,9 @@ export default function Login() {
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         <button type="submit">Log in </button>
       </form>
+      <Github/>
+      <Google/>
+      </div>
     </div>
   )
 }
