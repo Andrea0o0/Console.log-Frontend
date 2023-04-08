@@ -22,7 +22,6 @@ export default function Signup() {
   // console.log(validValues)
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
     name !== passwordControl &&
     setUser(prev => {
         return {
@@ -30,6 +29,14 @@ export default function Signup() {
             [name]: name === 'email' ? value.toLowerCase():value
         }
     });
+
+    if(name === 'passwordControl' || name === 'password'){
+      console.log(validValues)
+      let result = Object.assign({}, validValues)
+      passwordRegex.test(password) && (result.password=true)
+      passwordRegex.test(passwordControl) && (result.passwordControl=true)
+      setValidValues(result)
+    } 
       
       setValidValues(prev => {
         return {
@@ -43,13 +50,11 @@ const test = Object.keys(validValues).filter((key,i) => validValues[key] === tru
 // console.log(test,Object.keys(validValues).length)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    password !== passwordControl && setValidValues(prev => {
-      return {
-        ...prev,
-        password_passwordControl:false
-      }
-    })
-    if(Object.keys(validValues).filter((key,i) => validValues[key] === true).length === Object.keys(validValues).length){
+    let result = Object.assign({}, validValues)
+    password === passwordControl && (result.password_passwordControl=true) 
+    setValidValues(result)
+    console.log(validValues)
+    if(Object.keys(result).filter((key,i) => result[key] === true).length === Object.keys(result).length){
         try {
         await authService.signup({ username: user.username, email: user.email, password });
         navigate('/login');
@@ -67,10 +72,11 @@ const test = Object.keys(validValues).filter((key,i) => validValues[key] === tru
     }     
   }
 
-  const inputStyle = "w-full rounded-full bg-transparent  border-2  shadow-xl p-4 ";
-  const validStyle = "text-green-500 border-green-500 validInput ";
-  const invalidStyle = "text-red-500 border-red-500 invalidInput ";
+  const inputStyle = "w-full rounded-full bg-transparent  border-2 shadow-xl p-4 ";
+  const validStyle = "text-green-input border-green-input validInput ";
+  const invalidStyle = "text-red-input border-red-input invalidInput ";
 
+  console.log(Object.keys(validValues).filter((key,i) => validValues[key] === false).length>0)
   return (
     <div className="h-screen px-4 signup">
       <form className="h-96 flex flex-col align-center justify-around mt-4" onSubmit={handleSubmit}>
@@ -102,7 +108,7 @@ const test = Object.keys(validValues).filter((key,i) => validValues[key] === tru
       </div>
       <div className="flex flex-wrap justify-start w-full text-center mt-3">
         <label>Password</label>
-        <div className='flex items-center h-12 content-center'>
+        <div className='flex items-end'>
           <input 
             required 
             type={eye.password ? "password":"text"}
@@ -115,11 +121,11 @@ const test = Object.keys(validValues).filter((key,i) => validValues[key] === tru
           />
           <FontAwesomeIcon icon={eye.password ? 'fa-solid fa-eye-slash': 'fa-solid fa-eye'} size="sm" style={{color: `${validValues.password === true ? "#67b04b" : validValues.password === false ? "#c05c48" : "#ffffff"}`,}} onClick={() => setEye(prev => {return {...prev,password:!eye.password}})} className='mb-3' />
         </div>
-        {validValues.password === false && <p className=" text-red-input border-red-input text-center w-80">Type number, upper & lower case and at least 6 characters</p> }
+        {validValues.password === false && <p className=" text-red-input border-red-input text-center w-80">Type number, upper & lower case and at least 8 characters</p> }
       </div>
       <div className="flex flex-wrap justify-start w-full text-center mt-3">
         <label>Repeat the password</label>
-        <div className='flex items-center h-12'>
+        <div className='flex items-end'>
           <input 
             required 
             type={eye.passwordControl ? "password":"text"}
@@ -136,10 +142,8 @@ const test = Object.keys(validValues).filter((key,i) => validValues[key] === tru
       </div>
 
         <div className="flex flex-wrap w-full text-center mt-10 ">
-          <button type="submit" 
-        className={inputStyle + "p-2 rounded-full w-80" + Object.keys(validValues).filter((key,i) => validValues[key] === false).length>0 ? "text-red-input border-red-input": Object.keys(validValues).filter((key,i) => validValues[key] === true).length>0 ? "text-green-input border-green-input":"text-white border-white"}
-        >Register</button>
-        {validValues.password_passwordControl === false && <p className=" text-red-input border-red-input text-center w-80">Passwords do not match</p> }
+          <button type="sumbit" className={(Object.keys(validValues).filter((key,i) => validValues[key] === false).length>0 ? invalidStyle: Object.keys(validValues).filter((key,i) => validValues[key] === true).length === Object.keys(validValues).length ? validStyle:"border-2 border-white text-white") + inputStyle} >Register</button>
+          {validValues.password_passwordControl === false && <p className=" text-red-input text-center w-80">Passwords do not match</p> }
         </div>
       </form>
     </div>
