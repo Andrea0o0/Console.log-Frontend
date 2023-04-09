@@ -70,7 +70,10 @@ function loginWithGithub() {
         </>
          :
         <button onClick={loginWithGithub}>Login with Github</button>  } */}
-        <button onClick={loginWithGithub}>Login with Github</button> 
+        <div>
+          <img className="w-10 h-10 rounded-full mr-20" onClick={loginWithGithub} src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub"/>
+        </div>        
+        {/* <button onClick={loginWithGithub}>Login with Github</button>  */}
         
         </>)
 

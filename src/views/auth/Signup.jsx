@@ -13,16 +13,16 @@ export default function Signup() {
   const [password, setPassword] = useState('');
   const [passwordControl, setPasswordControl] = useState('');
   const [validValues, setValidValues] = useState({username:'',email:'',password:'',passwordControl:'',password_passwordControl:''});
+  const [errorMessage,setErrorMessage] = useState('')
   const navigate = useNavigate();
 
   const emailRegex = /([a-z]|[A-Z]|[0-9]|[_-])@gmail.com|@email.com|@hotmail.com/
   const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/; // 8 characters long, 1 number and 1 uppercase letter
   const usernameRegex = /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
 
-  // console.log(validValues)
   const handleChange = (e) => {
     const { name, value } = e.target;
-    name !== passwordControl &&
+    name !== 'passwordControl' &&
     setUser(prev => {
         return {
             ...prev,
@@ -31,7 +31,6 @@ export default function Signup() {
     });
 
     if(name === 'passwordControl' || name === 'password'){
-      console.log(validValues)
       let result = Object.assign({}, validValues)
       passwordRegex.test(password) && (result.password=true)
       passwordRegex.test(passwordControl) && (result.passwordControl=true)
@@ -46,37 +45,44 @@ export default function Signup() {
       })
 }
 
-const test = Object.keys(validValues).filter((key,i) => validValues[key] === true)
-// console.log(test,Object.keys(validValues).length)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let result = Object.assign({}, validValues)
+    setErrorMessage('')
+    const result = Object.assign({}, validValues)
     password === passwordControl && (result.password_passwordControl=true) 
     setValidValues(result)
-    console.log(validValues)
     if(Object.keys(result).filter((key,i) => result[key] === true).length === Object.keys(result).length){
         try {
         await authService.signup({ username: user.username, email: user.email, password });
         navigate('/login');
       } catch (error) {
-        console.error(error)
-        // setErrorMessage('Unable to create user account')
-      }
+        setErrorMessage(error.response.data.message)
+        error.response.data.message.includes('User already exists with email') ?setValidValues(prev => {return{...prev,email:false}}):setValidValues(prev => {return{...prev,username:false}})
+      } 
     }
-    else{
-      let result = Object.assign({}, validValues)
-      // Object.keys(validValues).filter((key,i) => result[key] = false)
-      result.password = false
-      result.passwordControl = false
-      setValidValues(result)
-    }     
   }
 
-  const inputStyle = "w-full rounded-full bg-transparent  border-2 shadow-xl p-4 ";
+  useEffect(() => {
+    password !== passwordControl && password!=='' && passwordControl!=='' && setValidValues(prev => {
+      return {
+        ...prev,
+        password_passwordControl:false,
+        password:false,
+        passwordControl:false
+      }
+    })
+    password === passwordControl && password!=='' && passwordControl!=='' && setValidValues(prev => {
+      return {
+        ...prev,
+        password_passwordControl:true
+      }
+    })
+  },[password,passwordControl])
+
+  const inputStyle = "w-full rounded-lg bg-transparent  border-2 shadow-xl p-4 ";
   const validStyle = "text-green-input border-green-input validInput ";
   const invalidStyle = "text-red-input border-red-input invalidInput ";
-
-  console.log(Object.keys(validValues).filter((key,i) => validValues[key] === false).length>0)
+  
   return (
     <div className="h-screen px-4 signup">
       <form className="h-96 flex flex-col align-center justify-around mt-4" onSubmit={handleSubmit}>
@@ -86,12 +92,12 @@ const test = Object.keys(validValues).filter((key,i) => validValues[key] === tru
             required 
             type="text" 
             name="username" 
-            placeholder="katabuaja"
+            placeholder="Console_KataD"
             className={inputStyle + (validValues.username === true ? validStyle : validValues.username === false ? invalidStyle : "")}
             value={user.username} 
             onChange={handleChange} 
           />
-          {validValues.username === false && <p className=" text-red-input border-red-input text-center w-95">Enter a valid username of at least 8 characters</p> }
+          {validValues.username === false && <p className=" text-red-input border-red-input text-center w-95">{validValues.username === false && errorMessage!=="" ? errorMessage: "Enter a valid username of at least 8 characters"}</p> }
       </div>
       <div className="flex flex-wrap justify-start w-full text-center mt-3">
         <label>Email</label>
@@ -100,11 +106,11 @@ const test = Object.keys(validValues).filter((key,i) => validValues[key] === tru
             type="email" 
             name="email" 
             value={user.email} 
-            placeholder="example@gmail.com"
+            placeholder="kata@gmail.com"
             className={inputStyle + (validValues.email === true ? validStyle : validValues.email === false ? invalidStyle : "")}
             onChange={handleChange} 
           />
-          {validValues.email === false && <p className=" text-red-input border-red-input text-center w-80">Enter a valid email</p> }
+          {validValues.email === false && <p className=" text-red-input border-red-input text-center w-80">{validValues.email === false && errorMessage!=="" ? errorMessage: 'Enter a valid email'}</p> }
       </div>
       <div className="flex flex-wrap justify-start w-full text-center mt-3">
         <label>Password</label>
@@ -114,14 +120,14 @@ const test = Object.keys(validValues).filter((key,i) => validValues[key] === tru
             type={eye.password ? "password":"text"}
             name="password" 
             value={password}
-            placeholder={"***********"}
-            className={inputStyle + (validValues.password === true && validValues.password_passwordControl !== false ? validStyle : validValues.password === false ? invalidStyle : "")+"mr-4"}
+            placeholder={eye.password ? "***********":"SecretPassword"}
+            className={inputStyle + (validValues.password === true ? validStyle : validValues.password === false ? invalidStyle : "")+"mr-4"}
             onChange={(e) => {setPassword(e.target.value);
             handleChange(e)}} 
           />
           <FontAwesomeIcon icon={eye.password ? 'fa-solid fa-eye-slash': 'fa-solid fa-eye'} size="sm" style={{color: `${validValues.password === true ? "#67b04b" : validValues.password === false ? "#c05c48" : "#ffffff"}`,}} onClick={() => setEye(prev => {return {...prev,password:!eye.password}})} className='mb-3' />
         </div>
-        {validValues.password === false && <p className=" text-red-input border-red-input text-center w-80">Type number, upper & lower case and at least 8 characters</p> }
+        {validValues.password === false && validValues.password_passwordControl !== false && <p className=" text-red-input border-red-input text-center w-80">Type number, upper & lower case and at least 8 characters</p> }
       </div>
       <div className="flex flex-wrap justify-start w-full text-center mt-3">
         <label>Repeat the password</label>
@@ -131,20 +137,21 @@ const test = Object.keys(validValues).filter((key,i) => validValues[key] === tru
             type={eye.passwordControl ? "password":"text"}
             name="passwordControl" 
             value={passwordControl}
-            placeholder={"***********"}
-            className={inputStyle + (validValues.passwordControl === true && validValues.password_passwordControl !== false ? validStyle : validValues.passwordControl === false ? invalidStyle : "")+"mr-4"}
+            placeholder={eye.passwordControl ? "***********":"SecretPassword"}
+            className={inputStyle + (validValues.passwordControl === true ? validStyle : validValues.passwordControl === false ? invalidStyle : "")+"mr-4"}
             onChange={(e) => {setPasswordControl(e.target.value);
             handleChange(e)}} 
           />
           <FontAwesomeIcon icon={eye.passwordControl ? 'fa-solid fa-eye-slash': 'fa-solid fa-eye'} size="sm" style={{color: `${validValues.passwordControl === true ? "#67b04b" : validValues.passwordControl === false ? "#c05c48" : "#ffffff"}`,}} onClick={() => setEye(prev => {return {...prev,passwordControl:!eye.passwordControl}})} className='mb-3' />
         </div>
-        {validValues.passwordControl === false && <p className=" text-red-input border-red-input text-center w-80">Type number, upper & lower case and at least 8 characters</p> }
+        {validValues.passwordControl === false && validValues.password_passwordControl !== false && <p className=" text-red-input border-red-input text-center w-80">Type number, upper & lower case and at least 8 characters</p> }
       </div>
 
         <div className="flex flex-wrap w-full text-center mt-10 ">
           <button type="sumbit" className={(Object.keys(validValues).filter((key,i) => validValues[key] === false).length>0 ? invalidStyle: Object.keys(validValues).filter((key,i) => validValues[key] === true).length === Object.keys(validValues).length ? validStyle:"border-2 border-white text-white") + inputStyle} >Register</button>
-          {validValues.password_passwordControl === false && <p className=" text-red-input text-center w-80">Passwords do not match</p> }
+          {validValues.password_passwordControl === false||errorMessage!=='' ? <p className="text-red-input text-center w-80">{validValues.password_passwordControl === false ? "Passwords do not match": errorMessage !== '' && errorMessage }</p>:'' }
         </div>
+        
       </form>
     </div>
   )

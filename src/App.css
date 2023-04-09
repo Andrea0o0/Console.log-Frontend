@@ -467,29 +467,7 @@ hr {
   width: 500px !important;
 }
 
-/* LOG IN */
-.login div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-}
-
-.login form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.login div form , .login div form > *{
-  width: 80%;
-  text-align: center;
-}
-
-.login div form > *{
-  color: white;
-}
-
+/* SIN UP */
 .signup form {
   color: white;
   text-align: center;
@@ -525,4 +503,25 @@ hr {
   border: solid var(--output-color-red);
   background: url('./assets/images/inputsvalidation/circle-xmark-solid.svg') no-repeat right;
   background-size:contain;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px var(--background-color) inset !important;
+}
+
+input:-webkit-autofill{
+  -webkit-text-fill-color: rgb(255, 255, 255) !important;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .login {
+    width: 40%;
+  }
+  .login form {
+    padding: 6%;
+  }
 }

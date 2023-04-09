@@ -23,8 +23,10 @@ export default function Google(){
 
         google.accounts.id.renderButton(
             document.getElementById('signInDiv'),
-            {theme:"outline",size:"large"}
+            {type:"icon",theme:"outline",shape:"pill"}
         )
+
+        // type:"icon" size:"large", 
 
     
         google.accounts.id.prompt()
@@ -33,7 +35,8 @@ export default function Google(){
 console.log(user)
     return (
         <>
-            <div id="signInDiv"></div>
+            <div className='w-10' id="signInDiv"></div>
+            
             {/* <button onClick={(e) => handleSignOut(e)}></button>
             { user && 
             <>
