@@ -35,7 +35,7 @@ export default function KataDetail() {
   }, [kataId])
 
   return (
-    <div>
+    <div className='m-4'>
       {loading && <p>Loading...</p>}
       {!loading && kata && 
       <>

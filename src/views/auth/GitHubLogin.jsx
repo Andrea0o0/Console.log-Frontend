@@ -1,51 +1,84 @@
 import React,{useEffect,useState} from "react";
+import toast from 'react-hot-toast';
+import { useAuth } from '../../hooks/useAuth';
+import GitHub from '../../assets/images/GitHub-logo.png'
+import authService from "../../services/authService";
+import { useNavigate } from 'react-router-dom';
 
 export default function Github () {
+  const navigate = useNavigate();
+  const { storeToken, authenticateUser } = useAuth(); 
 
-    // eslint-disable-next-line
-    const [rerender,setRerender] = useState(false)
-    const [userData,setUserData] = useState({})
+  const [userData,setUserData] = useState(null)
 
   useEffect (() => {
     const queryString  = window.location.search
     const urlParams = new URLSearchParams(queryString)
     const codeParam = urlParams.get("code")
-    console.log(codeParam)
 
+    // async function getUserData(){
+    //   await fetch(`${process.env.REACT_APP_BACKEND_URL}/getUserData`,{
+    //     method:"GET",
+    //     headers:{
+    //       "Authorization":localStorage.getItem("accessToken") //BEARER TOKEN
+    //     }
+    //   }).then((response) => {
+    //     return response.json()
+    //   }).then((data) => {
+    //     setUserData(data)
+    //     handleUser(data)
+    //   })
+    // }
 
     if(codeParam && (localStorage.getItem("accessToken") === null)){
-      async function getAccessToken(){
-        await fetch(`${process.env.REACT_APP_BACKEND_URL}/getAccessToken?code=${codeParam}`,{
-          method:"GET"
-        }).then((response) => {
-          return response.json()
-        }).then((data) => {
-          console.log(data)
-          if(data.access_token){
-            localStorage.setItem("accessToken",data.access_token)
-            setRerender(prev => !prev)
-          }
-        })
+      const getAccessToken = async function (){
+        const response = await authService.loginGitHub(codeParam)
+        if (response.authToken) {
+          storeToken(response.authToken);
+          authenticateUser();
+          navigate('/');
+          toast.success('Welcome back!')
+        } else {
+          toast.error("Sorry we can't authenticate your Github user")
+          navigate('/login')
+        }
+      //   await fetch(`${process.env.REACT_APP_BACKEND_URL}/getAccessToken?code=${codeParam}`,{
+      //     method:"GET"
+      //   }).then((response) => {
+      //     return response.json()
+      //   }).then((data) => {
+      //     console.log(data)
+      //     if(data.access_token){
+      //       localStorage.setItem("accessToken",data.access_token)
+      //       getUserData()
+      //     }
+      //   })
       }
       getAccessToken()
+
     }
 
 },[])
 
+console.log(userData)
 
-async function getUserData(){
-  await fetch(`${process.env.REACT_APP_BACKEND_URL}/getUserData`,{
-    method:"GET",
-    headers:{
-      "Authorization":localStorage.getItem("accessToken") //BEARER TOKEN
+const handleUser = async () => {
+  console.log('user')
+      try {
+      const response = await authService.loginGitHub({username: userData.login,image:userData.avatar_url});
+      console.log(response)
+      navigate('/');
+    } catch (error) {
+      console.log(error)
     }
-  }).then((response) => {
-    return response.json()
-  }).then((data) => {
-    console.log(data)
-    setUserData(data)
-  })
 }
+
+console.log(userData)
+useEffect(() => {
+  userData !== null && handleUser()
+  // eslint-disable-next-line
+},[userData])
+
 
 function loginWithGithub() {
     window.location.assign(`https://github.com/login/oauth/authorize?scope=user&client_id=${process.env.REACT_APP_GITHUB
@@ -71,7 +104,7 @@ function loginWithGithub() {
          :
         <button onClick={loginWithGithub}>Login with Github</button>  } */}
         <div>
-          <img className="w-10 h-10 rounded-full mr-20" onClick={loginWithGithub} src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub"/>
+          <img className="w-10 h-10 rounded-full mr-20" onClick={loginWithGithub} src={GitHub} alt="GitHub"/>
         </div>        
         {/* <button onClick={loginWithGithub}>Login with Github</button>  */}
         

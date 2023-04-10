@@ -113,7 +113,7 @@ export default function KataLogic(){
         <>     
         {loading && <p>Loading...</p>}
       {!loading && kata && 
-      <div>
+      <div className="m-6">
         <Kata kata={kata} practise={true}/>
         <div className='kata_display'>
           <div className={`kata_display_1 _kata_${kata.level}`}>

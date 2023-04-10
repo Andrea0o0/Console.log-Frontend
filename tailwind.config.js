@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       colors: {
         'red-input': '#c05c48',
-        'green-input': '#67b04b'
+        'green-input': '#67b04b',
+        'background-lightcolor':'#212a33'
       }
     },
   },

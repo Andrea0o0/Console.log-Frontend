@@ -74,21 +74,21 @@ export default function Login() {
       <div className='login p-2'>
         <div className={"w-full border-2 "+(Object.keys(validValues).filter((key,i) => validValues[key] === false).length>0 ? "border-red-input text-red-input": Object.keys(validValues).filter((key,i) => validValues[key] === true).length === Object.keys(validValues).length ? "border-green-input text-green-input":"border-white text-white")+ " p-4 rounded-lg"}>
           <form className='flex flex-col align-center justify-around' onSubmit={handleSubmit}>
-          <div className="w-full flex flex-wrap justify-start w-full text-center mt-3">
-            <label className='w-80'>Email</label>
+          <div className="w-full flex flex-wrap justify-start w-full mt-3">
+            <label className='w-full mr-6'>Email</label>
               <input 
                 required 
                 type="email" 
                 name="email" 
                 value={user.email} 
                 placeholder="kata@gmail.com"
-                className={inputStyle + (validValues.email === true ? validStyle : validValues.email === false ? invalidStyle : "")+" mr-6"}
+                className={inputStyle + (validValues.email === true ? validStyle : validValues.email === false ? invalidStyle : "")+" mr-6 "}
               onChange={handleChange} 
               />
-              {validValues.email === false && <p className=" text-red-input border-red-input text-center w-80">Enter a valid email</p> }
+              {validValues.email === false && <p className=" text-red-input border-red-input  w-full mr-6">Enter a valid email</p> }
           </div>
-          <div className="flex flex-wrap justify-start w-full text-center mt-3">
-          <label className='w-full'>Password</label>
+          <div className="flex flex-wrap justify-start w-full  mt-3">
+          <label className='w-full mr-6'>Password</label>
           <div className='w-full flex items-end'>
             <input 
               required 
@@ -96,23 +96,27 @@ export default function Login() {
               name="password" 
               value={user.password}
               placeholder={eye ? "***********":"SecretPassword"}
-              className={inputStyle + (validValues.password === true ? validStyle : validValues.password === false ? invalidStyle : "")+" w-full mr-2"}
+              className={inputStyle + (validValues.password === true ? validStyle : validValues.password === false ? invalidStyle : "")+" w-full mr-2 "}
               onChange={handleChange} 
             />
             <FontAwesomeIcon icon={eye ? 'fa-solid fa-eye-slash': 'fa-solid fa-eye'} size="sm" style={{color: `${validValues.password === true ? "#67b04b" : validValues.password === false ? "#c05c48" : "#ffffff"}`,}} onClick={() => setEye(prev => !prev)} className='mb-3' />
           </div>
-          {validValues.password === false && <p className=" text-red-input border-red-input text-center w-80">Type number, upper & lower case and at least 8 characters</p> }
+          {validValues.password === false && <p className=" text-red-input border-red-input  w-80">Type number, upper & lower case and at least 8 characters</p> }
         </div>
-        <div className="flex flex-wrap w-full text-center mt-10 ">
+        <div className="flex flex-wrap w-full  mt-10 ">
             <button type="sumbit" className={(Object.keys(validValues).filter((key,i) => validValues[key] === false).length>0 ? invalidStyle: Object.keys(validValues).filter((key,i) => validValues[key] === true).length === Object.keys(validValues).length ? validStyle:"w-full border-2 border-white text-white") + inputStyle} >Log in</button>
-            {validValues.password_passwordControl === false && <p className=" text-red-input text-center w-80">Passwords do not match</p> }
+            {validValues.password_passwordControl === false ? <p className=" text-red-input  w-80">Passwords do not match</p>: errorMessage !== undefined && <p className=" text-red-input  w-80">{errorMessage}</p> }
           </div>
         </form>
         </div>
+        {/* <div>
+          <LoginGG/>
+        </div> */}
         <div className='flex justify-center mt-6'>
-          <Github/>
-          <Google/>
-        </div>      
+                <Github/>
+                <Google/>
+        </div> 
+             
       </div>
     </div>
   )

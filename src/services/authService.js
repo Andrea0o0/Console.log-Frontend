@@ -23,6 +23,14 @@ class AuthService {
     return this.api.post('/login', user).then(({ data }) => data);
   }
 
+  loginGitHub(id) {
+    return this.api.get(`/github/${id}`).then((response) => response.data);
+  } 
+
+  loginGoogle(user) {
+    return this.api.post('/google', user).then(({ data }) => data);
+  }
+
   me() {
     return this.api.get('/me').then((response) => response.data);
   }
