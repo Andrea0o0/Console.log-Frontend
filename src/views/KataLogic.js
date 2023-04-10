@@ -77,7 +77,7 @@ export default function KataLogic(){
       }, [kataId])
 
       useEffect(() => {
-        createSolution()
+        createSolution(newSolution)
         // eslint-disable-next-line
       }, [newSolution])
 
@@ -85,7 +85,7 @@ export default function KataLogic(){
       setJs(initialState)
     }
 
-    const createSolution = async () => {
+    const createSolution = async (newSolution) => {
       try {
         const response = await solutionService.createSolution(newSolution);
         console.log(response)
@@ -127,7 +127,7 @@ export default function KataLogic(){
             <Outlet context={{example:kata.example,instructions:kata.instructions.split("<ControlledEditor/>"),output:output,kata:kata,solutions:solutions}} />
           </div>          
           <div className='kata_display_2'> 
-              <Editor language='javascript' displayName={`Solution => ${kata.name}`} value={js} onChange={setJs} level={kata.level}/>
+              <Editor language='javascript' displayName={`Solution => ${kata.name}`} value={js} onChange={setJs} level={kata.level} createSolution={createSolution} newSolution={newSolution}/>
               <Test input={js} 
               setAddSolution={handleAddSolution} reset={initialState}  setJs={handleReset} test_function={kata.input} output={kata.output} kata={kata} setOutput={handleOutput} initialOutput={initialOutput} level={kata.level}></Test>
           </div>

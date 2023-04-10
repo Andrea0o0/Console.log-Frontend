@@ -3,6 +3,15 @@
   padding: 0;
 }
 
+h3{
+  font-size: 30px;
+  font-weight: bold;
+} 
+
+a, a div {
+  font-size: 16px;
+}
+
 :root {
   --output-color-red: #c05c48;
   --output-color-green: #67b04b;
@@ -32,6 +41,26 @@ a{
   background-color: var(--background-color);
   min-height: 100vh;
   padding-bottom: 2%;
+  overflow-y: auto;
+}
+
+/* width */
+.App::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+/* Track */
+.App::-webkit-scrollbar-track {
+  border-radius: 10px !important;
+}
+ 
+/* Handle */
+.App::-webkit-scrollbar-thumb {
+  border-radius: 10px !important;
+}
+
+.App::-webkit-scrollbar-thumb {
+  background: var(--background-kata); 
 }
 
 .active, nav a:hover, nav li:hover {
@@ -49,7 +78,7 @@ a {
   text-decoration: none;
 }
 
-.Kata a, .home, .home > * {
+.Kata a, .home, .home > *, .sortlevels {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,7 +107,6 @@ a {
 
 .Kata a div {
   width: 15%;
-  font-size: small;
   font-weight: bold;
 }
 
@@ -188,7 +216,7 @@ a {
   justify-content: space-between;
   background-color: var(--background-kata);
   color: white;
-  padding: .5rem;
+  padding: .5rem .9rem;
   margin: 1%;
   border-radius: .6rem;
 }
@@ -213,6 +241,7 @@ a {
 
 /* OUTPUT */
 @media only screen and (min-width: 768px) {
+  
 .kata_display {
     display: flex;
     width: 97%;
@@ -321,7 +350,7 @@ a {
 }
 
 /* width */
-.output::-webkit-scrollbar, .instructions_1::-webkit-scrollbar {
+.output::-webkit-scrollbar, .instructions_output::-webkit-scrollbar {
   width: 10px !important;
 }
 
@@ -587,7 +616,30 @@ header div, nav {
    }
 
    .Logo {
-    width: 10% ;
+    width: 15% ;
    }
 
+}
+
+@media only screen and (max-width:800px){
+
+h3{
+  font-size: 18px;
+  font-weight: bold;
+} 
+
+a, a div {
+  font-size: 10px;
+}
+
+.filterlevels{
+  width: 12%;
+}
+}
+
+
+/* SEARCHBAR */
+
+input {
+  outline: none;
 }

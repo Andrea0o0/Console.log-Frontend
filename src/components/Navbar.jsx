@@ -1,5 +1,5 @@
 import React, { useContext, useRef,useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Logo from '../assets/images/Logo/LOGO.svg'
@@ -21,8 +21,8 @@ export default function Navbar() {
   // WebkitTextFillColor:"transparent"}
 
   return (
-      <header className='bg-background-lightcolor flex items-center justify-around h-20 px-2 text-white'>
-      <img className='Logo' src={Logo} width='5%' alt='logo'/>
+      <header className='bg-background-lightcolor flex items-center justify-around h-20 px-8 text-white mb-10'>
+      <Link to="/"><img className='Logo' src={Logo} width='20%' alt='logo'/></Link>
         {user && <p>Hello {user.username}</p> }
         <nav ref={navRef}>
           <li><NavLink to="/">Home</NavLink></li>
@@ -36,11 +36,11 @@ export default function Navbar() {
         {backhover ? <img width='15%' className='pr-2' src={Back} alt='back'/>:<FontAwesomeIcon className='pr-2' icon="fa-solid fa-arrow-left"/>} Go back
            </li>
           <button className='nav-btn nav-close-btn' onClick={showNavbar}>
-            <FontAwesomeIcon icon="fa-solid fa-rectangle-xmark" style={{color: "#ffffff",}} />
+            <FontAwesomeIcon icon="fa-solid fa-rectangle-xmark" style={{color: "#ffffff"}}/>
           </button>
         </nav>
         <button className='nav-btn' onClick={showNavbar}>
-        <FontAwesomeIcon icon="fa-solid fa-bars" style={{color: "#ffffff",}} />
+        <FontAwesomeIcon icon="fa-solid fa-bars fa-2xl" with='45%' style={{color: "#ffffff",}} />
           </button>
         </header>
   )

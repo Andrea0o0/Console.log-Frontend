@@ -3,14 +3,17 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 import 'codemirror/mode/javascript/javascript'
 import { Controlled as ControlledEditor } from 'react-codemirror2'
+import solutionService from "../services/solutionService";
 
 
-export default function Editor({ displayName,value,onChange,level }){
+export default function Editor({ displayName,value,onChange,level,NewSolution}){
 
     const [open,setOpen] = useState(true)
     const [selected,setSelected] = useState('')
     const [key,setKey] = useState('')
     const [hover,setHover] = useState(false)
+    const [save,setSave] = useState(false)
+    console.log(save===true)
 
     const handleChange = (editor,data,value) => {
         onChange(value)
@@ -46,10 +49,11 @@ export default function Editor({ displayName,value,onChange,level }){
     return (
         <>
             <div className="pane top-pane">
-                <div className={`editor-container ${open ? '':'collapsed'}`}>
-                    <div className={`editor-title ${hover ? `hover_${level}`:`_${level}`}`} onMouseEnter={handleHover}
+                <div className={` editor-container ${open ? '':'collapsed'}`}>
+                    <div className={`  editor-title ${hover ? `hover_${level}`:`_${level}`}`} onMouseEnter={handleHover}
     onMouseLeave={handleHover}>
                     <p>{displayName}</p>
+                    <button onClick={() => setSave(true)}><p>Click to Save function</p></button>
                     </div>
                     <ControlledEditor
                     onBeforeChange={handleChange}

@@ -9,6 +9,7 @@ export default function Home() {
   const [katas,setKatas] = useState([])
   const [searchKata,setSearchKata] = useState('')
   const [loading, setLoading] = useState(true);
+  const [levels,setLevels] = useState([1,2,3,4,5])
 
   const getKatas = async () => {
     try {
@@ -29,6 +30,9 @@ export default function Home() {
     setSearchKata(value);
   }
 
+  const handleLevels = (value) => {
+    setLevels()
+  }
   
 
 
@@ -37,14 +41,14 @@ export default function Home() {
     {loading && <p>Loading...</p>}
       {!loading &&
         <div className="home">
-          <div className="search_container">
+          <div className="search_container mb-8">
             <SearchInput handleSearchKata={handleSearch} />
           </div>
           <div className="card_container">
-            {katas.filter(elem => elem.name.toLowerCase().includes(searchKata.toLowerCase()))
+            {katas.filter(elem => elem.name.toLowerCase().includes(searchKata.toLowerCase())).length>0 ? katas.filter(elem => elem.name.toLowerCase().includes(searchKata.toLowerCase()))
               .map(elem => {
                 return <Kata key={elem._id} kata={elem} />
-              })}
+              }): <div><h2 className='text-white'>No functions with that name or description have been found.</h2></div>}
           </div>
         </div>}
     </div>
