@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import authService from '../../services/authService';
+import ToLogin from '../../assets/images/Signup/Arrow to login.svg'
 
 export default function Signup() {
   const [user, setUser] = useState({
@@ -14,6 +15,7 @@ export default function Signup() {
   const [passwordControl, setPasswordControl] = useState('');
   const [validValues, setValidValues] = useState({username:'',email:'',password:'',passwordControl:'',password_passwordControl:''});
   const [errorMessage,setErrorMessage] = useState('')
+  const [backhover,setHover] = useState(false)
   const navigate = useNavigate();
 
   const emailRegex = /([a-z]|[A-Z]|[0-9]|[_-])@gmail.com|@email.com|@hotmail.com/
@@ -84,9 +86,16 @@ export default function Signup() {
   const invalidStyle = "text-red-input border-red-input invalidInput ";
   
   return (
-    <div className='flex justify-center'>
-      <div className="h-screen w-96 signup">
-        <div className={"w-full border-2 "+(Object.keys(validValues).filter((key,i) => validValues[key] === false).length>0 ? "border-red-input text-red-input": Object.keys(validValues).filter((key,i) => validValues[key] === true).length === Object.keys(validValues).length ? "border-green-input text-green-input":"border-white text-white")+ " p-8 pb-28 pt-20 rounded-lg"}>
+    <div className='flex justify-center text-xs'>
+    
+      <div className="flex flex-wrap justify-center w-96 signup">
+      <div className='mb-4'>
+      <Link to="/login"><li className='tologin flex cursor-pointer text-white items-center justify-center m-0 pb-1' onMouseEnter={() => setHover(prev => !prev)}
+        onMouseLeave={() => setHover(prev =>!prev)}>
+        {backhover ? <img width='5%' className='pr-2' src={ToLogin} alt='back'/>:<FontAwesomeIcon className='pr-2' icon="fa-solid fa-arrow-right fa-sm" />} Click here to login if you've already have an account
+           </li></Link>
+      </div>
+        <div className={"w-full border-2 "+(Object.keys(validValues).filter((key,i) => validValues[key] === false).length>0 ? "border-red-input text-red-input": Object.keys(validValues).filter((key,i) => validValues[key] === true).length === Object.keys(validValues).length ? "border-green-input text-green-input":"border-white text-white")+ " p-8 pb-10 pt-4 rounded-lg"}>
           <form className="h-96 flex flex-col align-center justify-around mt-2" onSubmit={handleSubmit}>
           <div className="flex flex-wrap justify-start w-full">
             <label>Username</label>

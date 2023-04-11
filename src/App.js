@@ -20,6 +20,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import Github from './views/auth/GitHubLogin';
 import Google from './views/auth/Google';
+import Profile from './views/User/Profile';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="instructions" element={<Instructions />}/>
           <Route path="pastsolutions" element={<Pastsolutions />}/>
         </Route>
+        <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login/github" element={<Github/>} />

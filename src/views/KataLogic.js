@@ -8,6 +8,8 @@ import kataService from "../services/kataService";
 import solutionService from "../services/solutionService";
 import Kata from "../components/Kata";
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import Loading from '../assets/images/Logo/Loading.gif'
 
 export default function KataLogic(){
     const {kataId} = useParams()
@@ -46,6 +48,7 @@ export default function KataLogic(){
       } catch (error) {
         console.error(error)
         setLoading(false);
+        setError(true)
       }
     }
 
@@ -67,6 +70,7 @@ export default function KataLogic(){
         } catch (error) {
           console.error(error)
           setLoading(false);
+          setError(true)
         }
       }
 
@@ -88,7 +92,12 @@ export default function KataLogic(){
     const createSolution = async (newSolution) => {
       try {
         const response = await solutionService.createSolution(newSolution);
-        console.log(response)
+        if (response) {
+          navigate('/');
+          toast.success('Solution Created!')
+        } else {
+          toast.error("Sorry we can't create your Solution")
+        }
       } catch (error) {
         console.error(error)
       }
@@ -111,7 +120,7 @@ export default function KataLogic(){
 
     return (
         <>     
-        {loading && <p>Loading...</p>}
+        {loading && <div className='flex justify-center mt-20'><img width='10%' src={Loading} alt='loading'/></div>}
       {!loading && kata && 
       <div className="m-6">
         <Kata kata={kata} practise={true}/>
@@ -133,7 +142,8 @@ export default function KataLogic(){
           </div>
         </div>
       </div>          
-      }     
+      }
+      {error && <p>Something went wrong. Couldn't find your kata</p>}     
         </>
     )
 }

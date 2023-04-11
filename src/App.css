@@ -4,12 +4,28 @@
 }
 
 h3{
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
 } 
 
-a, a div {
-  font-size: 16px;
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--background-color);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #35424f; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: -webkit-linear-gradient( var(--level-5-blue), var(--level-4-purple),var(--level-3-pink),var(--level-2-orange),var(--level-1-green));
 }
 
 :root {
@@ -31,43 +47,30 @@ a, a div {
   --level-1-hover-green: #B5CF89;
   --level-1-green: #9CC763;
 }
-
-a{
-  color:  var(--a-color);
-}
   
 .App {
   /* background-color: #183153; */
   background-color: var(--background-color);
   min-height: 100vh;
   padding-bottom: 2%;
-  overflow-y: auto;
+  overflow:visible;
+  overflow-y: visible;
 }
 
-/* width */
-.App::-webkit-scrollbar {
-  width: 10px !important;
-}
-
-/* Track */
-.App::-webkit-scrollbar-track {
-  border-radius: 10px !important;
-}
- 
-/* Handle */
-.App::-webkit-scrollbar-thumb {
-  border-radius: 10px !important;
-}
-
-.App::-webkit-scrollbar-thumb {
-  background: var(--background-kata); 
-}
-
-.active, nav a:hover, nav li:hover {
+.active, nav a:hover, nav li:hover, .loginsignup, .tologin:hover, .navbarlink:hover {
   /* font-size: 72px; */
   background: -webkit-linear-gradient(left, var(--level-5-blue), var(--level-4-purple),var(--level-3-pink),var(--level-2-orange),var(--level-1-green));
+  background-clip: inherit;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.tologin:hover {
+  font-size: medium;
+}
+
+.navbarlink:hover {
+  font-size: .75rem;
 }
 
 li {
@@ -95,8 +98,8 @@ a {
   color: white;
 }
 
-.Kata a h3{
-  width: 80%;
+.Kata a h3 {
+  width: 84%;
   padding-left: 4%;
 }
 
@@ -106,21 +109,23 @@ a {
 
 
 .Kata a div {
-  width: 15%;
+  width: 14%;
   font-weight: bold;
 }
 
-.Kata a div img, .Kata a div div{
+.Kata a div img, .Kata a div div {
   width: 100%;
 }
 
+
 .Kata {
   width: 92%;
-  margin: 3% 4%;
+  margin: 2% 4%;
   padding: 2%;
   border-radius: 20px;
   background-color: var(--background-kata);
 }
+
 
 .img_level {
   position: absolute;
@@ -351,6 +356,7 @@ a {
 
 /* width */
 .output::-webkit-scrollbar, .instructions_output::-webkit-scrollbar {
+  background-color: transparent;
   width: 10px !important;
 }
 
@@ -479,7 +485,7 @@ hr {
 
  .start_btn {
   margin: 2%;
-  width: 90%;
+  width: 94%;
   text-align: center;
   border:none;
   border-radius: .8rem;
@@ -551,11 +557,32 @@ input:-webkit-autofill{
 
 
 @media only screen and (min-width: 768px) {
+  .Kata a div {
+    width: 8%;
+    font-weight: bold;
+  }
+
   .login,.signup {
     width: 40%;
   }
   .login form, .signup form {
     padding: 6%;
+  }
+
+  .level_selector {
+    width: 55%;
+  }
+
+  .infoselect {
+    width: 100%;
+  }
+
+  .sortedlevels {
+    width: 35%;
+  }
+
+  .navbarlink:hover{
+    font-size: .75rem;
   }
 }
 
@@ -570,6 +597,10 @@ nav li {
 
 nav a {
   color: white;
+}
+
+header a {
+  width: 10%;
 }
 
 header .nav-btn {
@@ -588,7 +619,11 @@ header div, nav {
   align-items: center;
 }
 
-@media only screen and (max-width:1024px){
+@media only screen and (max-width:700px){
+  header nav a, header nav li {
+    font-size: 1.4rem;
+  }
+
   header .nav-btn {
     visibility: visible;
     opacity: 1;
@@ -615,27 +650,51 @@ header div, nav {
     transform: none;
    }
 
+   header {
+    padding: 0% 1%;
+   }
+
    .Logo {
-    width: 15% ;
+    width: 100% ;
+   }
+
+   header p {
+    font-size: .7.5rem;
+   }
+
+   .tologin, .navbarlink {
+    background: -webkit-linear-gradient(left, var(--level-5-blue), var(--level-4-purple),var(--level-3-pink),var(--level-2-orange),var(--level-1-green));
+    background-clip: inherit;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+   }
+   
+   .tologin{
+   font-size: medium;
+   }
+
+   .navbarlink p {
+    font-size: .75rem;
    }
 
 }
 
-@media only screen and (max-width:800px){
-
-h3{
-  font-size: 18px;
-  font-weight: bold;
-} 
-
-a, a div {
-  font-size: 10px;
-}
-
+@media only screen and (max-width:1000px){
 .filterlevels{
   width: 15%;
 }
 }
+@media only screen and (max-width:800px){
+   h3{
+      font-size: 18px;
+      font-weight: bold;
+    } 
+
+    a div {
+      font-size: 8px;
+    }
+}
+
 
 
 /* SEARCHBAR */

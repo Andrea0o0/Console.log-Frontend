@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams,Link } from 'react-router-dom';
 import kataService from '../services/kataService';
 import { Controlled as ControlledEditor } from 'react-codemirror2'
@@ -6,8 +6,11 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 import 'codemirror/mode/javascript/javascript'
 import Kata from '../components/Kata';
+import Loading from '../assets/images/Logo/Loading.gif'
+import { AuthContext } from '../context/AuthContext';
 
 export default function KataDetail() {
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext); 
   const { kataId } = useParams();
   const [kata, setkata] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -36,7 +39,7 @@ export default function KataDetail() {
 
   return (
     <div className='m-4'>
-      {loading && <p>Loading...</p>}
+      {loading && <div className='flex justify-center mt-20'><img width='10%' src={Loading} alt='loading'/></div>}
       {!loading && kata && 
       <>
         <Kata kata={kata} practise={true}/>
@@ -50,7 +53,7 @@ export default function KataDetail() {
             </div>
             )
         })}
-        <button className="start_btn" style={{ marginLeft: '10px' }}><Link to={`/kata/practise/${kata._id}`}>Start</Link></button>
+        {isLoggedIn ? <button className="start_btn"><Link to={`/kata/practise/${kata._id}`}>Start</Link></button>:<button className="start_btn"><Link to={`/signup`}>Sign up FIRST! 😉</Link></button>}
       </div>
       </>}
         {error && <p>Something went wrong. Couldn't find your kata</p>}

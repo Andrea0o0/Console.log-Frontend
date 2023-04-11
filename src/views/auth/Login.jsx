@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import authService from '../../services/authService';
 import Github from './GitHubLogin';
 import Google from './Google';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ToSignup from '../../assets/images/Signup/Arrow to login.svg'
 
 export default function Login() {
   const { storeToken, authenticateUser, isLoggedIn } = useAuth(); 
@@ -16,6 +17,7 @@ export default function Login() {
   const [eye,setEye] = useState(true)
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [validValues, setValidValues] = useState({email:'',password:''});
+  const [backhover,setHover] = useState(false)
   const navigate = useNavigate();
 
   const emailRegex = /([a-z]|[A-Z]|[0-9]|[_-])@gmail.com|@email.com|@hotmail.com/
@@ -70,8 +72,14 @@ export default function Login() {
   const invalidStyle = "text-red-input border-red-input invalidInput ";
 
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center text-sm'>
       <div className='login p-2'>
+      <div className='mb-4'>
+      <Link to='/signup'><li className='tologin flex cursor-pointer text-white items-center justify-center m-0 pb-1' onMouseEnter={() => setHover(prev => !prev)}
+        onMouseLeave={() => setHover(prev =>!prev)}>
+        {backhover ? <img width='5%' className='pr-2' src={ToSignup} alt='back'/>:<FontAwesomeIcon className='pr-2' icon="fa-solid fa-arrow-right fa-sm" />} Click here to Signup if you don't have an account
+           </li></Link>
+      </div>
         <div className={"w-full border-2 "+(Object.keys(validValues).filter((key,i) => validValues[key] === false).length>0 ? "border-red-input text-red-input": Object.keys(validValues).filter((key,i) => validValues[key] === true).length === Object.keys(validValues).length ? "border-green-input text-green-input":"border-white text-white")+ " p-4 rounded-lg"}>
           <form className='flex flex-col align-center justify-around' onSubmit={handleSubmit}>
           <div className="w-full flex flex-wrap justify-start w-full mt-3">

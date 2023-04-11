@@ -53,7 +53,7 @@ export default function Editor({ displayName,value,onChange,level,NewSolution}){
                     <div className={`  editor-title ${hover ? `hover_${level}`:`_${level}`}`} onMouseEnter={handleHover}
     onMouseLeave={handleHover}>
                     <p>{displayName}</p>
-                    <button onClick={() => setSave(true)}><p>Click to Save function</p></button>
+                    {/* <button onClick={() => setSave(true)}><p>Click to Save function</p></button> */}
                     </div>
                     <ControlledEditor
                     onBeforeChange={handleChange}

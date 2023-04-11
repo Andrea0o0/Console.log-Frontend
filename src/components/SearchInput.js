@@ -35,6 +35,7 @@ export default function SearchInput(props) {
     _2:L2,
     _1:L1})
   const [select,setSelect] = useState([])
+  const [selectSort,setSelectSort] = useState({High:false,Low:false})
 
     const handleHover = (level) => {
       const hoverr = hover[`_${level}`] ? false:true
@@ -66,7 +67,7 @@ export default function SearchInput(props) {
 
     const selectItem = "bg-background-lightcolor"
     const unselectItem = "bg-transparent"
-    const sortstyle = 'flex justify-center items-center rounded-full bg-background-lightcolor card mx-1'
+    const sortstyle = 'flex justify-center items-center rounded-full border-1 border-background-lightcolor bg-background-lightcolor card mx-1 cursor-pointer'
 
     useEffect(() => {
       const selectSorted = select.sort()
@@ -74,36 +75,40 @@ export default function SearchInput(props) {
       setInfoSelect(response)
     },[select])
 
+    // ${selectSort.High===true ? "border-1 border-white":""}`}
   return (
     <>
       <div className='Kata card'>
         <input className='searchbar text-white bg-transparent px-2 w-full' type="text" name="search" onChange={handleChange} placeholder="What are you looking for?" />
       </div>
-      <div className='w-full flex flex-wrap items-center justify-center'>
-      <div className='w-80 mx-3 mb-1 rounded-full bg-background-lightcolor card text-center text-no-select'><p className='text-xs py-0.5'>{infoSelect}</p></div>
-        {Object.keys(srcImage).map((key,i)=>{ 
-        return(
-        <div key={i} className={`rounded-full p-2 ${select.indexOf(i+1) > -1 ? selectItem:unselectItem} filterlevels card w-20 mx-1 ${hover ? `hover_${i+1}`:`_${i+1}`}`} onMouseEnter={() => handleHover(i+1)}
-    onMouseLeave={() => handleHover(i+1)} onClick={()=>handleSelect(i+1)}>
-          <a>
-            <div className='level'>
-                <img src={srcImage[`_${i+1}`]} alt={`Level${i+1}`}/>
-                <div className='img_level'>{`${i+1}JS`}</div>
+      <div className='flex flex-wrap items-center justify-center'>
+        <div className='level_selector w-full flex flex-wrap items-center justify-center'>
+          <div className='infoselect w-4/5 mx-3 mb-1 rounded-full bg-background-lightcolor card text-center text-no-select'><p className='text-xs py-0.5'>{infoSelect}</p></div>
+          {Object.keys(srcImage).map((key,i)=>{ 
+          return(
+          <div key={i} className={`cursor-pointer rounded-full p-2 ${select.indexOf(i+1) > -1 ? selectItem:unselectItem} filterlevels card w-20 mx-1 ${hover ? `hover_${i+1}`:`_${i+1}`}`} onMouseEnter={() => handleHover(i+1)}
+      onMouseLeave={() => handleHover(i+1)} onClick={()=>handleSelect(i+1)}>
+            <a>
+              <div className='level'>
+                  <img src={srcImage[`_${i+1}`]} alt={`Level${i+1}`}/>
+                  <div className='img_level'>{`${i+1}JS`}</div>
+              </div>
+            </a>
+          </div>)
+          })}
+        </div>  
+        <div className='sortedlevels w-4/5 mt-2 p-1 text-no-select flex justify-center'>
+            <div className={sortstyle} onClick={()=>{handleSort(true);setSelectSort(prev=>{return{...prev,High:!selectSort.High}})}}>
+                <p className='text-xs mx-1'>Highest Level</p>
+                <img width='15%' src={High} alt='highest'/>
             </div>
-          </a>
-        </div>)
-        })}
-      </div>  
-      <div className='sortedlevels w-4/5 mt-2 p-1 text-no-select flex justify-center'>
-          <div className={sortstyle} onClick={()=>handleSort(true)}>
-              <p className='text-xs mx-1'>Highest Level</p>
-              <img width='15%' src={High} alt='highest'/>
-          </div>
-          <div className={sortstyle} onClick={()=>handleSort(false)}>
-              <img width='15%' src={Low} alt='highest'/>
-              <p className='text-xs mx-1'>Lowest Level</p>
-          </div>
-      </div>    
+            <div className={sortstyle} onClick={()=>handleSort(false)}>
+                <img width='15%' src={Low} alt='highest'/>
+                <p className='text-xs mx-1'>Lowest Level</p>
+            </div>
+        </div>    
+      </div>
+      
     </>
   )
 }

@@ -29,7 +29,7 @@ export default function Kata({ kata : {name, level, _id},practise }) {
     },[hover])
 
   return (    
-    <div className={`Kata card ${hover ? `hover_${level}`:`_${level}`}`} onMouseEnter={handleHover}
+    <div className={`Kata ${hover ? `hover_${level}`:`_${level}`}`} onMouseEnter={handleHover}
     onMouseLeave={handleHover}>
         {!practise ? 
         (<Link to={`/katas/${_id}`}>
@@ -39,12 +39,12 @@ export default function Kata({ kata : {name, level, _id},practise }) {
             </div>
             <h3>{name}</h3> 
         </Link>):
-        (<a>
+        (<a className='w-4/5'>
             <div className='level'>
                 <img src={srcImage} alt={`Level${level}`}/>
-                <div className='img_level'>{`${level}JS`}</div>
+                <div className='img_level text-xs'>{`${level}JS`}</div>
             </div>
-            <h3>{name}</h3> 
+            <h3 className='text-xl'>{name}</h3> 
         </a>)}
     </div>
    

@@ -9,8 +9,6 @@ export default function Google(){
     const navigate = useNavigate();
   const { storeToken, authenticateUser } = useAuth(); 
 
-    // const [user,setUser] = useState(null)
-
     const handleCallbackResponse = async function(response){
         const userObject = await jwt_decode(response.credential)
         handleUser(userObject)
@@ -27,8 +25,6 @@ export default function Google(){
             toast.error("Sorry we can't authenticate your Github user")
             navigate('/login')
           }
-
-        //   AGNmyxZD50NsmRknuAYY8-h0dyB4SshW_7wAYuCBzj1Z=s96-c
     }
 
     useEffect(() => {
@@ -43,23 +39,13 @@ export default function Google(){
             {type:"icon",theme:"outline",shape:"pill"}
         )
 
-        // type:"icon" size:"large", 
-
-    
         google.accounts.id.prompt()
 
     },[])
+    
     return (
         <>
             <div className='w-10' id="signInDiv"></div>
-            
-            {/* <button onClick={(e) => handleSignOut(e)}></button>
-            { user && 
-            <>
-                <img src={user.picture} alt='imageGoogle'/>
-                <h3>{user.name}</h3>
-            </>} */}
-            
         </>
     )
 }

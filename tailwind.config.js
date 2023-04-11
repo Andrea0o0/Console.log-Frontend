@@ -3,6 +3,8 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      borderWidth: {
+        '1': '1px'},
       colors: {
         'red-input': '#c05c48',
         'green-input': '#67b04b',

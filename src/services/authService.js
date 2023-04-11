@@ -31,6 +31,18 @@ class AuthService {
     return this.api.post('/google', user).then(({ data }) => data);
   }
 
+  edit_username(username) {
+    return this.api.post('/username', username).then(({ data }) => data);
+  }
+
+  edit_image(image) {
+    return this.api.post('/image', image).then(({ data }) => data);
+  }
+
+  user() {
+    return this.api.get('/user').then((response) => response.data);
+  }
+
   me() {
     return this.api.get('/me').then((response) => response.data);
   }

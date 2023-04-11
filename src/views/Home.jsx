@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import kataService from '../services/kataService';
 import SearchInput from '../components/SearchInput';
 import Kata from '../components/Kata';
+import Loading from '../assets/images/Logo/Loading.gif'
 
 
 export default function Home() {
@@ -47,8 +48,8 @@ export default function Home() {
 
 
   return (
-    <div>
-    {loading && <p>Loading...</p>}
+    <div className='Home'>
+    {loading && <div className='flex justify-center mt-20'><img width='10%' src={Loading} alt='loading'/></div>}
       {!loading && !error ?
         <div className="home">
           <div className="search_container mb-8 flex flex-wrap">
