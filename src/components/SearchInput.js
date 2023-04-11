@@ -9,15 +9,18 @@ import L2_hover from '../assets/images/levels/2 HOVER.svg'
 import L3_hover from '../assets/images/levels/3 HOVER.svg'
 import L4_hover from '../assets/images/levels/4 HOVER.svg'
 import L5_hover from '../assets/images/levels/5 HOVER.svg'
+import High from '../assets/images/SearchBar/Highest Level.svg'
+import Low from '../assets/images/SearchBar/Lowest Level.svg'
 import { Link } from 'react-router-dom';
 
 export default function SearchInput(props) {
 
-  const { handleSearchKata, levels } = props;
+  const { handleSearchKata, handleLevels, handleSortByLevel } = props;
 
   const handleChange = (e) => {
     handleSearchKata(e.target.value)
   }
+  const [infoSelect,setInfoSelect] = useState('')
 
   const [hover,setHover] = useState({
     _5:false,
@@ -31,6 +34,7 @@ export default function SearchInput(props) {
     _3:L3,
     _2:L2,
     _1:L1})
+  const [select,setSelect] = useState([])
 
     const handleHover = (level) => {
       const hoverr = hover[`_${level}`] ? false:true
@@ -49,9 +53,26 @@ export default function SearchInput(props) {
         })
     }
 
-    const handleClick = () => {
-      
+    const handleSelect = (level) => {
+      const newSelect = [...select]
+      newSelect.indexOf(level) > -1 ? newSelect.splice(select.indexOf(level),1) :newSelect.push(level)
+      setSelect(newSelect)
+      handleLevels(newSelect)
     }
+
+    const handleSort = (order) => {
+      handleSortByLevel(order)
+    }
+
+    const selectItem = "bg-background-lightcolor"
+    const unselectItem = "bg-transparent"
+    const sortstyle = 'flex justify-center items-center rounded-full bg-background-lightcolor card mx-1'
+
+    useEffect(() => {
+      const selectSorted = select.sort()
+      const response = select.length === 0  ? "No level selected": select.length === 1 ? `Level ${selectSorted[0]} is the only one selected`: select.length === 2 ? `Levels ${selectSorted[0]} and ${selectSorted[1]} are selected`: select.length === 3 ? `Levels ${selectSorted[0]}, ${selectSorted[1]} and ${selectSorted[2]} are selected`: select.length === 4 ? `Levels ${selectSorted[0]}, ${selectSorted[1]}, ${selectSorted[2]} and ${selectSorted[3]} are selected`:`All levels are selected, from 1 to 5`
+      setInfoSelect(response)
+    },[select])
 
   return (
     <>
@@ -59,10 +80,11 @@ export default function SearchInput(props) {
         <input className='searchbar text-white bg-transparent px-2 w-full' type="text" name="search" onChange={handleChange} placeholder="What are you looking for?" />
       </div>
       <div className='w-full flex flex-wrap items-center justify-center'>
+      <div className='w-80 mx-3 mb-1 rounded-full bg-background-lightcolor card text-center text-no-select'><p className='text-xs py-0.5'>{infoSelect}</p></div>
         {Object.keys(srcImage).map((key,i)=>{ 
         return(
-        <div key={i} className={`filterlevels card w-20 mx-2 ${hover ? `hover_${i+1}`:`_${i+1}`}`} onMouseEnter={() => handleHover(i+1)}
-    onMouseLeave={() => handleHover(i+1)}>
+        <div key={i} className={`rounded-full p-2 ${select.indexOf(i+1) > -1 ? selectItem:unselectItem} filterlevels card w-20 mx-1 ${hover ? `hover_${i+1}`:`_${i+1}`}`} onMouseEnter={() => handleHover(i+1)}
+    onMouseLeave={() => handleHover(i+1)} onClick={()=>handleSelect(i+1)}>
           <a>
             <div className='level'>
                 <img src={srcImage[`_${i+1}`]} alt={`Level${i+1}`}/>
@@ -71,7 +93,17 @@ export default function SearchInput(props) {
           </a>
         </div>)
         })}
-      </div>      
+      </div>  
+      <div className='sortedlevels w-4/5 mt-2 p-1 text-no-select flex justify-center'>
+          <div className={sortstyle} onClick={()=>handleSort(true)}>
+              <p className='text-xs mx-1'>Highest Level</p>
+              <img width='15%' src={High} alt='highest'/>
+          </div>
+          <div className={sortstyle} onClick={()=>handleSort(false)}>
+              <img width='15%' src={Low} alt='highest'/>
+              <p className='text-xs mx-1'>Lowest Level</p>
+          </div>
+      </div>    
     </>
   )
 }

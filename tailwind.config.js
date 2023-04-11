@@ -6,7 +6,8 @@ module.exports = {
       colors: {
         'red-input': '#c05c48',
         'green-input': '#67b04b',
-        'background-lightcolor':'#212a33'
+        'background-lightcolor':'#212a33',
+        'no-select':'#9CA3A4'
       }
     },
   },
