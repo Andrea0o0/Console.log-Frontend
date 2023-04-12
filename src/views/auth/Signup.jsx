@@ -81,7 +81,7 @@ export default function Signup() {
     })
   },[password,passwordControl])
 
-  const inputStyle = "w-full rounded-lg bg-transparent  border-2 shadow-xl p-3 ";
+  const inputStyle = "w-full rounded-full bg-transparent  border-2 shadow-xl p-3 ";
   const validStyle = "text-green-input border-green-input validInput ";
   const invalidStyle = "text-red-input border-red-input invalidInput ";
   

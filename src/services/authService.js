@@ -31,16 +31,16 @@ class AuthService {
     return this.api.post('/google', user).then(({ data }) => data);
   }
 
-  edit_username(username) {
+  editusername(username) {
     return this.api.post('/username', username).then(({ data }) => data);
   }
 
-  edit_image(image) {
+  editimage(image) {
     return this.api.post('/image', image).then(({ data }) => data);
   }
 
-  user() {
-    return this.api.get('/user').then((response) => response.data);
+  userInfo() {
+    return this.api.get('/userinfo').then((response) => response.data);
   }
 
   me() {

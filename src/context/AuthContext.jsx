@@ -1,13 +1,16 @@
 import React, { useState, createContext, useEffect } from 'react';
 import authService from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
+
 
 function AuthProviderWrapper(props) {
   // Store the variables we want to share
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   // Functions to store and delete the token received by the backend in the browser
   const storeToken = (token) => {
@@ -41,8 +44,10 @@ function AuthProviderWrapper(props) {
   };
 
   const logOutUser = () => {
+    console.log(localStorage.getItem('authToken'))
     removeToken();
     authenticateUser();
+    navigate('/')
   }
 
   // When the app first renders, let's see if the user's session is still active

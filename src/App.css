@@ -247,6 +247,15 @@ a {
 /* OUTPUT */
 @media only screen and (min-width: 768px) {
   
+.avatar {
+  width: 25%;
+}
+
+.profile{
+  flex-direction: row;
+  justify-content: center;
+}
+
 .kata_display {
     display: flex;
     width: 97%;
@@ -556,7 +565,16 @@ input:-webkit-autofill{
 }
 
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 700px) {
+  .navLinks{
+    width: 65%;
+    justify-content:end;
+  }
+
+  .navbarlink{
+    width:32%;
+  }
+
   .Kata a div {
     width: 8%;
     font-weight: bold;
@@ -591,7 +609,7 @@ input:-webkit-autofill{
 }
 
 nav li {
-  margin: 0 2rem;
+  margin: 0 1.5rem;
   text-align: center;
 }
 

@@ -18,7 +18,6 @@ export default function Github () {
     if(codeParam && (localStorage.getItem("accessToken") === null)){
       const getAccessToken = async function (){
         const response = await authService.loginGitHub(codeParam)
-        console.log(response)
         if (response.authToken) {
           storeToken(response.authToken);
           authenticateUser();
@@ -43,7 +42,7 @@ function loginWithGithub() {
 
       return(
         <>
-        <div>
+        <div className="cursor-pointer">
           <img className="w-10 h-10 rounded-full mr-20" onClick={loginWithGithub} src={GitHub} alt="GitHub"/>
         </div>                
         </>)
