@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Logo from '../assets/images/Logo/LOGO.svg'
 import Back from '../assets/images/navbar/back hover.svg'
-import Profile from '../views/User/Profile';
+import Profile from '../views/User/User';
 
 
 export default function Navbar() {

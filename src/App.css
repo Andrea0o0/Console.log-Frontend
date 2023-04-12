@@ -57,7 +57,7 @@ h3{
   overflow-y: visible;
 }
 
-.active, nav a:hover, nav li:hover, .loginsignup, .tologin:hover, .navbarlink:hover {
+.active, nav a:hover, nav li:hover, .loginsignup, .tologin:hover, .navbarlink:hover, .profileOutlet li:hover {
   /* font-size: 72px; */
   background: -webkit-linear-gradient(left, var(--level-5-blue), var(--level-4-purple),var(--level-3-pink),var(--level-2-orange),var(--level-1-green));
   background-clip: inherit;
