@@ -5,6 +5,7 @@ import Loading from '../../assets/images/Logo/Loading.gif'
 import toast from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
 import Avatar from '../../components/Avatar';
+import Logo from '../../assets/images/avatars/Logo.png'
 
 export default function User() {
   const { storeToken, authenticateUser } = useAuth(); 
@@ -21,6 +22,7 @@ export default function User() {
     try {
       const response = await authService.userInfo();
       setProfile(response)
+      console.log(response.image)
       setLoading(false);
       setError(false);
     } catch (error) {
@@ -46,7 +48,7 @@ export default function User() {
       if (response.authToken) {
         storeToken(response.authToken);
         authenticateUser();
-        navigate('/profile');
+        navigate('/profile/user');
         toast.success('Avatar changed!')
       } else {
         toast.error("Sorry We couldn't update your avatar ")
@@ -84,9 +86,9 @@ export default function User() {
   }
 
 
-const handleImgError = e => {
-  e.target.src = profile.image
-}
+// const handleImgError = e => {
+//   e.target.src = profile.image
+// }
 
 const handleChange = (e) => {
   setNewUsername(e.target.value)
@@ -110,11 +112,13 @@ const inputStyle = "w-full rounded-full  border-2 shadow-xl p-1 px-3 ";
         </div>: 
         <div className='avatar flex flex-col items-center text-white w-1/2'>
           <p className='text-sm mb-2'>Current Profile Avatar</p>
-          <img className='rounded-lg' width='85%' src={profile.image} onError={handleImgError} alt='ImageProfile'/>
+          <img className='rounded-lg' width='85%' src={profile.image} referrerPolicy="no-referrer" 
+          // onError={handleImgError}
+           alt='ImageProfile'/>
           <button className='text-sm p-1.5 px-6 my-4 bg-background-lightcolor rounded-full border-1 border-background-lightcolor hover:border-white focus:border-white' onClick={() => setChangeAvatar(prev => !prev)}>Change Avatar</button>
         </div>}
         <div className='avatar flex flex-col items-center text-white w-3/4 ml-2'>
-          <p className='text-sm my-2'>Change username</p>
+          <p className='text-sm my-2'>Username</p>
           <input className={`searchbar text-center bg-background-lightcolor w-full ${inputStyle} ${errorMessageUsername.state === false ? validStyle : errorMessageUsername.state === true ? invalidStyle : ""}`} type="text" name="search"  placeholder={profile.username} onChange={handleChange}/>
           {errorMessageUsername.state === true && <p className='text-xs text-red-input text-center'>{errorMessageUsername.message}</p>}
           <button className={`text-sm p-1.5 px-6 my-4 bg-background-lightcolor rounded-full border-1 border-background-lightcolor hover:border-white hover:text-white ${errorMessageUsername.state === false ? 'text-green-input border-green-input' : errorMessageUsername.state === true ? 'text-red-input border-red-input' : ""}`} onClick={handleNewUsername}>Change Username</button>

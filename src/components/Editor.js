@@ -13,7 +13,6 @@ export default function Editor({ displayName,value,onChange,level,NewSolution}){
     const [key,setKey] = useState('')
     const [hover,setHover] = useState(false)
     const [save,setSave] = useState(false)
-    console.log(save===true)
 
     const handleChange = (editor,data,value) => {
         onChange(value)

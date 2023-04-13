@@ -22,6 +22,9 @@ import Github from './views/auth/GitHubLogin';
 import Google from './views/auth/Google';
 import Profile from './views/User/Profile';
 import User from './views/User/User';
+import Solutions from './components/Solutions';
+import KataSolutions from './components/KataSolutions';
+import Discussions from './components/Discussions';
 
 function App() {
 
@@ -33,13 +36,18 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/katas/:kataId" element={<KataDetail />} /><Route path="/kata/practise/:kataId" element={<KataLogic />}>
+        <Route path="/katas/:kataId" element={<KataDetail />}>
+          <Route path="solutions" element={<KataSolutions/>}/>
+          <Route path="discussions" element={<Discussions/>}/>
+        </Route>
+        <Route path="/kata/practise/:kataId" element={<KataLogic />}>
           <Route path="output" element={<Output />}/>
           <Route path="instructions" element={<Instructions />}/>
           <Route path="pastsolutions" element={<Pastsolutions />}/>
         </Route>
         <Route path="/profile" element={<Profile />}>
           <Route path="user" element={<User />}/>
+          <Route path="solutions" element={<Solutions />}/>
         </Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />

@@ -57,7 +57,7 @@ h3{
   overflow-y: visible;
 }
 
-.active, nav a:hover, nav li:hover, .loginsignup, .tologin:hover, .navbarlink:hover, .profileOutlet li:hover {
+.active, nav a:hover, nav li:hover, .loginsignup, .tologin:hover, .navbarlink:hover, .profileOutlet li:hover, .yoda h3:hover {
   /* font-size: 72px; */
   background: -webkit-linear-gradient(left, var(--level-5-blue), var(--level-4-purple),var(--level-3-pink),var(--level-2-orange),var(--level-1-green));
   background-clip: inherit;
@@ -112,6 +112,19 @@ a {
   width: 14%;
   font-weight: bold;
 }
+
+#solutionsKata .solution {
+  width: 10%;
+}
+
+#solutionsKata div div {
+  font-size: 8px;
+}
+
+#solutionsKata h3 {
+  font-size: .9em;
+}
+
 
 .Kata a div img, .Kata a div div {
   width: 100%;
@@ -249,6 +262,22 @@ a {
   
 .avatar {
   width: 25%;
+}
+
+.yoda {
+  width: 30%;
+}
+
+.yoda:hover {
+  width: 35%;
+}
+
+.yoda img {
+  width: 40%;
+}
+
+.yoda h3 {
+  font-size: .9rem ;
 }
 
 .profile{

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams,Link } from 'react-router-dom';
+import { useParams,Link, NavLink, Outlet } from 'react-router-dom';
 import kataService from '../services/kataService';
 import { Controlled as ControlledEditor } from 'react-codemirror2'
 import 'codemirror/lib/codemirror.css'
@@ -17,6 +17,7 @@ export default function KataDetail() {
   const [error, setError] = useState(false);
   const [instructions,setInstructions] = useState('')
   const [example,setExample] = useState('')
+  const [showInstructions,setShowInstructions] = useState(true)
 
   const getKata = async () => {
     try {
@@ -37,12 +38,26 @@ export default function KataDetail() {
     // eslint-disable-next-line
   }, [kataId])
 
+  useEffect(() => {
+    (window.location.pathname.includes('solutions') || window.location.pathname.includes('discussions')) && setShowInstructions(false)
+    // eslint-disable-next-line
+  },[window.location.pathname])
+  
+
   return (
     <div className='m-4'>
       {loading && <div className='flex justify-center mt-20'><img width='10%' src={Loading} alt='loading'/></div>}
       {!loading && kata && 
       <>
         <Kata kata={kata} practise={true}/>
+        <div className="flex justify-center">
+          <ul className='profileOutlet flex justify-around text-white bg-background-lightcolor w-11/12 p-2 rounded-full'>
+            <li onClick={()=>setShowInstructions(true)}className={showInstructions===true ? 'active':''}><Link to={`/katas/${kata._id}`}>Instructions</Link></li>
+            <li><NavLink to={`/katas/${kata._id}/solutions`}>Solutions</NavLink></li>
+            <li><NavLink to={`/katas/${kata._id}/discussions`}>Discussions</NavLink></li>
+          </ul>
+        </div>
+        {showInstructions === true &&
         <div className={`instructions instructions_${kata.level}`} style={{height:'100%'}}>
         <h4>DESCRIPTION:</h4>
         {instructions.length > 0 && instructions.map((elem,i) => {
@@ -54,7 +69,8 @@ export default function KataDetail() {
             )
         })}
         {isLoggedIn ? <button className="start_btn"><Link to={`/kata/practise/${kata._id}`}>Start</Link></button>:<button className="start_btn"><Link to={`/signup`}>Sign up FIRST! 😉</Link></button>}
-      </div>
+      </div>}
+      <Outlet context={{kata:kata}}/>
       </>}
         {error && <p>Something went wrong. Couldn't find your kata</p>}
       </div>       
