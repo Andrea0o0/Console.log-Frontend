@@ -5,7 +5,6 @@ import Loading from '../../assets/images/Logo/Loading.gif'
 import toast from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
 import Avatar from '../../components/Avatar';
-import Logo from '../../assets/images/avatars/Logo.png'
 
 export default function User() {
   const { storeToken, authenticateUser } = useAuth(); 

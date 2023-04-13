@@ -6,7 +6,6 @@ import 'codemirror/mode/javascript/javascript'
 import solutionService from "../services/solutionService";
 import Loading from '../assets/images/Logo/Loading.gif'
 import { useNavigate, Link, useOutletContext } from "react-router-dom";
-import Kata from "./Kata";
 import YodaHappy from "../assets/images/Yoda/Yoda happy.svg"
 
 
@@ -16,7 +15,6 @@ export default function KataSolutions(){
     const [solutions,setSolutions] = useState(undefined)
     const [loading,setLoading] = useState(true)
     const [error, setError] = useState(false);
-    const navigate = useNavigate();
 
     const getSolutions = async () => {
         try {
@@ -43,10 +41,13 @@ export default function KataSolutions(){
                 {solutions.length > 0 ? 
                 <>
                     {solutions.map((elem,i) => 
-                    <div key={i} className="mx-4 flex flex-wrap justify-center">
-                        <div className='w-11/12'>
-                            <div className="w-4/5">{elem.user.username}</div>
-                            <ControlledEditor style={{padding:'3%'}} value={elem.function} options={{    lineWrapping:true, mode:'javascript', theme: 'material', readOnly:true}}/> 
+                    <div key={i} className="m-4 flex flex-wrap justify-center">
+                        <div className='kataSolutions w-11/12 flex flex-wrap justify-center'>
+                            <div className="firstkataSolutions flex justify-center items-center text-white w-3/5">
+                                <img className='rounded-lg' width='16%' src={elem.user.image} alt={`Image_${elem.user.username}`}/>
+                                <h3 className="ml-4 text-sm bg-background-lightcolor p-1 px-20 rounded-full">{elem.user.username}</h3>
+                            </div>
+                            <ControlledEditor className="p-3 w-full secondkataSolutions" value={elem.function} options={{    lineWrapping:true, mode:'javascript', theme: 'material', readOnly:true}}/> 
                          </div>
                     </div>)}
                 </>:
@@ -54,10 +55,11 @@ export default function KataSolutions(){
                     <div className="flex justify-center my-4">
                         <Link to='/' className="flex flex-wrap w-3/4 justify-center p-3 pb-8 rounded-full bg-background-lightcolor hover:w-4/5 yoda">
                             <img width='20%' className="m-2" src={YodaHappy} alt='yoda happy'/>
-                            <h3 className="w-4/5 text-center text-white">No solutions yet<br/>Be the First<br/>You must unlearn what you have learned</h3>
+                            <h3 className="w-4/5 text-center text-white font-normal">No solutions yet<br/>Be the First<br/>You must unlearn what you have learned</h3>
                         </Link>
                     </div>
                 </> }
             </>}
+            {error && <p>Something went wrong. Couldn't find your kata</p>}
         </>)
 }

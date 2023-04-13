@@ -23,6 +23,10 @@ h3{
   background: #35424f; 
 }
 
+textarea::placeholder {
+  line-height: 50px;
+}
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: -webkit-linear-gradient( var(--level-5-blue), var(--level-4-purple),var(--level-3-pink),var(--level-2-orange),var(--level-1-green));
@@ -259,7 +263,39 @@ a {
 
 /* OUTPUT */
 @media only screen and (min-width: 768px) {
-  
+
+  .kataComment {
+    width: 80%;
+  }
+
+  .kataSolutions .firstkataSolutions {
+    flex-wrap: wrap;
+    width: 30%;
+    margin: 0% 6%;
+  }
+
+  .kataSolutions .firstkataSolutions h3 {
+    text-align: center;
+  }
+
+  .kataSolutions .secondkataSolutions {
+    width: 70%;
+  }
+
+  .kataDiscussions {
+    width: 90%;
+  }
+
+  .divKataDiscussions, .divKataDiscussions img {
+    width: 20%;
+  }
+
+  .divKataDiscussions h3 {
+    padding: 0 2%;
+  }
+
+
+
 .avatar {
   width: 25%;
 }

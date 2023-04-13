@@ -53,7 +53,7 @@ export default function Solutions(){
                     <div className="flex justify-center my-4">
                         <Link to='/' className="flex flex-wrap w-3/4 justify-center p-3 pb-8 rounded-full bg-background-lightcolor hover:w-4/5 yoda">
                             <img width='20%' className="m-2" src={YodaPatience} alt='yoda happy'/>
-                            <h3 className="w-4/5 text-center text-white">You still have no solution <br/> Patience you must have my young padawan</h3>
+                            <h3 className="w-4/5 text-center text-white text-normal">You still have no solution <br/> Patience you must have my young padawan</h3>
                         </Link>
                     </div>
                 </> }
