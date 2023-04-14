@@ -40,8 +40,9 @@ export default function KataSolutions(){
             <>
                 {solutions.length > 0 ? 
                 <>
-                    {solutions.map((elem,i) => 
-                    <div key={i} className="m-4 flex flex-wrap justify-center">
+                    {solutions.map((elem,i) => {
+                    return elem.user !== null &&
+                    (<div key={i} className="m-4 flex flex-wrap justify-center">
                         <div className='kataSolutions w-11/12 flex flex-wrap justify-center'>
                             <div className="firstkataSolutions flex justify-center items-center text-white w-3/5">
                                 <img className='rounded-lg' width='16%' src={elem.user.image} alt={`Image_${elem.user.username}`}/>
@@ -50,6 +51,7 @@ export default function KataSolutions(){
                             <ControlledEditor className="p-3 w-full secondkataSolutions" value={elem.function} options={{    lineWrapping:true, mode:'javascript', theme: 'material', readOnly:true}}/> 
                          </div>
                     </div>)}
+                    )}
                 </>:
                 <>
                     <div className="flex justify-center my-4">

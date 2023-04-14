@@ -61,7 +61,8 @@ export default function Discussions(){
                 </div>
                 {discussions.length > 0 ? 
                 <div className="kataDiscussions border-1 rounded-lg">
-                    {discussions.map((elem,i) => 
+                    {discussions.map((elem,i) => {
+                        return elem.user !== null &&
                         <div key={i} className="m-4 flex flex-wrap justify-center">
                             <div className='w-11/12 flex flex-wrap justify-center'>
                                 <div className="divKataDiscussions flex justify-center items-center text-white w-3/5 mb-2">
@@ -71,7 +72,7 @@ export default function Discussions(){
                             <p className={`pt-1 ${textInput}`}>{elem.comment}</p>
                             </div>
                            
-                        </div>)}
+                        </div>})}
                 </div>:
                 <>
                     <div className="flex justify-center my-4">

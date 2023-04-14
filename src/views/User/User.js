@@ -21,7 +21,6 @@ export default function User() {
     try {
       const response = await authService.userInfo();
       setProfile(response)
-      console.log(response.image)
       setLoading(false);
       setError(false);
     } catch (error) {
@@ -40,7 +39,6 @@ export default function User() {
       setChangeAvatar(false)
       setLoading(true)
       const response = await authService.edituser({image:image});
-      console.log(response)
       setProfile(response.user)
       setLoading(false);
       setError(false);
@@ -54,7 +52,6 @@ export default function User() {
       }
     } catch (error) {
       setLoading(false);
-      console.log(error)
     }    
   }
 
@@ -70,7 +67,7 @@ export default function User() {
         if (response.authToken) {
           storeToken(response.authToken);
           authenticateUser();
-          navigate('/profile');
+          navigate('/profile/user');
           setErrorMessageUsername('')
           toast.success('Username changed!')
         } else {
@@ -105,11 +102,11 @@ const inputStyle = "w-full rounded-full  border-2 shadow-xl p-1 px-3 ";
     {!loading &&
     <>
         {changeAvatar ? 
-        <div className='avatar flex flex-col items-center text-white w-1/2'>
+        <div className='avatar flex flex-col items-center text-white w-2/5'>
           <p className='text-sm mb-2'>Select New Avatar</p>
           <Avatar setNewImage={handleNewAvatar}/>
         </div>: 
-        <div className='avatar flex flex-col items-center text-white w-1/2'>
+        <div className='avatar flex flex-col items-center text-white w-2/5'>
           <p className='text-sm mb-2'>Current Profile Avatar</p>
           <img className='rounded-lg' width='85%' src={profile.image} referrerPolicy="no-referrer" 
           // onError={handleImgError}

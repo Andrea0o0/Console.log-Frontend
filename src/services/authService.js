@@ -39,6 +39,10 @@ class AuthService {
     return this.api.get('/userinfo').then((response) => response.data);
   }
 
+  getUsers() {
+    return this.api.get(`/users`).then((response) => response.data);
+  } 
+
   me() {
     return this.api.get('/me').then((response) => response.data);
   }

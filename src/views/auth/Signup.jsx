@@ -87,7 +87,6 @@ export default function Signup() {
   
   return (
     <div className='flex justify-center text-xs'>
-    
       <div className="flex flex-wrap justify-center w-96 signup">
       <div className='mb-4'>
       <Link to="/login"><li className='tologin flex cursor-pointer text-white items-center justify-center m-0 pb-1' onMouseEnter={() => setHover(prev => !prev)}

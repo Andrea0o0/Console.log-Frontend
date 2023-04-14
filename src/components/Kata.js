@@ -11,7 +11,7 @@ import L3_hover from '../assets/images/levels/3 HOVER.svg'
 import L4_hover from '../assets/images/levels/4 HOVER.svg'
 import L5_hover from '../assets/images/levels/5 HOVER.svg'
 
-export default function Kata({ kata : {name, level, _id},practise,solutions }) {
+export default function Kata({ kata : {name, level, _id},practise,solutions,champions, handleKataChampions }) {
     const [hover,setHover] = useState(false)
     const [srcImage,setSrcImage] = useState('')
 
@@ -31,7 +31,7 @@ export default function Kata({ kata : {name, level, _id},practise,solutions }) {
   return (    
     <div className={`Kata ${hover ? `hover_${level}`:`_${level}`}`} onMouseEnter={handleHover}
     onMouseLeave={handleHover}>
-        {!practise && !solutions ? 
+        {!practise && !solutions && !champions ? 
         (<Link to={`/katas/${_id}`}>
             <div className='level'>
                 <img src={srcImage} alt={`Level${level}`}/>
@@ -45,7 +45,16 @@ export default function Kata({ kata : {name, level, _id},practise,solutions }) {
                 <div className='img_level text-xs'>{`${level}JS`}</div>
             </div>
             <h3 className='text-xl'>{name}</h3> 
-        </Link>):
+        </Link>):champions ?
+          // eslint-disable-next-line
+        (<a id='solutionsKata' className='cursor-pointer w-4/5' onClick={()=>handleKataChampions(_id,name,level)}>
+            <div className='level solution'>
+                <img src={srcImage} alt={`Level${level}`}/>
+                <div className='img_level text-xs'>{`${level}JS`}</div>
+            </div>
+            <h3 className='text-xl'>{name}</h3> 
+        </a>):
+          // eslint-disable-next-line
         (<a className='w-4/5'>
             <div className='level'>
                 <img src={srcImage} alt={`Level${level}`}/>

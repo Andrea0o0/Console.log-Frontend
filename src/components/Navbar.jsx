@@ -20,7 +20,7 @@ export default function Navbar() {
   return (
       <header className='bg-background-lightcolor flex items-center justify-around h-20 px-8 text-white mb-10'>
       <Link to="/" className='cursor-pointer'><img className='Logo m-0' src={Logo} width='50%' alt='logo'/></Link>
-      {user ? <Link className='flex cursor-pointer items-center justify-center m-0 p-0 w-36' to='/profile/user'><li className='flex items-center' onMouseEnter={() => setHover(prev => !prev)}
+      {user ? <Link className='flex cursor-pointer items-center justify-center m-0 p-0 w-36' to='/profile/user'><li className='flex items-center' referrerPolicy="no-referrer" onMouseEnter={() => setHover(prev => !prev)}
         onMouseLeave={() => setHover(prev =>!prev)}>
         <img width='30%' className='mr-2 rounded-lg' src={user.image} alt='back'/>  {user.username}
            </li></Link>:<p><Link to='/signup' className='navbarlink text-xs w-60 text-center text-white cursor-pointer'>Signup or Login to not be a stranger</Link> 😶‍🌫️</p> }

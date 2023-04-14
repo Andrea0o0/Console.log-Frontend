@@ -264,6 +264,21 @@ a {
 /* OUTPUT */
 @media only screen and (min-width: 768px) {
 
+  .championsNew {
+    display: flex;
+    justify-content: center;
+  }
+
+  .championsNew .firstChampionsNew, .championsNew .secondChampionsNew{
+    width: 48%;
+    margin-right: 2%;
+  }
+
+  .championsNew div > * {
+    text-align: center;
+  }
+
+
   .kataComment {
     width: 80%;
   }

@@ -25,6 +25,9 @@ import User from './views/User/User';
 import Solutions from './components/Solutions';
 import KataSolutions from './components/KataSolutions';
 import Discussions from './components/Discussions';
+import ProfileChampions from './components/ProfileChampions';
+import NewChampion from './components/NewChampion';
+import ChampionsView from './components/ChampionsView';
 
 function App() {
 
@@ -48,6 +51,11 @@ function App() {
         <Route path="/profile" element={<Profile />}>
           <Route path="user" element={<User />}/>
           <Route path="solutions" element={<Solutions />}/>
+          <Route path="champions" element={<ProfileChampions />}>
+            <Route path="new" element={<NewChampion />}/>
+            <Route path="request" element={<NewChampion />}/>
+            <Route path="completed" element={<ChampionsView />}/>
+          </Route>
         </Route>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
