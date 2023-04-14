@@ -18,22 +18,8 @@ export default function ProfileChampions(){
     const navigate = useNavigate();
 
 
-    const getChampions = async () => {
-        try {
-          const response = await championsService.getChampionsUser();
-          console.log(response)
-          setChampions(response);
-          setLoading(false);
-          setError(false);
-        } catch (error) {
-          setLoading(false);
-          setError(true)
-        }
-      }
-
       useEffect(() => {
         navigate('/profile/champions/new')
-        getChampions()
         // eslint-disable-next-line
       }, [])
 

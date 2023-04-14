@@ -19,6 +19,10 @@ class ChampionsService {
     return this.api.get('/').then(({ data }) => data).catch(err => console.error(err));
   }
 
+  getRequesttt() {
+    return this.api.get('/status/request').then(({ data }) => data).catch(err => console.error(err));
+  }
+
   getOneChampion(championId) {
     return this.api.get(`/${championId}`).then(({ data }) => data).catch(err => console.error(err));
   }

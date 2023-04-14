@@ -82,9 +82,9 @@ export default function User() {
   }
 
 
-// const handleImgError = e => {
-//   e.target.src = profile.image
-// }
+const handleImgError = e => {
+  e.target.src = profile.image
+}
 
 const handleChange = (e) => {
   setNewUsername(e.target.value)
@@ -109,7 +109,7 @@ const inputStyle = "w-full rounded-full  border-2 shadow-xl p-1 px-3 ";
         <div className='avatar flex flex-col items-center text-white w-2/5'>
           <p className='text-sm mb-2'>Current Profile Avatar</p>
           <img className='rounded-lg' width='85%' src={profile.image} referrerPolicy="no-referrer" 
-          // onError={handleImgError}
+          onError={handleImgError}
            alt='ImageProfile'/>
           <button className='text-sm p-1.5 px-6 my-4 bg-background-lightcolor rounded-full border-1 border-background-lightcolor hover:border-white focus:border-white' onClick={() => setChangeAvatar(prev => !prev)}>Change Avatar</button>
         </div>}

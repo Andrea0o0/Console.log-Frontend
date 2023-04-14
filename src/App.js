@@ -28,6 +28,7 @@ import Discussions from './components/Discussions';
 import ProfileChampions from './components/ProfileChampions';
 import NewChampion from './components/NewChampion';
 import ChampionsView from './components/ChampionsView';
+import RequestChampions from './components/RequestChampions';
 
 function App() {
 
@@ -53,7 +54,7 @@ function App() {
           <Route path="solutions" element={<Solutions />}/>
           <Route path="champions" element={<ProfileChampions />}>
             <Route path="new" element={<NewChampion />}/>
-            <Route path="request" element={<NewChampion />}/>
+            <Route path="request" element={<RequestChampions />}/>
             <Route path="completed" element={<ChampionsView />}/>
           </Route>
         </Route>

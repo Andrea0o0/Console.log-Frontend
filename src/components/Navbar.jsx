@@ -17,6 +17,7 @@ export default function Navbar() {
     navRef.current.classList.toggle("responsive_nav")
   }
 
+
   return (
       <header className='bg-background-lightcolor flex items-center justify-around h-20 px-8 text-white mb-10'>
       <Link to="/" className='cursor-pointer'><img className='Logo m-0' src={Logo} width='50%' alt='logo'/></Link>
@@ -30,7 +31,7 @@ export default function Navbar() {
           {!isLoggedIn && <li onClick={showNavbar}><NavLink to="/login">Login</NavLink></li>}       
           {isLoggedIn && <li onClick={showNavbar}><NavLink to="/private">Private view</NavLink></li>}
           {isLoggedIn && <li onClick={showNavbar}><NavLink to="/profile/user">Profile</NavLink></li>}
-          {isLoggedIn && <li onClick={() => { logOutUser();showNavbar()}}>Log out</li>}
+          {isLoggedIn && <li className='cursor-pointer' onClick={() => { logOutUser();showNavbar()}}>Log out</li>}
           <li onClick={() => {navigate(-1);showNavbar()}} className='flex cursor-pointer items-center justify-center m-0 p-0 w-36' onMouseEnter={() => setHover(prev => !prev)}
         onMouseLeave={() => setHover(prev =>!prev)}>
         {backhover ? <img width='15%' className='pr-2' src={Back} alt='back'/>:<FontAwesomeIcon className='pr-2' icon="fa-solid fa-arrow-left"/>} Go back

@@ -1,0 +1,59 @@
+import React,{useState,useEffect} from "react";
+import championsService from "../services/championsService";
+import Loading from '../assets/images/Logo/Loading.gif'
+import { Link } from "react-router-dom";
+import YodaPatience from "../assets/images/Yoda/Yoda patience.svg"
+import CardRequestChampions from "./CardRequest";
+import { useAuth } from '../hooks/useAuth';
+import authService from "../services/authService";
+
+export default function RequestChampions(){
+    const { storeToken, authenticateUser } = useAuth(); 
+
+    const [championsRequest,setChampionsRequest] = useState(undefined)
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(false);
+
+
+    const getChampionsRequest = async function () {
+        try {
+            const response = await championsService.getRequesttt()
+            console.log(response)
+            // setLoading(false)
+            // setChampionsRequest(response)
+        } catch (error) {
+            // setError(error)
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getChampionsRequest()
+    },[])
+
+    return (
+        <>
+        {/* {loading && <div className='flex justify-center mt-20'><img width='10%' src={Loading} alt='loading'/></div>}
+        {!loading && championsRequest &&
+        <> 
+            {championsRequest.length > 0 ? 
+            <>
+                {championsRequest.map(elem => 
+                <div key={elem._id}>
+                    <CardRequestChampions champions={elem}/>
+                </div>)}
+            </>:
+            <>
+                <div className="flex justify-center my-4">
+                    <Link to='/' className="flex flex-wrap w-3/4 justify-center p-3 pb-8 rounded-full bg-background-lightcolor hover:w-4/5 yoda">
+                        <img width='20%' className="m-2" src={YodaPatience} alt='yoda happy'/>
+                        <h3 className="w-4/5 text-center text-white text-normal">You still have no solution <br/> Patience you must have my young padawan</h3>
+                    </Link>
+                </div>
+            </>}
+        </>}
+        {error && <p>Something went wrong. Couldn't find your kata</p>} */}
+        <h3>h2</h3>
+        </>
+    )
+}

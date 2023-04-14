@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useRef } from "react";
+import React, { useState,useEffect, useRef, useContext } from "react";
 import { Controlled as ControlledEditor } from 'react-codemirror2'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
@@ -6,13 +6,18 @@ import 'codemirror/mode/javascript/javascript'
 import championsService from "../services/championsService";
 import Loading from '../assets/images/Logo/Loading.gif'
 import { useNavigate, Link, useOutletContext, NavLink } from "react-router-dom";
-import YodaHappy from "../assets/images/Yoda/Yoda happy.svg"
 import authService from "../services/authService";
 import kataService from "../services/kataService";
 import Kata from "./Kata";
+import toast from 'react-hot-toast';
+import { useAuth } from '../hooks/useAuth';
+import { AuthContext } from '../context/AuthContext';
+
 
 
 export default function NewChampion(){
+    const { storeToken, authenticateUser } = useAuth(); 
+    const { user } = useContext(AuthContext); 
 
     // const {kata} = useOutletContext();
     const [champions,setChampions] = useState(undefined)
@@ -38,14 +43,26 @@ export default function NewChampion(){
         
             try {
                 if(Object.keys(NewChampion).length === 3 && NewChampion.users_request.length>0){
-                console.log('in')
                 const response = await championsService.createChampions(NewChampion)
-                console.log(response)}
+                // console.log(response)
+                setLoading(false);
+                setError(false);
+                if (response.authToken) {
+                    storeToken(response.authToken);
+                    authenticateUser();
+                    // console.log(user)
+                    navigate('/profile/champions/request');
+                    toast.success('Champions created!')
+                } else {
+                    toast.error("Sorry We couldn't create Champions")
+                }
+                }
                 else {
-            setErrorMessageNameFight({state:'error',message:'Please choose a kata, at least one opponent and a valid fight name'})
-        }
+                setErrorMessageNameFight({state:'error',message:'Please choose a kata, at least one opponent and a valid fight name'})
+                }
             } catch (error) {
                 setErrorMessageNameFight({state:'error',message:error})
+                toast.error("Sorry We couldn't create your champions")
             }          
         
     }
@@ -53,8 +70,9 @@ export default function NewChampion(){
     const getUsers = async function () {
         try {
             const response = await authService.getUsers()
-            setInitialUsers(response)
-            setUsers(response)
+            const nouser = [...response].filter(elem => elem.username !== user.username)
+            setInitialUsers(nouser)
+            setUsers(nouser)
             setLoading(false)
         } catch (error) {
             setError(true)
@@ -172,7 +190,7 @@ export default function NewChampion(){
                             <div key={elem._id} className="m-2 flex flex-wrap justify-center">
                                 <div key={elem._id} className='w-11/12 flex flex-wrap justify-center'>
                                     <div className="flex justify-center items-center text-white w-full rounded-full hover:border-1 px-10 p-1 hover:border-white">
-                                        <img className='rounded-lg' width='12%' src={elem.image} alt={`Image_${elem.username}`}/>
+                                        <img className='rounded-lg' width='12%' referrerPolicy="no-referrer" src={elem.image} alt={`Image_${elem.username}`}/>
                                         <h3 className="ml-4 text-sm text-center bg-background-lightcolor p-1 rounded-full w-4/5">{elem.username}</h3>
                                     </div>
                                 </div>
