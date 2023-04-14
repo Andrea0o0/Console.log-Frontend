@@ -15,13 +15,7 @@ export default function ProfileChampions(){
     const [champions,setChampions] = useState(undefined)
     const [loading,setLoading] = useState(true)
     const [error, setError] = useState(false);
-    const navigate = useNavigate();
 
-
-      useEffect(() => {
-        navigate('/profile/champions/new')
-        // eslint-disable-next-line
-      }, [])
 
     return(
         <>

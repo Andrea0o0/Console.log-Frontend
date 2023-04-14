@@ -70,12 +70,11 @@ export default function NewChampion(){
     const getUsers = async function () {
         try {
             const response = await authService.getUsers()
-            const nouser = [...response].filter(elem => elem.username !== user.username)
-            setInitialUsers(nouser)
-            setUsers(nouser)
+            setInitialUsers(response)
+            setUsers(response)
             setLoading(false)
         } catch (error) {
-            setError(true)
+            setError(error)
         }
     }
 
@@ -86,7 +85,7 @@ export default function NewChampion(){
             setInitialKatas(response)
             setLoading(false)
         } catch (error) {
-            setError(true)
+            setError(error)
         }
     }
 
@@ -207,7 +206,7 @@ export default function NewChampion(){
                     <div className="overflow-y-auto max-h-56">
                         {users.length>0 ? 
                         <>
-                            {users.filter(elem => elem.username.toLowerCase().includes(searchUsers.toLowerCase())).length > 0 ? users.filter(elem => elem.username.toLowerCase().includes(searchUsers.toLowerCase())).map(elem => {
+                            {users.filter(elem=>elem.username!==user.username).filter(elem => elem.username.toLowerCase().includes(searchUsers.toLowerCase())).length > 0 ? users.filter(elem=>elem.username!==user.username).filter(elem => elem.username.toLowerCase().includes(searchUsers.toLowerCase())).map(elem => {
                             return (
                                 <div key={elem._id} onClick={()=>handleUsersChampion(elem)} className="cursor-pointer m-2 flex flex-wrap justify-center">
                                     <div key={elem._id} className='w-11/12 flex flex-wrap justify-center'>

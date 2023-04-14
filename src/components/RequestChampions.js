@@ -11,18 +11,18 @@ export default function RequestChampions(){
     const { storeToken, authenticateUser } = useAuth(); 
 
     const [championsRequest,setChampionsRequest] = useState(undefined)
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
 
     const getChampionsRequest = async function () {
         try {
             const response = await championsService.getRequesttt()
             console.log(response)
-            // setLoading(false)
-            // setChampionsRequest(response)
+            setLoading(false)
+            setChampionsRequest(response)
         } catch (error) {
-            // setError(error)
+            setError(error)
             console.log(error)
         }
     }
@@ -33,15 +33,19 @@ export default function RequestChampions(){
 
     return (
         <>
-        {/* {loading && <div className='flex justify-center mt-20'><img width='10%' src={Loading} alt='loading'/></div>}
+        {loading && <div className='flex justify-center mt-20'><img width='10%' src={Loading} alt='loading'/></div>}
         {!loading && championsRequest &&
         <> 
             {championsRequest.length > 0 ? 
             <>
-                {championsRequest.map(elem => 
+                {championsRequest.map(elem => {
+                    let initial_timer = localStorage.getItem(`champions_${elem._id}`) ? 
+                    localStorage.getItem(`champions_${elem._id}`):180
+                    return(
                 <div key={elem._id}>
-                    <CardRequestChampions champions={elem}/>
-                </div>)}
+
+                    <CardRequestChampions champions={elem} initial_timer={initial_timer}/>
+                </div>)})}
             </>:
             <>
                 <div className="flex justify-center my-4">
@@ -52,8 +56,7 @@ export default function RequestChampions(){
                 </div>
             </>}
         </>}
-        {error && <p>Something went wrong. Couldn't find your kata</p>} */}
-        <h3>h2</h3>
+        {error && <p>Something went wrong. Couldn't find your kata</p>}
         </>
     )
 }
