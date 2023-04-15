@@ -52,9 +52,9 @@ export default function NewChampion(){
                     authenticateUser();
                     // console.log(user)
                     navigate('/profile/champions/request');
-                    toast.success('Champions created!')
+                    toast.success('Champions created!',{style:{backgroundColor:'#1a1e24', color:'white'}})
                 } else {
-                    toast.error("Sorry We couldn't create Champions")
+                    toast.error("Sorry We couldn't create Champions",{style:{backgroundColor:'#1a1e24', color:'white'}})
                 }
                 }
                 else {

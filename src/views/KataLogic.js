@@ -94,9 +94,9 @@ export default function KataLogic(){
         const response = await solutionService.createSolution(newSolution);
         if (response) {
           navigate('/');
-          toast.success('Solution Created!')
+          toast.success('Solution Created!',{style:{backgroundColor:'#1a1e24', color:'white'}})
         } else {
-          toast.error("Sorry we can't create your Solution")
+          toast.error("Sorry we can't create your Solution",{style:{backgroundColor:'#1a1e24', color:'white'}})
         }
       } catch (error) {
         console.error(error)

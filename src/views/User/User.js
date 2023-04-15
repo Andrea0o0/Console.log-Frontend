@@ -46,9 +46,9 @@ export default function User() {
         storeToken(response.authToken);
         authenticateUser();
         navigate('/profile/user');
-        toast.success('Avatar changed!')
+        toast.success('Avatar changed!',{style:{backgroundColor:'#1a1e24', color:'white'}})
       } else {
-        toast.error("Sorry We couldn't update your avatar ")
+        toast.error("Sorry We couldn't update your avatar ",{style:{backgroundColor:'#1a1e24', color:'white'}})
       }
     } catch (error) {
       setLoading(false);
@@ -69,9 +69,9 @@ export default function User() {
           authenticateUser();
           navigate('/profile/user');
           setErrorMessageUsername('')
-          toast.success('Username changed!')
+          toast.success('Username changed!',{style:{backgroundColor:'#1a1e24', color:'white'}})
         } else {
-          toast.error("Sorry We couldn't update your username")
+          toast.error("Sorry We couldn't update your username",{style:{backgroundColor:'#1a1e24', color:'white'}})
           setErrorMessageUsername({state:'error',message:error})
         }
       } catch (error) {

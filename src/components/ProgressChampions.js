@@ -7,7 +7,7 @@ import CardRequestChampions from "./CardRequest";
 import { useAuth } from '../hooks/useAuth';
 import authService from "../services/authService";
 
-export default function RequestChampions(){
+export default function ProgressChampions(){
     const { storeToken, authenticateUser } = useAuth(); 
 
     const [championsRequest,setChampionsRequest] = useState(undefined)
@@ -15,9 +15,9 @@ export default function RequestChampions(){
     const [error, setError] = useState(false);
 
 
-    const getChampionsRequest = async function () {
+    const getChampionsInProgress = async function () {
         try {
-            const response = await championsService.getChampionsByStatus('REQUEST')
+            const response = await championsService.getChampionsByStatus('START')
             setLoading(false)
             setChampionsRequest(response)
         } catch (error) {
@@ -39,15 +39,7 @@ export default function RequestChampions(){
     }
 
     useEffect(() => {
-            getChampionsRequest()
-            const intervalID = setInterval(() => {
-                getChampionsRequest()
-            }, 10000)
-        
-            return () => {
-              clearInterval(intervalID);
-            }
-      
+        getChampionsInProgress()
         
     },[])
 
@@ -70,7 +62,7 @@ export default function RequestChampions(){
                 <div className="flex justify-center my-4">
                     <Link to='/profile/champions/new' className="flex flex-wrap w-3/4 justify-center p-3 pb-8 rounded-full bg-background-lightcolor hover:w-4/5 yoda">
                         <img width='20%' className="m-2" src={YodaPatience} alt='yoda happy'/>
-                        <h3 className="w-4/5 text-center text-white text-normal">You still have no Champions Request <br/> Patience you must have my young padawan</h3>
+                        <h3 className="w-4/5 text-center text-white text-normal">You still have no Champions In Progress <br/> Patience you must have my young padawan</h3>
                     </Link>
                 </div>
             </>}

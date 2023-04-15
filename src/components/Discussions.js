@@ -40,10 +40,10 @@ export default function Discussions(){
             setDiscussions(response)
             setLoading(false);
             setError(false);
-              toast.success("Comment added")
+              toast.success("Comment added",{style:{backgroundColor:'#1a1e24', color:'white'}})
           } catch (error) {
             setLoading(false);
-            toast.error("Sorry We couldn't update your username")
+            toast.error("Sorry We couldn't update your username",{style:{backgroundColor:'#1a1e24', color:'white'}})
           }  
       }
 

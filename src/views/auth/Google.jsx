@@ -20,9 +20,9 @@ export default function Google(){
             storeToken(response.authToken);
             authenticateUser();
             navigate('/');
-            toast.success('Welcome back!')
+            toast.success('Welcome back!',{style:{backgroundColor:'#1a1e24', color:'white'}})
           } else {
-            toast.error("Sorry we can't authenticate your Github user")
+            toast.error("Sorry we can't authenticate your Github user",{style:{backgroundColor:'#1a1e24', color:'white'}})
             navigate('/login')
           }
     }

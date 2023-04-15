@@ -11,7 +11,7 @@ import L3_hover from '../assets/images/levels/3 HOVER.svg'
 import L4_hover from '../assets/images/levels/4 HOVER.svg'
 import L5_hover from '../assets/images/levels/5 HOVER.svg'
 
-export default function Kata({ kata : {name, level, _id},practise,solutions,champions, handleKataChampions }) {
+export default function Kata({ kata : {name, level, _id},practise,solutions,champions, handleKataChampions, championsRequest }) {
     const [hover,setHover] = useState(false)
     const [srcImage,setSrcImage] = useState('')
 

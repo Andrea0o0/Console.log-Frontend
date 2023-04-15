@@ -313,7 +313,9 @@ a {
     padding: 0 2%;
   }
 
-
+  .championsRequest{
+    width: 40%;
+  }
 
 .avatar {
   width: 25%;

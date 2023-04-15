@@ -19,16 +19,16 @@ class ChampionsService {
     return this.api.get('/').then(({ data }) => data).catch(err => console.error(err));
   }
 
-  getRequesttt() {
-    return this.api.get('/status/request').then(({ data }) => data).catch(err => console.error(err));
+  getChampionsByStatus(type) {
+    return this.api.get(`/status/${type}`).then(({ data }) => data).catch(err => console.error(err));
   }
 
   getOneChampion(championId) {
     return this.api.get(`/${championId}`).then(({ data }) => data).catch(err => console.error(err));
   }
 
-  editUserRequest(championId,body) {
-    return this.api.put(`/user-request/${championId}`,body).then(({ data }) => data).catch(err => console.error(err));
+  editUserRequest(championId) {
+    return this.api.put(`/user-request/${championId}`).then(({ data }) => data).catch(err => console.error(err));
   }
 
   editStatus(championId,body) {

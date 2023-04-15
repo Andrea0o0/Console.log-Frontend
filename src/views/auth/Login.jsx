@@ -49,9 +49,9 @@ export default function Login() {
           storeToken(response.authToken);
           authenticateUser();
           navigate('/');
-          toast.success('Welcome back!')
+          toast.success('Welcome back!',{style:{backgroundColor:'#1a1e24', color:'white'}})
         } else {
-          setErrorMessage('Unable to authenticate user')
+          setErrorMessage('Unable to authenticate user',{style:{backgroundColor:'#1a1e24', color:'white'}})
         }
       } catch (error) {
         setErrorMessage('Unable to authenticate user');

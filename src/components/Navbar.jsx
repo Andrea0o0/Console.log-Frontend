@@ -25,12 +25,12 @@ export default function Navbar() {
   const handleRequest = async function () {
     try {
       if(user){
-        const response = await championsService.getRequesttt()
+        const response = await championsService.getChampionsByStatus('REQUEST')
       if(response.length>0 && request===false){
         setRequest(true) 
-        toast("New champions Request!!", {
+        toast(<Link to='/profile/champions/request'>"New champions Request!!"</Link>, {
         icon: <img src={Champions} width='10%' alt='Champions Beat' />,
-        className:'bg-background-lightcolor'
+        style:{backgroundColor:'#1a1e24', color:'white'}
       });
       } else if (response.length<1){
         setRequest(false)
@@ -45,7 +45,7 @@ export default function Navbar() {
     const intervalID = setInterval(() => {
       authenticateUser()
       handleRequest()
-    }, 10000)
+    }, 15000)
 
     return () => {
       clearInterval(intervalID);
@@ -58,9 +58,9 @@ export default function Navbar() {
       <header className='bg-background-lightcolor flex items-center justify-around h-20 px-8 text-white mb-10'>
       <Link to="/" className='cursor-pointer'><img className='Logo m-0' src={Logo} width='50%' alt='logo'/></Link>
       {user && request && <Link to='profile/champions/request' className='championsbeat'><img src={ChampionsBeat} alt='Champions Beat' /></Link>}
-      {user ? <Link className='flex cursor-pointer items-center justify-center m-0 p-0 w-36' to='/profile/user'><li className='flex items-center' referrerPolicy="no-referrer" onMouseEnter={() => setHover(prev => !prev)}
+      {user ? <Link className='flex cursor-pointer items-center justify-center m-0 pl-2 w-52' to='/profile/user'><li className='flex items-center' referrerPolicy="no-referrer" onMouseEnter={() => setHover(prev => !prev)}
         onMouseLeave={() => setHover(prev =>!prev)}>
-        <img width='30%' className='mr-2 rounded-lg' src={user.image} alt='back'/>  {user.username}
+        <img width='20%' className='mr-2 rounded-lg' src={user.image} alt='back'/>  {user.username}
            </li></Link>:<p><Link to='/signup' className='navbarlink text-xs w-60 text-center text-white cursor-pointer'>Signup or Login to not be a stranger</Link> 😶‍🌫️</p> }
         <nav className='navLinks flex' ref={navRef}>
           <li onClick={showNavbar}><NavLink to="/">Home</NavLink></li>
