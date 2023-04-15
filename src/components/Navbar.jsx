@@ -66,7 +66,7 @@ export default function Navbar() {
           <li onClick={showNavbar}><NavLink to="/">Home</NavLink></li>
           {!isLoggedIn && <li onClick={showNavbar}><NavLink to="/signup">Sign up</NavLink></li>}
           {!isLoggedIn && <li onClick={showNavbar}><NavLink to="/login">Login</NavLink></li>}       
-          {isLoggedIn && <li onClick={showNavbar}><NavLink to="/private">Private view</NavLink></li>}
+          {isLoggedIn && <li onClick={showNavbar}><NavLink to="/profile/champions/new">Champions</NavLink></li>}
           {isLoggedIn && <li onClick={showNavbar}><NavLink to="/profile/user">Profile</NavLink></li>}
           {isLoggedIn && <li className='cursor-pointer' onClick={() => { logOutUser();showNavbar()}}>Log out</li>}
           <li onClick={() => {navigate(-1);showNavbar()}} className='flex cursor-pointer items-center justify-center m-0 p-0 w-36' onMouseEnter={() => setHover(prev => !prev)}

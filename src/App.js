@@ -30,9 +30,10 @@ import NewChampion from './components/NewChampion';
 import ChampionsView from './components/ChampionsView';
 import RequestChampions from './components/RequestChampions';
 import ProgressChampions from './components/ProgressChampions';
+import ChampionsKataLogic from './views/ChampionsKataLogic';
+
 
 function App() {
-
   
 
   return (
@@ -46,6 +47,11 @@ function App() {
           <Route path="discussions" element={<Discussions/>}/>
         </Route>
         <Route path="/kata/practise/:kataId" element={<KataLogic />}>
+          <Route path="output" element={<Output />}/>
+          <Route path="instructions" element={<Instructions />}/>
+          <Route path="pastsolutions" element={<Pastsolutions />}/>
+        </Route>
+        <Route path="/katas/champions/:kataId/:championsId" element={<ChampionsKataLogic />}>
           <Route path="output" element={<Output />}/>
           <Route path="instructions" element={<Instructions />}/>
           <Route path="pastsolutions" element={<Pastsolutions />}/>

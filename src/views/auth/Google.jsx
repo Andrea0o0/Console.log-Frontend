@@ -29,7 +29,8 @@ export default function Google(){
 
     useEffect(() => {
         /* global google */
-        google.accounts.id.initialize({
+        const googlefunction = () => {
+          google.accounts.id.initialize({
             client_id:process.env.REACT_APP_GOOGLE,
             callback: handleCallbackResponse
         })
@@ -39,7 +40,11 @@ export default function Google(){
             {type:"icon",theme:"outline",shape:"pill"}
         )
 
-        google.accounts.id.prompt()
+        google.accounts.id.prompt()  
+        }
+        
+        !window.location.pathname.includes('login?') && googlefunction()
+
 
     },[])
     

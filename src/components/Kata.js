@@ -11,7 +11,7 @@ import L3_hover from '../assets/images/levels/3 HOVER.svg'
 import L4_hover from '../assets/images/levels/4 HOVER.svg'
 import L5_hover from '../assets/images/levels/5 HOVER.svg'
 
-export default function Kata({ kata : {name, level, _id},practise,solutions,champions, handleKataChampions, championsRequest }) {
+export default function Kata({ kata : {name, level, _id},practise,solutions,champions, handleKataChampions, championsRequest,championsProgress}) {
     const [hover,setHover] = useState(false)
     const [srcImage,setSrcImage] = useState('')
 
@@ -31,7 +31,7 @@ export default function Kata({ kata : {name, level, _id},practise,solutions,cham
   return (    
     <div className={`Kata ${hover ? `hover_${level}`:`_${level}`}`} onMouseEnter={handleHover}
     onMouseLeave={handleHover}>
-        {!practise && !solutions && !champions ? 
+        {!practise && !solutions && !champions && !championsProgress ? 
         (<Link to={`/katas/${_id}`}>
             <div className='level'>
                 <img src={srcImage} alt={`Level${level}`}/>
@@ -53,8 +53,15 @@ export default function Kata({ kata : {name, level, _id},practise,solutions,cham
                 <div className='img_level text-xs'>{`${level}JS`}</div>
             </div>
             <h3 className='text-xl'>{name}</h3> 
-        </a>):
+        </a>): championsProgress ?
           // eslint-disable-next-line
+        (<a className='ml-2'>
+            <div className='level'>
+                <img src={srcImage} alt={`Level${level}`}/>
+                <div className='img_level'>{`${level}JS`}</div>
+            </div>
+            <h3>{name}</h3> 
+        </a>):
         (<a className='w-4/5'>
             <div className='level'>
                 <img src={srcImage} alt={`Level${level}`}/>

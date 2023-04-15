@@ -146,7 +146,7 @@ export default function NewChampion(){
             setUsersSelected([])
             searchUsersValue.current.value = ''
             const copyChampions = Object.assign({}, NewChampion)
-            delete copyChampions.users_request
+            copyChampions.users_request = []
             setNewChampion(copyChampions)
         } 
       }
@@ -182,7 +182,7 @@ export default function NewChampion(){
                 <div className="firstChampionsNew card_container">
                 {usersSelected.length > 0 &&
                 <>
-                <p className='cursor-pointer text-sm p-1.5 px-6 my-4 bg-background-lightcolor rounded-full border-1 border-background-lightcolor hover:border-white focus:border-white' onClick={handleReset}>Reset Opponents</p>
+                <p className='cursor-pointer text-sm text-center p-1.5 px-6 my-4 bg-background-lightcolor rounded-full border-1 border-background-lightcolor hover:border-white focus:border-white' onClick={handleReset}>Reset Opponents</p>
                 <label className='text-sm my-2 flex justify-center'>{usersSelected.length} Opponent{usersSelected.length > 1 ? 's':''}  Selected</label>
                 {usersSelected.map(elem => {
                         return (

@@ -6,11 +6,12 @@ import YodaPatience from "../assets/images/Yoda/Yoda patience.svg"
 import CardRequestChampions from "./CardRequest";
 import { useAuth } from '../hooks/useAuth';
 import authService from "../services/authService";
+import CardInProgress from "./CardInProgress";
 
 export default function ProgressChampions(){
     const { storeToken, authenticateUser } = useAuth(); 
 
-    const [championsRequest,setChampionsRequest] = useState(undefined)
+    const [championsProgress,setChampionsProgress] = useState(undefined)
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
@@ -18,8 +19,9 @@ export default function ProgressChampions(){
     const getChampionsInProgress = async function () {
         try {
             const response = await championsService.getChampionsByStatus('START')
+            console.log(response)
             setLoading(false)
-            setChampionsRequest(response)
+            setChampionsProgress(response)
         } catch (error) {
             setError(error)
             console.log(error)
@@ -31,7 +33,7 @@ export default function ProgressChampions(){
             const response = await championsService.editUserRequest(championsId)
             console.log(response)
             setLoading(false)
-            setChampionsRequest(response)
+            setChampionsProgress(response)
         } catch (error) {
             setError(error)
             console.log(error.message)
@@ -46,16 +48,16 @@ export default function ProgressChampions(){
     return (
         <>
         {loading && <div className='flex justify-center mt-20'><img width='10%' src={Loading} alt='loading'/></div>}
-        {!loading && championsRequest &&
+        {!loading && championsProgress &&
         <> 
-            {championsRequest.length > 0 ? 
+            {championsProgress.length > 0 ? 
             <>
-                {championsRequest.map(elem => {
+                {championsProgress.map(elem => {
                     let initial_timer = localStorage.getItem(`champions_${elem._id}`) ? 
                     localStorage.getItem(`champions_${elem._id}`):300
                     return(
                 <div className="my-2 flex justify-center" key={elem._id}>
-                    <CardRequestChampions champions={elem} initial_timer={initial_timer}  setStatusUser={editStatusUser}/>
+                    <CardInProgress champions={elem} initial_timer={initial_timer}  setStatusUser={editStatusUser}/>
                 </div>)})}
             </>:
             <>
