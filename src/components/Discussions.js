@@ -1,11 +1,14 @@
-import React,{useState, useEffect} from "react";
+import React,{useState, useEffect, useContext} from "react";
 import { useOutletContext, useNavigate, Link } from "react-router-dom";
 import commentService from "../services/commentService";
 import Loading from '../assets/images/Logo/Loading.gif'
 import YodaHappy from "../assets/images/Yoda/Yoda happy.svg"
 import toast from 'react-hot-toast';
+import { AuthContext } from "../context/AuthContext";
 
 export default function Discussions(){
+    const { isLoggedIn } = useContext(AuthContext); 
+
     const {kata} = useOutletContext();
     const [discussions,setDiscussions] = useState(undefined)
     const [loading,setLoading] = useState(true)
@@ -51,6 +54,8 @@ export default function Discussions(){
 
     return (
         <>
+            {isLoggedIn ?
+            <>
             {loading && <div className='flex justify-center mt-20'><img width='10%' src={Loading} alt='loading'/></div>}
             {!loading && discussions && 
             <div className="flex flex-col items-center">
@@ -83,6 +88,15 @@ export default function Discussions(){
                     </div>
                 </>}
             </div>}
+            </>:
+            <>
+            <div className="flex justify-center my-4">
+                <Link to='/signup' className="flex flex-wrap w-3/4 justify-center p-3 pb-8 rounded-full bg-background-lightcolor hover:w-4/5 yoda">
+                    <img width='20%' className="m-2" src={YodaHappy} alt='yoda happy'/>
+                    <h3 className="w-4/5 text-center text-white font-normal">Sorry stranger you don't have access to the discussions<br/>Signup first</h3>
+                </Link>
+            </div>
+            </>}
             {error && <p>Something went wrong. Couldn't find your kata</p>}
         </>
     )

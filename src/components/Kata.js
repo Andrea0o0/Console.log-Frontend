@@ -11,7 +11,7 @@ import L3_hover from '../assets/images/levels/3 HOVER.svg'
 import L4_hover from '../assets/images/levels/4 HOVER.svg'
 import L5_hover from '../assets/images/levels/5 HOVER.svg'
 
-export default function Kata({ kata : {name, level, _id},practise,solutions,champions, handleKataChampions, championsRequest,championsProgress}) {
+export default function Kata({ kata : {name, level, _id},practise,solutions,champions, handleKataChampions,championsProgress}) {
     const [hover,setHover] = useState(false)
     const [srcImage,setSrcImage] = useState('')
 
@@ -47,7 +47,7 @@ export default function Kata({ kata : {name, level, _id},practise,solutions,cham
             <h3 className='text-xl'>{name}</h3> 
         </Link>):champions ?
           // eslint-disable-next-line
-        (<a id='solutionsKata' className='cursor-pointer w-4/5' onClick={()=>handleKataChampions(_id,name,level)}>
+        (<a id='solutionsKata' className='champions cursor-pointer w-4/5' onClick={()=>handleKataChampions(_id,name,level)}>
             <div className='level solution'>
                 <img src={srcImage} alt={`Level${level}`}/>
                 <div className='img_level text-xs'>{`${level}JS`}</div>

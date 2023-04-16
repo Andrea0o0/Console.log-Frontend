@@ -234,7 +234,7 @@ export default function NewChampion(){
                         :
                         <p className='cursor-pointer text-sm p-1.5 px-6 my-4 bg-background-lightcolor rounded-full border-1 border-background-lightcolor hover:border-white focus:border-white' onClick={() => handleReset('kata')}>Choose another Kata</p>
                     }
-                    <div className="overflow-y-auto max-h-56">
+                    <div className="overflow-y-auto newChampionsKatas max-h-56">
                        {katas.filter(elem => elem.name.toLowerCase().includes(searchKata.toLowerCase())).length > 0 ? katas.filter(elem => elem.name.toLowerCase().includes(searchKata.toLowerCase())).map(elem => {
                         return (
                             <div key={elem._id} className="mx-4">

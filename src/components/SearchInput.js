@@ -83,7 +83,7 @@ export default function SearchInput(props) {
       </div>
       <div className='flex flex-wrap items-center justify-center'>
         <div className='level_selector w-full flex flex-wrap items-center justify-center'>
-          <div className='infoselect w-4/5 mx-3 mb-1 rounded-full bg-background-lightcolor card text-center text-no-select'><p className='text-xs py-0.5'>{infoSelect}</p></div>
+          <div className='infoselect w-4/5 mx-3 mb-1 rounded-full bg-background-lightcolor card text-center text-no-select'><p className='py-0.5'>{infoSelect}</p></div>
           {Object.keys(srcImage).map((key,i)=>{ 
           return(
           <div key={i} className={`cursor-pointer rounded-full p-2 ${select.indexOf(i+1) > -1 ? selectItem:unselectItem} filterlevels card w-20 mx-1 ${hover ? `hover_${i+1}`:`_${i+1}`}`} onMouseEnter={() => handleHover(i+1)}

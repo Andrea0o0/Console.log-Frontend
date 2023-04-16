@@ -56,7 +56,7 @@ export default function Navbar() {
 
   return (
       <header className='bg-background-lightcolor flex items-center justify-around h-20 px-8 text-white mb-10'>
-      <Link to="/" className='cursor-pointer'><img className='Logo m-0' src={Logo} width='50%' alt='logo'/></Link>
+      <Link to="/" className='cursor-pointer'><img className='Logo m-0' src={Logo} width='40%' alt='logo'/></Link>
       {user && request && <Link to='profile/champions/request' className='championsbeat'><img src={ChampionsBeat} alt='Champions Beat' /></Link>}
       {user ? <Link className='flex cursor-pointer items-center justify-center m-0 pl-2 w-52' to='/profile/user'><li className='flex items-center' referrerPolicy="no-referrer" onMouseEnter={() => setHover(prev => !prev)}
         onMouseLeave={() => setHover(prev =>!prev)}>

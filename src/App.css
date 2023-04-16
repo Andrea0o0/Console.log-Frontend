@@ -264,6 +264,10 @@ a {
 /* OUTPUT */
 @media only screen and (min-width: 768px) {
 
+  .newChampionsKatas {
+    max-height: 25%;
+  }
+
   .championsbeat {
     width: 5%;
   }
@@ -789,6 +793,11 @@ header div, nav {
 }
 }
 @media only screen and (max-width:800px){
+
+  .champions div img {
+    width: 20%;
+  }
+
    h3{
       font-size: 18px;
       font-weight: bold;
