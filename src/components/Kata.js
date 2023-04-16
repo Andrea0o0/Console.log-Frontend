@@ -56,7 +56,7 @@ export default function Kata({ kata : {name, level, _id},practise,solutions,cham
         </a>): championsProgress ?
           // eslint-disable-next-line
         (<a className='ml-2'>
-            <div className='level'>
+            <div id='championsProgress' className='level'>
                 <img src={srcImage} alt={`Level${level}`}/>
                 <div className='img_level'>{`${level}JS`}</div>
             </div>

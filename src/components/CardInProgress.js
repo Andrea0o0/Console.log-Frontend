@@ -1,13 +1,8 @@
-import React, {useState,useEffect, useContext} from "react";
-import { AuthContext } from "../context/AuthContext";
+import React from "react";
 import Kata from "./Kata";
-import championsService from "../services/championsService";
 import { Link } from "react-router-dom";
 
-export default function CardInProgress({champions,setStart}){
-    const { user } = useContext(AuthContext); 
-
-    const [valid,setValid] = useState({})
+export default function CardInProgress({champions}){
 
 
     return (

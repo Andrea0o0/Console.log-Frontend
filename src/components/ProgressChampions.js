@@ -19,7 +19,7 @@ export default function ProgressChampions(){
     const getChampionsInProgress = async function () {
         try {
             const response = await championsService.getChampionsByStatus('START')
-            console.log(response)
+            response.sort((a,b)=>a.updatedAt - b.updatedAt).reverse()
             setLoading(false)
             setChampionsProgress(response)
         } catch (error) {

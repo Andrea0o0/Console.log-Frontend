@@ -10,12 +10,6 @@ useEffect(()=> {
   setNewFunction(input)
   },[input])
 
-  // useEffect(()=> {
-  //   return () => {
-  //     setAddSolution(newfunction,false)
-  //   }
-  //   },[])
-
   const handleOutput = (output,name,response) => {
     let result = Object.assign({}, initialOutput)
     output === initialOutput ? setNewOutput(initialOutput):output === 0 ? result[name] = response:
@@ -79,7 +73,7 @@ useEffect(()=> {
   }
 
   const handleSubmit = () => {
-      setAddSolution(newfunction,true)
+      setAddSolution({function:newfunction,status:true})
     }
 
   const handleBtns = (e) => {
