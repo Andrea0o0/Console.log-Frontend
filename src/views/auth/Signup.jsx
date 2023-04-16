@@ -86,7 +86,7 @@ export default function Signup() {
   const invalidStyle = "text-red-input border-red-input invalidInput ";
   
   return (
-    <div className='ViewHeightDiv flex justify-center text-xs items-center'>
+    <div className='ViewHeightDiv flex justify-center text-xs items-center w-full'>
       <div className="flex flex-col items-center w-96 signup">
       <div className='mb-4'>
       <Link to="/login"><li className='tologin mb-4 flex cursor-pointer text-white items-center justify-center m-0 pb-1' onMouseEnter={() => setHover(prev => !prev)}

@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect,useRef} from "react";
 import jwt_decode from "jwt-decode"
 import toast from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import authService from "../../services/authService";
 
 export default function Google(){
+    const windowSize = useRef(window.innerWidth)
     const navigate = useNavigate();
-  const { storeToken, authenticateUser } = useAuth(); 
+    const { storeToken, authenticateUser } = useAuth(); 
 
     const handleCallbackResponse = async function(response){
         const userObject = await jwt_decode(response.credential)
@@ -28,7 +29,6 @@ export default function Google(){
     }
 
     useEffect(() => {
-        console.log(screen.width)
         /* global google */
         const googlefunction = () => {
           google.accounts.id.initialize({
@@ -41,10 +41,10 @@ export default function Google(){
             {type:"icon",theme:"outline",shape:"pill"}
         )
         
-        if(screen.width > 850){
+        if(windowSize.current > 850){
           google.accounts.id.prompt()  
         }
-          
+
         }
         
         
