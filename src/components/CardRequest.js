@@ -1,52 +1,18 @@
 import React, {useState,useEffect, useContext} from "react";
 import { AuthContext } from "../context/AuthContext";
 import Kata from "./Kata";
-import championsService from "../services/championsService";
 
 
-export default function CardRequestChampions({champions, initial_timer,setStatusUser,setLoading, handleDelete, handleStart}){
+export default function CardRequestChampions({champions, initial_timer,setStatusUser}){
     const { user } = useContext(AuthContext); 
 
-    const initialMinute = Math.floor(initial_timer/60)
-    const initialSeconds = initial_timer-(initialMinute*60);
-    const [ minutes, setMinutes ] = useState(initialMinute);
-    const [seconds, setSeconds ] =  useState(initialSeconds);
- 
-
-
-    const handleEditTimer = async function(){
-        try {
-            const response = await championsService.editTimeRequest(champions._id,{time:((minutes*60)+seconds)})
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    const [ minutes, setMinutes ] = useState(undefined);
+    const [seconds, setSeconds ] =  useState(undefined);
 
     useEffect(() => {
-        user._id === champions.users[0] && ((minutes*60)+seconds) > 0  && handleEditTimer() 
-        user._id === champions.users[0] && ((minutes*60)+seconds) < 1 && champions.users.length > 1 ? handleStart(champions._id): user._id === champions.users[0] && ((minutes*60)+seconds) < 1 && champions.users.length < 2 &&handleDelete(champions._id)
-        
-    },[minutes,seconds])
-
-        
-        useEffect(()=>{
-              const myInterval = setInterval(() => {
-                if (seconds > 0) {
-                    setSeconds(seconds - 1);
-                }
-                if (seconds === 0) {
-                    if (minutes === 0) {
-                        clearInterval(myInterval)
-                    } else {
-                        setMinutes(minutes - 1);
-                        setSeconds(59);
-                    }
-                } 
-            }, 1000)
-            return ()=> {
-                clearInterval(myInterval);
-              };  
-        });
+        setMinutes(Math.floor(initial_timer/60))
+        setSeconds(initial_timer-((Math.floor(initial_timer/60))*60))
+    },[champions])
 
     return (
         <div className="championsRequest flex flex-wrap text-white justify-center py-6 my-2 bg-background-lightcolor rounded-full w-4/5">

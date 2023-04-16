@@ -10,7 +10,7 @@ import championsService from '../services/championsService';
 import toast from 'react-hot-toast';
 
 
-export default function Navbar() {
+export default function Navbar({requestChampions}) {
   const { isLoggedIn, user, logOutUser, authenticateUser } = useContext(AuthContext); 
   const [request,setRequest] = useState(false)
   const navigate = useNavigate();
@@ -22,36 +22,38 @@ export default function Navbar() {
     navRef.current.classList.toggle("responsive_nav")
   }
 
-  const handleRequest = async function () {
-    try {
-      if(user){
-        const response = await championsService.getChampionsByStatus('REQUEST')
-      if(response.length>0 && request===false){
-        setRequest(true) 
-        toast(<Link to='/profile/champions/request'>"New champions Request!!"</Link>, {
-        icon: <img src={Champions} width='10%' alt='Champions Beat' />,
-        style:{backgroundColor:'#1a1e24', color:'white'}
-      });
-      } else if (response.length<1){
-        setRequest(false)
-      } 
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // const handleRequest = async function () {
+  //   try {
+  //     if(user){
+  //       const response = await championsService.getChampionsByStatus('REQUEST')
+  //     if(response.length>0 && request===false){
+  //       setRequest(true) 
+  //       toast(<Link to='/profile/champions/request'>"New champions Request!!"</Link>, {
+  //       icon: <img src={Champions} width='10%' alt='Champions Beat' />,
+  //       style:{backgroundColor:'#1a1e24', color:'white'}
+  //     });
+  //     } else if (response.length<1){
+  //       setRequest(false)
+  //     } 
+  //     }
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   useEffect(() => {
-    const intervalID = setInterval(() => {
-      authenticateUser()
-      handleRequest()
-    }, 15000)
-
-    return () => {
-      clearInterval(intervalID);
+    console.log(requestChampions)
+    if(requestChampions === true){
+      setRequest(true)
+      toast(<Link to='/profile/champions/request'>"New champions Request!!"</Link>, {
+        icon: <img src={Champions} width='10%' alt='Champions Beat' />,
+        style:{backgroundColor:'#1a1e24', color:'white'}
+      })
+    }else{
+      setRequest(false)
     }
 
-  }, [user])
+  }, [requestChampions])
 
 
   return (

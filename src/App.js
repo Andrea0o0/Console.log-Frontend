@@ -1,5 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+import React,{useContext, useEffect, useState} from 'react';
 import { Toaster } from 'react-hot-toast';
 import Home from './views/Home';
 import Navbar from './components/Navbar';
@@ -31,15 +32,21 @@ import ChampionsView from './components/ChampionsView';
 import RequestChampions from './components/RequestChampions';
 import ProgressChampions from './components/ProgressChampions';
 import ChampionsKataLogic from './views/ChampionsKataLogic';
-
+import IntervalChampions from './components/IntervalChampions';
+import { AuthContext } from "./context/AuthContext";
+import { useAuth } from "./hooks/useAuth";
 
 function App() {
-  
+  const { user } = useContext(AuthContext); 
+  const { storeToken, authenticateUser, isLoggedIn } = useAuth(); 
+
+  const [requestChampions,setRequestChampions] = useState(false)
 
   return (
     <div className="App">
       <Toaster/>
-      <Navbar />
+      <Navbar requestChampions={requestChampions} />
+      {/* <IntervalChampions user={user} setRequestChampions={setRequestChampions}/> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/katas/:kataId" element={<KataDetail />}>
