@@ -30,7 +30,6 @@ export default function Google(){
 
     useEffect(() => {
         /* global google */
-        const googlefunction = () => {
           google.accounts.id.initialize({
             client_id:process.env.REACT_APP_GOOGLE,
             callback: handleCallbackResponse
@@ -44,11 +43,6 @@ export default function Google(){
         if(windowSize.current > 850){
           google.accounts.id.prompt()  
         }
-
-        }
-        
-        
-        !window.location.pathname.includes('login?') && googlefunction()
 
 
     },[])
