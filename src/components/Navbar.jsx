@@ -55,14 +55,15 @@ export default function Navbar() {
 
 
   return (
-      <header className='bg-background-lightcolor flex items-center justify-around h-20 px-8 text-white mb-10'>
+      <header className='bg-background-lightcolor'>
+      <div className='flex items-center justify-around h-20 px-8 text-white mb-10'>
       <Link to="/" className='cursor-pointer'><img className='Logo m-0' src={Logo} width='40%' alt='logo'/></Link>
       {user && request && <Link to='profile/champions/request' className='championsbeat'><img src={ChampionsBeat} alt='Champions Beat' /></Link>}
       {user ? <Link className='flex cursor-pointer items-center justify-center m-0 pl-2 w-52' to='/profile/user'><li className='flex items-center' referrerPolicy="no-referrer" onMouseEnter={() => setHover(prev => !prev)}
         onMouseLeave={() => setHover(prev =>!prev)}>
         <img width='20%' className='mr-2 rounded-lg' src={user.image} alt='back'/>  {user.username}
            </li></Link>:<p><Link to='/signup' className='navbarlink text-xs w-60 text-center text-white cursor-pointer'>Signup or Login to not be a stranger</Link> 😶‍🌫️</p> }
-        <nav className='navLinks flex' ref={navRef}>
+        <nav className='navLinks' ref={navRef}>
           <li onClick={showNavbar}><NavLink to="/">Home</NavLink></li>
           {!isLoggedIn && <li onClick={showNavbar}><NavLink to="/signup">Sign up</NavLink></li>}
           {!isLoggedIn && <li onClick={showNavbar}><NavLink to="/login">Login</NavLink></li>}       
@@ -80,6 +81,7 @@ export default function Navbar() {
         <button className='nav-btn' onClick={showNavbar}>
         <FontAwesomeIcon icon="fa-solid fa-bars fa-2xl" with='45%' style={{color: "#ffffff",}} />
           </button>
+          </div>
         </header>
   )
 }

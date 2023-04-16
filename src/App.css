@@ -659,7 +659,7 @@ input:-webkit-autofill{
 }
 
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 850px) {
   .navLinks{
     width: 65%;
     justify-content:end;
@@ -668,7 +668,9 @@ input:-webkit-autofill{
   .navbarlink{
     width:32%;
   }
+}
 
+@media only screen and (min-width: 700px) {
   .Kata a div {
     width: 8%;
     font-weight: bold;
@@ -731,7 +733,7 @@ header div, nav {
   align-items: center;
 }
 
-@media only screen and (max-width:700px){
+@media only screen and (max-width:850px){
 
   header nav a, header nav li {
     font-size: 1.4rem;
@@ -743,7 +745,7 @@ header div, nav {
    }
 
    header nav {
-    position: fixed;
+    position: absolute;
     z-index: 1;
     top:0vh;
     left:0;

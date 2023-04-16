@@ -37,7 +37,7 @@ export default function Google(){
 
         google.accounts.id.renderButton(
             document.getElementById('signInDiv'),
-            {type:"icon",theme:"outline",shape:"pill"}
+            {type:"icon",theme:"outline",shape:"pill",text: "continue_with"}
         )
         
         if(windowSize.current > 850){
