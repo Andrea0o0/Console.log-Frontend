@@ -32,21 +32,13 @@ import ChampionsView from './components/ChampionsView';
 import RequestChampions from './components/RequestChampions';
 import ProgressChampions from './components/ProgressChampions';
 import ChampionsKataLogic from './views/ChampionsKataLogic';
-import IntervalChampions from './components/IntervalChampions';
-import { AuthContext } from "./context/AuthContext";
-import { useAuth } from "./hooks/useAuth";
 
 function App() {
-  const { user } = useContext(AuthContext); 
-  const { storeToken, authenticateUser, isLoggedIn } = useAuth(); 
-
-  const [requestChampions,setRequestChampions] = useState(false)
 
   return (
     <div className="App">
       <Toaster/>
-      <Navbar requestChampions={requestChampions} />
-      {/* <IntervalChampions user={user} setRequestChampions={setRequestChampions}/> */}
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/katas/:kataId" element={<KataDetail />}>
