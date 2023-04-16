@@ -606,6 +606,10 @@ hr {
 }
 
 /* SIN UP */
+.ViewHeightDiv {
+  height: 70vh;
+}
+
 .signup form,.login form {
   color: white;
   text-align: center;
@@ -728,6 +732,7 @@ header div, nav {
 }
 
 @media only screen and (max-width:700px){
+
   header nav a, header nav li {
     font-size: 1.4rem;
   }
@@ -770,7 +775,7 @@ header div, nav {
     font-size: .7.5rem;
    }
 
-   .tologin, .navbarlink {
+   .navbarlink {
     background: -webkit-linear-gradient(left, var(--level-5-blue), var(--level-4-purple),var(--level-3-pink),var(--level-2-orange),var(--level-1-green));
     background-clip: inherit;
     -webkit-background-clip: text;
@@ -778,7 +783,7 @@ header div, nav {
    }
    
    .tologin{
-   font-size: medium;
+   font-size: small;
    }
 
    .navbarlink p {

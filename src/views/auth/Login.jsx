@@ -72,8 +72,8 @@ export default function Login() {
   const invalidStyle = "text-red-input border-red-input invalidInput ";
 
   return (
-    <div className='flex justify-center text-sm'>
-      <div className='login p-2'>
+    <div className='ViewHeightDiv flex justify-center text-sm items-center'>
+      <div className='login p-2 flex items-center flex-col'>
       <div className='mb-4 h-6'>
       <Link to='/signup'><li className='tologin flex cursor-pointer text-white items-center justify-center m-0 pb-1' onMouseEnter={() => setHover(prev => !prev)}
         onMouseLeave={() => setHover(prev =>!prev)}>
@@ -117,10 +117,7 @@ export default function Login() {
           </div>
         </form>
         </div>
-        {/* <div>
-          <LoginGG/>
-        </div> */}
-        <div className='flex justify-center mt-6'>
+        <div className='flex justify-center mt-6 w-full'>
                 <Github/>
                 <Google/>
         </div> 

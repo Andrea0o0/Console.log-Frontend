@@ -28,6 +28,7 @@ export default function Google(){
     }
 
     useEffect(() => {
+        console.log(screen.width)
         /* global google */
         const googlefunction = () => {
           google.accounts.id.initialize({
@@ -39,9 +40,13 @@ export default function Google(){
             document.getElementById('signInDiv'),
             {type:"icon",theme:"outline",shape:"pill"}
         )
-
-        google.accounts.id.prompt()  
+        
+        if(screen.width > 850){
+          google.accounts.id.prompt()  
         }
+          
+        }
+        
         
         !window.location.pathname.includes('login?') && googlefunction()
 
