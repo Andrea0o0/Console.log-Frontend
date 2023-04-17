@@ -3,13 +3,9 @@ import championsService from "../services/championsService";
 import Loading from '../assets/images/Logo/Loading.gif'
 import { Link } from "react-router-dom";
 import YodaPatience from "../assets/images/Yoda/Yoda patience.svg"
-import CardRequestChampions from "./CardRequest";
-import { useAuth } from '../hooks/useAuth';
-import authService from "../services/authService";
 import CardInProgress from "./CardInProgress";
 
 export default function ProgressChampions(){
-    const { storeToken, authenticateUser } = useAuth(); 
 
     const [championsProgress,setChampionsProgress] = useState(undefined)
     const [loading, setLoading] = useState(true);
@@ -19,7 +15,7 @@ export default function ProgressChampions(){
     const getChampionsInProgress = async function () {
         try {
             const response = await championsService.getChampionsByStatus('START')
-            response.sort((a,b)=>a.updatedAt - b.updatedAt).reverse()
+            response.length>0 && response.sort((a,b)=>a.updatedAt - b.updatedAt).reverse()
             setLoading(false)
             setChampionsProgress(response)
         } catch (error) {
@@ -51,7 +47,10 @@ export default function ProgressChampions(){
         {!loading && championsProgress &&
         <> 
             {championsProgress.length > 0 ? 
-            <>
+            <>  
+                <div className="text-white flex justify-center w-full px-4">
+                    <h3 className="text-sm text-center">Remember that unfinished champions are automatically deleted in 10 days</h3>
+                </div>                    
                 {championsProgress.map(elem => {
                     let initial_timer = localStorage.getItem(`champions_${elem._id}`) ? 
                     localStorage.getItem(`champions_${elem._id}`):300

@@ -12,7 +12,7 @@ import Kata from "../components/Kata";
 
 export default function ChampionsKataLogic(){
     const {kataId} = useParams()
-    const championsId = window.location.pathname.split('/')[window.location.pathname.split('/').length-1]
+    const championsId = window.location.pathname.includes('pastsolutions')||window.location.pathname.includes('output')||window.location.pathname.includes('instructions') ? window.location.pathname.split('/')[window.location.pathname.split('/').length-2]:window.location.pathname.split('/')[window.location.pathname.split('/').length-1]
 
     const navigate = useNavigate();
 
@@ -43,8 +43,8 @@ export default function ChampionsKataLogic(){
 
       // useEffect(() => {
       //   const intervalID = setInterval(() => {
-      //     // (prev => prev + 1)
-      //   }, 1000)
+          
+      //   }, 10000)
     
       //   return () => {
       //     clearInterval(intervalID);
@@ -68,7 +68,6 @@ export default function ChampionsKataLogic(){
       try {
         const response = await solutionService.getSolutionsUserKata(kataId);
         setSolutions(response);
-        console.log(response)
       } catch (error) {
         console.error(error)
         setLoading(false);
@@ -80,7 +79,6 @@ export default function ChampionsKataLogic(){
       try {
         const response = await championsService.getOneChampion(championsId);
         setChampions(response);
-        console.log(response)
       } catch (error) {
         console.error(error)
         setLoading(false);
@@ -146,33 +144,30 @@ export default function ChampionsKataLogic(){
 
     return(
     <>
-        {loading && <div className='flex justify-center mt-20'><img width='10%' src={Loading} alt='loading'/></div>}
-        {!loading && kata && 
-        <div className="m-6">
-          <div>
-            {/* <div className="championsRequest flex flex-wrap text-white justify-center py-6 my-2 bg-background-lightcolor rounded-full w-3/4">
-            <h3 className="w-4/5 text-center mb-2">{champions.namefight}</h3>             
-              <div className="flex flex-wrap w-4/5">
+        {loading && <div className='flex justify-center'><img width='10%' src={Loading} alt='loading'/></div>}
+        {!loading && kata && champions &&
+        <div className="mx-6">
+          <div className="flex justify-center">
+            <div id='championsOnKata' className={`flex flex-wrap text-white justify-center my-2 py-1 bg-background-lightcolor rounded-full w-full border-1 ${kata.level === 5 ? 'border-color-5':kata.level === 4 ? 'border-color-4':kata.level === 3 ? 'border-color-3':kata.level === 2 ? 'border-color-2':'border-color-1'}`}>     
                   {champions.users.map(elem => {
                       return (
-                          <div className="flex justify-center my-1 w-full items-center" key={elem._id}>
-                              <img width='15%' className="rounded-lg" src={elem.image} alt={`image_${elem.username}`}/> 
-                              <p className="w-1/3 px-3">{elem.username}</p>
+                          <div className="flex justify-center my-1 w-1/3 items-center mx-1" key={elem._id}>
+                              <img width='20%' className="rounded-lg" src={elem.image} alt={`image_${elem.username}`}/> 
+                              <p className="w-1/3 px-1">{elem.username}</p>
                           </div>
                       )
                   })}
-              </div>
-            </div> */}
+            </div>
         </div>
-        <Kata kata={kata} practise={true}/>
+        <Kata kata={kata} championsfight={true}/>
         <div className='kata_display'>
           <div className={`kata_display_1 _kata_${kata.level}`}>
             <ul className='editor-title'>
               <li style={{width:solutions === null ? '53%' :'24%'}}
-              ><NavLink to={`/kata/practise/${kata._id}/output`}>Output</NavLink></li>
-              <li style={{width:solutions.length === 0 || solutions === null? '48%' :''}}><NavLink to={`/kata/practise/${kata._id}/instructions`}>Instructions</NavLink></li>
+              ><NavLink to={`/katas/champions/${kata._id}/${championsId}/output`}>Output</NavLink></li>
+              <li style={{width:solutions.length === 0 || solutions === null? '48%' :''}}><NavLink to={`/katas/champions/${kata._id}/${championsId}/instructions`}>Instructions</NavLink></li>
               {solutions.length !== 0 &&
-              <li style={{width:'38%'}}><NavLink to={`/kata/practise/${kata._id}/pastsolutions`}>Past Solutions</NavLink></li>}
+              <li style={{width:'38%'}}><NavLink to={`/katas/champions/${kata._id}/${championsId}/pastsolutions`}>Past Solutions</NavLink></li>}
             </ul>
             <Outlet context={{example:kata.example,instructions:kata.instructions.split("<ControlledEditor/>"),output:output,kata:kata,solutions:solutions}} />
           </div>          

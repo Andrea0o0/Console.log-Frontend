@@ -2,17 +2,19 @@ import React, { useContext, useRef,useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import championsService from '../services/championsService';
 import Logo from '../assets/images/Logo/LOGO.svg'
 import Back from '../assets/images/navbar/back hover.svg'
 import ChampionsBeat from '../assets/images/Champions/beat.gif'
 import Champions from '../assets/images/Champions/no_beat.svg'
-import championsService from '../services/championsService';
 import toast from 'react-hot-toast';
 
 
-export default function Navbar({requestChampions}) {
-  const { isLoggedIn, user, logOutUser, authenticateUser } = useContext(AuthContext); 
+export default function Navbar() {
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext); 
+
   const [request,setRequest] = useState(false)
+  // const [error,setError] = useState(false)
   const navigate = useNavigate();
   const navRef = useRef()
 
@@ -22,43 +24,41 @@ export default function Navbar({requestChampions}) {
     navRef.current.classList.toggle("responsive_nav")
   }
 
-  // const handleRequest = async function () {
-  //   try {
-  //     if(user){
-  //       const response = await championsService.getChampionsByStatus('REQUEST')
-  //     if(response.length>0 && request===false){
-  //       setRequest(true) 
-  //       toast(<Link to='/profile/champions/request'>"New champions Request!!"</Link>, {
-  //       icon: <img src={Champions} width='10%' alt='Champions Beat' />,
-  //       style:{backgroundColor:'#1a1e24', color:'white'}
-  //     });
-  //     } else if (response.length<1){
-  //       setRequest(false)
-  //     } 
-  //     }
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  useEffect(() => {
-    console.log(requestChampions)
-    if(requestChampions === true){
-      setRequest(true)
-      toast(<Link to='/profile/champions/request'>"New champions Request!!"</Link>, {
+  const handleRequest = async function () {
+    try {
+      if(user){
+        const response = await championsService.getChampionsByStatus('REQUEST')
+      if(response.length>0 && request===false){
+        console.log(true)
+        setRequest(true) 
+        toast(<Link to='/profile/champions/request'>"New champions Request!!"</Link>, {
         icon: <img src={Champions} width='10%' alt='Champions Beat' />,
         style:{backgroundColor:'#1a1e24', color:'white'}
-      })
-    }else{
-      setRequest(false)
+      });
+      } else if (response.length<1){
+        setRequest(false)
+      } 
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    const intervalID = setInterval(() => {
+      handleRequest()
+    }, 10000)
+
+    return () => {
+      clearInterval(intervalID);
     }
 
-  }, [requestChampions])
+  })
 
 
   return (
-      <header className='bg-background-lightcolor'>
-      <div className='flex items-center justify-around h-20 px-8 text-white mb-10'>
+      <header className='bg-background-lightcolor mb-2'>
+      <div className='flex items-center justify-around h-20 px-8 text-white'>
       <Link to="/" className='cursor-pointer'><img className='Logo m-0' src={Logo} width='40%' alt='logo'/></Link>
       {user && request && <Link to='profile/champions/request' className='championsbeat'><img src={ChampionsBeat} alt='Champions Beat' /></Link>}
       {user ? <Link className='flex cursor-pointer items-center justify-center m-0 pl-2 w-52' to='/profile/user'><li className='flex items-center' referrerPolicy="no-referrer" onMouseEnter={() => setHover(prev => !prev)}

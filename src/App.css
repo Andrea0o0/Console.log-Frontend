@@ -260,9 +260,26 @@ a {
   padding: 6px !important;
 }
 
+#championsFightDiv img{
+  align-items: end;
+  width: 15%;
+}
+
 
 /* OUTPUT */
 @media only screen and (min-width: 768px) {
+
+  #championsOnKata {
+    width: 85%;
+  }
+
+  #championsOnKata img {
+    width:10%;
+  }
+
+  #championsFightDiv img {
+    width: 8%;
+  }
 
   #championsProgress{
     width: 15%;
@@ -825,4 +842,14 @@ header div, nav {
 
 input {
   outline: none;
+}
+
+/* CHAMPIONS FIGHT KATALOGIC */
+
+#championsFightDiv {
+  width: 80%;
+}
+
+#championsFightDiv h3{
+  width: 95%;
 }

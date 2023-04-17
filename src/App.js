@@ -1,6 +1,5 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import React,{useContext, useEffect, useState} from 'react';
 import { Toaster } from 'react-hot-toast';
 import Home from './views/Home';
 import Navbar from './components/Navbar';
@@ -60,7 +59,7 @@ function App() {
           <Route path="solutions" element={<Solutions />}/>
           <Route path="champions" element={<ProfileChampions />}>
             <Route path="new" element={<NewChampion />}/>
-            <Route path="request" element={<RequestChampions />}/>
+            <Route path="request" element={<RequestChampions/>}/>
             <Route path="inprogress" element={<ProgressChampions />}/>
             <Route path="completed" element={<ChampionsView />}/>
           </Route>

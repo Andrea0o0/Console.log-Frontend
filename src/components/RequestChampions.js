@@ -12,11 +12,13 @@ export default function RequestChampions(){
     const [error, setError] = useState(false);
 
 
+
     const getChampionsRequest = async function () {
         try {
             const response = await championsService.getChampionsByStatus('REQUEST')
             setLoading(false)
-            setChampionsRequest(response.sort((a,b)=>a.updatedAt - b.updatedAt).reverse())
+            response.length>0 ?
+            setChampionsRequest(response.sort((a,b)=>a.updatedAt - b.updatedAt).reverse()): setChampionsRequest(response)
         } catch (error) {
             setError(error)
             console.log(error)
