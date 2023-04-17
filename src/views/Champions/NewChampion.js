@@ -200,7 +200,7 @@ export default function NewChampion(){
                     name="searchusers"
                     ref={searchUsersValue}
                     className={`searchbar text-center bg-background-lightcolor w-full ${inputStyle}`} onChange={handleSearch} placeholder="Look for your opponents" />
-                    <div className="overflow-y-auto max-h-56">
+                    <div className="overflow-y-auto h-56 tall:h-550">
                         {users.length>0 ? 
                         <>
                             {users.filter(elem=>elem.username!==user.username).filter(elem => elem.username.toLowerCase().includes(searchUsers.toLowerCase())).length > 0 ? users.filter(elem=>elem.username!==user.username).filter(elem => elem.username.toLowerCase().includes(searchUsers.toLowerCase())).map(elem => {
@@ -231,7 +231,7 @@ export default function NewChampion(){
                         :
                         <p className='cursor-pointer text-sm p-1.5 px-6 my-4 bg-background-lightcolor rounded-full border-1 border-background-lightcolor hover:border-white focus:border-white' onClick={() => handleReset('kata')}>Choose another Kata</p>
                     }
-                    <div className="overflow-y-auto newChampionsKatas max-h-56">
+                    <div className="overflow-y-auto newChampionsKatas h-56 tall:h-550">
                        {katas.filter(elem => elem.name.toLowerCase().includes(searchKata.toLowerCase())).length > 0 ? katas.filter(elem => elem.name.toLowerCase().includes(searchKata.toLowerCase())).map(elem => {
                         return (
                             <div key={elem._id} className="mx-4">

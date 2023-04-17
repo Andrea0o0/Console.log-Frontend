@@ -90,8 +90,6 @@ export default function KataLogic(){
         if (response) {
           navigate('/');
           toast.success('Solution Created!',{style:{backgroundColor:'#1a1e24', color:'white'}})
-        } else {
-          toast.error("Sorry we can't create your Solution",{style:{backgroundColor:'#1a1e24', color:'white'}})
         }
       } catch (error) {
         setError(true)

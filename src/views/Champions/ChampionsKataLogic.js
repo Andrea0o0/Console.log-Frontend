@@ -132,10 +132,7 @@ export default function ChampionsKataLogic(){
 
       const createSolution = async (newSolution) => {
         try {
-          const response = await solutionService.createSolution(newSolution);
-          if (!response) {
-            toast.error("Sorry we can't create your Solution",{style:{backgroundColor:'#1a1e24', color:'white'}})
-          }
+          await solutionService.createSolution(newSolution);
         } catch (error) {
           console.error(error)
         }

@@ -57,7 +57,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className='bg-background-lightcolor mb-2'>
+      <header className='bg-background-lightcolor mb-2 tall:mb-12'>
       <div className='flex items-center justify-around h-20 px-8 text-white'>
       <Link to="/" className='cursor-pointer'><img className='Logo m-0' src={Logo} width='40%' alt='logo'/></Link>
       {user ? <Link to='profile/champions/new' className='championsbeat'><img src={Champions} alt='Champions Beat' /></Link>: user && request && <Link to='profile/champions/request' className='championsbeat'><img src={ChampionsBeat} alt='Champions Beat' /></Link>}

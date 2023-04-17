@@ -18,6 +18,9 @@ module.exports = {
       },
       screens: {
         'tall': '768px' 
+      },
+      height: {
+        '550': '550px',
       }
     },
   },
