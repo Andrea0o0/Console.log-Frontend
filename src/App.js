@@ -5,32 +5,36 @@ import Home from './views/Home';
 import Navbar from './components/Navbar';
 import ErrorPage from './views/ErrorPage';
 import NotFound from './views/NotFound';
+// SIGNUP && LOGIN
 import Signup from './views/auth/Signup';
 import Login from './views/auth/Login';
-import PrivateView from './views/PrivateView';
-import IsPrivate from './components/IsPrivate';
+import Github from './views/auth/GitHubLogin';
+import Google from './views/auth/Google';
+// LOGIC
 import KataLogic from './views/KataLogic';
-import KataDetail from './views/KataDetail';
-import Output from './components/Output';
-import Instructions from './components/Instructions';
-import Pastsolutions from './components/PastSolutions';
+import Output from './components/Logic Components/Output';
+import Instructions from './components/Details Kata/Instructions';
+import Pastsolutions from './components/Details Kata/PastSolutions';
+// FONTAWESOME
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
-import Github from './views/auth/GitHubLogin';
-import Google from './views/auth/Google';
+// KATA DETAILS
+import KataDetail from './views/KataDetail';
+import KataSolutions from './components/Details Kata/KataSolutions';
+import Discussions from './components/Details Kata/Discussions';
+// PROFILE / USER
 import Profile from './views/User/Profile';
 import User from './views/User/User';
-import Solutions from './components/Solutions';
-import KataSolutions from './components/KataSolutions';
-import Discussions from './components/Discussions';
-import ProfileChampions from './components/ProfileChampions';
-import NewChampion from './components/NewChampion';
-import ChampionsView from './components/ChampionsView';
-import RequestChampions from './components/RequestChampions';
-import ProgressChampions from './components/ProgressChampions';
-import ChampionsKataLogic from './views/ChampionsKataLogic';
+import Solutions from './components/User Components/Solutions';
+// CHAMPIONS
+import ProfileChampions from './views/Champions/ProfileChampions';
+import NewChampion from './views/Champions/NewChampion';
+import ChampionsView from './views/Champions/ChampionsView';
+import RequestChampions from './views/Champions/RequestChampions'
+import ProgressChampions from './views/Champions/ProgressChampions';
+import ChampionsKataLogic from './views/Champions/ChampionsKataLogic'
 
 function App() {
 
@@ -68,7 +72,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/login/github" element={<Github/>} />
         <Route path="/login/google" element={<Google/>} />
-        <Route path="/private" element={<IsPrivate><PrivateView /></IsPrivate>} />
         <Route path="/error" element={<ErrorPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

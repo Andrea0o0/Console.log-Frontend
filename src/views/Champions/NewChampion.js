@@ -1,17 +1,16 @@
 import React, { useState,useEffect, useRef, useContext } from "react";
-import { Controlled as ControlledEditor } from 'react-codemirror2'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 import 'codemirror/mode/javascript/javascript'
-import championsService from "../services/championsService";
-import Loading from '../assets/images/Logo/Loading.gif'
-import { useNavigate, Link, useOutletContext, NavLink } from "react-router-dom";
-import authService from "../services/authService";
-import kataService from "../services/kataService";
-import Kata from "./Kata";
+import championsService from "../../services/championsService";
+import Loading from '../../assets/images/Logo/Loading.gif'
+import { useNavigate } from "react-router-dom";
+import authService from "../../services/authService";
+import kataService from "../../services/kataService";
+import Kata from "../../components/Details Kata/Kata";
 import toast from 'react-hot-toast';
-import { useAuth } from '../hooks/useAuth';
-import { AuthContext } from '../context/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
+import { AuthContext } from '../../context/AuthContext';
 
 
 
@@ -19,8 +18,6 @@ export default function NewChampion(){
     const { storeToken, authenticateUser } = useAuth(); 
     const { user } = useContext(AuthContext); 
 
-    // const {kata} = useOutletContext();
-    const [champions,setChampions] = useState(undefined)
     const [loading,setLoading] = useState(true)
     const [error, setError] = useState(false);
     const navigate = useNavigate();

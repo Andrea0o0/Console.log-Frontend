@@ -31,16 +31,12 @@ class ChampionsService {
     return this.api.put(`/user-request/${championId}`).then(({ data }) => data).catch(err => console.error(err));
   }
 
-  editTimeRequest(championId,body) {
-    return this.api.put(`/time/${championId}`,body).then(({ data }) => data).catch(err => console.error(err));
-  }
-
-  editStatus(championId,body) {
-    return this.api.put(`/status/${championId}`,body).then(({ data }) => data).catch(err => console.error(err));
-  }
-
   classificationChampions(championId,body) {
     return this.api.put(`/classification/${championId}`,body).then(({ data }) => data).catch(err => console.error(err));
+  }
+
+  winnerChampions(championId,body) {
+    return this.api.put(`/winner/${championId}`,body).then(({ data }) => data).catch(err => console.error(err));
   }
 
   createChampions(body) {

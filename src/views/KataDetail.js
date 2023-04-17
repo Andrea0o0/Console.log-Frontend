@@ -5,12 +5,12 @@ import { Controlled as ControlledEditor } from 'react-codemirror2'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 import 'codemirror/mode/javascript/javascript'
-import Kata from '../components/Kata';
+import Kata from '../components/Details Kata/Kata';
 import Loading from '../assets/images/Logo/Loading.gif'
 import { AuthContext } from '../context/AuthContext';
 
 export default function KataDetail() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext); 
+  const { isLoggedIn } = useContext(AuthContext); 
   const { kataId } = useParams();
   const [kata, setkata] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -28,7 +28,7 @@ export default function KataDetail() {
       setLoading(false);
       setError(false);
     } catch (error) {
-      console.error(error)
+      setError(true)
       setLoading(false);
     }
   }
@@ -72,7 +72,10 @@ export default function KataDetail() {
       </div>}
       <Outlet context={{kata:kata}}/>
       </>}
-        {error && <p>Something went wrong. Couldn't find your kata</p>}
+      {error && 
+      <div className="flex justify-center text-white">
+        <p className="text-center">Something went wrong. Couldn't find your kata</p>
+      </div>} 
       </div>       
   )
 }

@@ -1,10 +1,10 @@
 import React,{useState, useEffect, useContext} from "react";
-import { useOutletContext, useNavigate, Link } from "react-router-dom";
-import commentService from "../services/commentService";
-import Loading from '../assets/images/Logo/Loading.gif'
-import YodaHappy from "../assets/images/Yoda/Yoda happy.svg"
+import { useOutletContext, Link } from "react-router-dom";
+import commentService from "../../services/commentService";
+import Loading from '../../assets/images/Logo/Loading.gif'
+import YodaHappy from "../../assets/images/Yoda/Yoda happy.svg"
 import toast from 'react-hot-toast';
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Discussions(){
     const { isLoggedIn } = useContext(AuthContext); 
@@ -14,12 +14,10 @@ export default function Discussions(){
     const [loading,setLoading] = useState(true)
     const [error, setError] = useState(false);
     const [newDiscussion,setNewDiscussion] = useState('')
-    const navigate = useNavigate();
 
     const getDiscussions = async () => {
         try {
           const response = await commentService.commentsKata(kata._id);
-          console.log(response)
           setDiscussions(response);
           setLoading(false);
           setError(false);
@@ -38,7 +36,6 @@ export default function Discussions(){
           try {
             setLoading(true)
             const response = await commentService.createComment({kata:kata._id,comment:newDiscussion});
-            console.log(response)
             setNewDiscussion('')
             setDiscussions(response)
             setLoading(false);

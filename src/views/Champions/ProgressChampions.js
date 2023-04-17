@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from "react";
-import championsService from "../services/championsService";
-import Loading from '../assets/images/Logo/Loading.gif'
+import championsService from "../../services/championsService";
+import Loading from '../../assets/images/Logo/Loading.gif'
 import { Link } from "react-router-dom";
-import YodaPatience from "../assets/images/Yoda/Yoda patience.svg"
-import CardInProgress from "./CardInProgress";
+import YodaPatience from "../../assets/images/Yoda/Yoda patience.svg"
+import CardInProgress from "../../components/Champions/CardInProgress";
 
 export default function ProgressChampions(){
 

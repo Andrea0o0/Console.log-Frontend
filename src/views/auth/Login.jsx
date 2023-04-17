@@ -74,7 +74,7 @@ export default function Login() {
   return (
     <div className='ViewHeightDiv flex justify-center text-sm items-center'>
       <div className='login p-2 flex items-center flex-col'>
-      <div className='mb-4 h-6'>
+      <div className='mb-4 h-6 mt-16'>
       <Link to='/signup'><li className='tologin flex cursor-pointer text-white items-center justify-center m-0 pb-1' onMouseEnter={() => setHover(prev => !prev)}
         onMouseLeave={() => setHover(prev =>!prev)}>
         {backhover ? <img width='7%' className='pr-2' src={ToSignup} alt='back'/>:<FontAwesomeIcon className='pr-2' icon="fa-solid fa-arrow-right fa-sm" />} Click here to Signup if you don't have an account

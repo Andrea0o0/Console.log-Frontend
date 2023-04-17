@@ -1,10 +1,8 @@
 import React, {useState,useEffect} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import red_seccion from '../assets/images/output/pipe-section-red.svg'
-import green_seccion from '../assets/images/output/pipe-section-green.svg'
+import red_seccion from '../../assets/images/output/pipe-section-red.svg'
+import green_seccion from '../../assets/images/output/pipe-section-green.svg'
 import { useOutletContext } from "react-router-dom";
-// <FontAwesomeIcon icon="fa-solid fa-circle-exclamation" style={{color: "#f31212",backgroundColor:"white",borderRadius:"50px"}}
-// #67b04b green 
 
 export default function Output(){
     const {output,kata} = useOutletContext();
@@ -43,6 +41,7 @@ export default function Output(){
         Object.keys(output.output).map((key,i) => {
             firstCollapsible[`should_${i}`] = false
             firstCollapsible[`log_${i}`] = false
+            return true;
         })
         setCollapsible(firstCollapsible)
     }
@@ -51,8 +50,8 @@ export default function Output(){
         handleOutput(output.output)
         handleValidation(output.validation)
         handleError(output.error)   
-        handleFirstCollapsible()     
-        // setCollapsible()
+        handleFirstCollapsible()  
+        // eslint-disable-next-line
     },[output])
 
 

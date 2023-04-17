@@ -1,9 +1,9 @@
 import React,{useState,useEffect} from "react";
-import championsService from "../services/championsService";
-import Loading from '../assets/images/Logo/Loading.gif'
+import championsService from "../../services/championsService";
+import Loading from '../../assets/images/Logo/Loading.gif'
 import { Link } from "react-router-dom";
-import YodaPatience from "../assets/images/Yoda/Yoda patience.svg"
-import CardRequestChampions from "./CardRequest";
+import YodaPatience from "../../assets/images/Yoda/Yoda patience.svg"
+import CardRequestChampions from "../../components/Champions/CardRequest";
 
 export default function RequestChampions(){
 

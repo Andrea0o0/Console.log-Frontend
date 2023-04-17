@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import kataService from '../services/kataService';
 import SearchInput from '../components/SearchInput';
-import Kata from '../components/Kata';
+import Kata from '../components/Details Kata/Kata';
 import Loading from '../assets/images/Logo/Loading.gif'
 
 
@@ -33,7 +33,6 @@ export default function Home() {
   }
 
   const handleLevels = (levels) => {
-    console.log(levels)
     const filtereslevels = [...initialKata].filter(key => {
       let result = 0
       levels.map(elem => result += key.level === elem ? 1:0)

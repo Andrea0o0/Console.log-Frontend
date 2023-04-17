@@ -1,6 +1,6 @@
 import React, {useState,useEffect, useContext} from "react";
-import { AuthContext } from "../context/AuthContext";
-import Kata from "./Kata";
+import { AuthContext } from "../../context/AuthContext";
+import Kata from "../Details Kata/Kata";
 
 
 export default function CardRequestChampions({champions, initial_timer,setStatusUser}){
@@ -12,6 +12,7 @@ export default function CardRequestChampions({champions, initial_timer,setStatus
     useEffect(() => {
         setMinutes(Math.floor(initial_timer/60))
         setSeconds(initial_timer-((Math.floor(initial_timer/60))*60))
+        // eslint-disable-next-line
     },[champions])
 
     return (

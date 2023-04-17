@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import L1 from '../assets/images/levels/1.svg'
-import L2 from '../assets/images/levels/2.svg'
-import L3 from '../assets/images/levels/3.svg'
-import L4 from '../assets/images/levels/4.svg'
-import L5 from '../assets/images/levels/5.svg'
-import L1_hover from '../assets/images/levels/1 HOVER.svg'
-import L2_hover from '../assets/images/levels/2 HOVER.svg'
-import L3_hover from '../assets/images/levels/3 HOVER.svg'
-import L4_hover from '../assets/images/levels/4 HOVER.svg'
-import L5_hover from '../assets/images/levels/5 HOVER.svg'
-import Champions from '../assets/images/Champions/no_beat.svg'
+import L1 from '../../assets/images/levels/1.svg'
+import L2 from '../../assets/images/levels/2.svg'
+import L3 from '../../assets/images/levels/3.svg'
+import L4 from '../../assets/images/levels/4.svg'
+import L5 from '../../assets/images/levels/5.svg'
+import L1_hover from '../../assets/images/levels/1 HOVER.svg'
+import L2_hover from '../../assets/images/levels/2 HOVER.svg'
+import L3_hover from '../../assets/images/levels/3 HOVER.svg'
+import L4_hover from '../../assets/images/levels/4 HOVER.svg'
+import L5_hover from '../../assets/images/levels/5 HOVER.svg'
+import Champions from '../../assets/images/Champions/no_beat.svg'
 
 export default function Kata({ kata : {name, level, _id},practise,solutions,champions, handleKataChampions,championsProgress,championsfight}) {
     const [hover,setHover] = useState(false)

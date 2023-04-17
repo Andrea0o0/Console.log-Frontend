@@ -3,11 +3,11 @@ import { Controlled as ControlledEditor } from 'react-codemirror2'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 import 'codemirror/mode/javascript/javascript'
-import solutionService from "../services/solutionService";
-import Loading from '../assets/images/Logo/Loading.gif'
-import { useNavigate, Link, useOutletContext } from "react-router-dom";
-import YodaHappy from "../assets/images/Yoda/Yoda happy.svg"
-import { AuthContext } from "../context/AuthContext";
+import solutionService from "../../services/solutionService";
+import Loading from '../../assets/images/Logo/Loading.gif'
+import { Link, useOutletContext } from "react-router-dom";
+import YodaHappy from "../../assets/images/Yoda/Yoda happy.svg"
+import { AuthContext } from "../../context/AuthContext";
 
 
 export default function KataSolutions(){
@@ -74,6 +74,9 @@ export default function KataSolutions(){
                 </Link>
             </div>
             }
-            {error && <p>Something went wrong. Couldn't find your kata</p>}
+            {error && 
+            <div className="flex justify-center text-white">
+                <p className="text-center">Something went wrong. Couldn't find your kata and solutions</p>
+            </div>} 
         </>)
 }

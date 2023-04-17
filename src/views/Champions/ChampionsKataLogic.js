@@ -1,13 +1,13 @@
 import React,{useState,useEffect} from "react";
-import { useParams, useNavigate, NavLink,Link, Outlet } from "react-router-dom";
-import Editor from "../components/Editor";
-import Test from "../components/Test";
-import solutionService from "../services/solutionService";
-import kataService from "../services/kataService";
-import championsService from "../services/championsService"
+import { useParams, useNavigate, NavLink, Outlet } from "react-router-dom";
+import Editor from "../../components/Logic Components/Editor";
+import Test from "../../components/Logic Components/Test";
+import solutionService from "../../services/solutionService";
+import kataService from "../../services/kataService";
+import championsService from "../../services/championsService"
 import { toast } from "react-hot-toast";
-import Loading from '../assets/images/Logo/Loading.gif'
-import Kata from "../components/Kata";
+import Loading from '../../assets/images/Logo/Loading.gif'
+import Kata from "../../components/Details Kata/Kata";
 
 
 export default function ChampionsKataLogic(){
@@ -41,16 +41,16 @@ export default function ChampionsKataLogic(){
 
       const [js,setJs] = useState(initialState)
 
-      // useEffect(() => {
-      //   const intervalID = setInterval(() => {
-          
-      //   }, 10000)
+      useEffect(() => {
+        const intervalID = setInterval(() => {
+          getChampionsKata()
+        }, 7000)
     
-      //   return () => {
-      //     clearInterval(intervalID);
-      //   }
-    
-      // }, [])
+        return () => {
+          clearInterval(intervalID);
+        }
+        // eslint-disable-next-line
+      }, [])
       
       useEffect(() => {
         getKata();
@@ -61,6 +61,7 @@ export default function ChampionsKataLogic(){
 
       useEffect(() => {
         createSolution(newSolution)
+        createSolutionChampions(newSolution)
         // eslint-disable-next-line
       }, [newSolution])
 
@@ -75,9 +76,30 @@ export default function ChampionsKataLogic(){
       }
     }
 
+    const createSolutionChampions = async (solution) => {
+      try {
+        console.log(newSolution.function)
+        await championsService.winnerChampions(champions._id,{function:newSolution.function})
+        navigate('/profile/champions/completed')
+        toast.success("Congratulations, You're the WINNER!!",{style:{backgroundColor:'#1a1e24', color:'white'}})
+      } catch (error) {
+        
+      }
+    }
+
     const getChampionsKata = async () => {
       try {
         const response = await championsService.getOneChampion(championsId);
+        console.log(response.winner)
+        if(response.winner){ 
+          console.log('in')
+          navigate('/profile/champions/completed')
+          toast(`Sorry, ${response.winner.username} has won!!`,
+          {
+            style:{backgroundColor:'#1a1e24', color:'white'},
+            icon:'😢'
+          })
+        }
         setChampions(response);
       } catch (error) {
         console.error(error)
@@ -100,7 +122,6 @@ export default function ChampionsKataLogic(){
           })
           setLoading(false);
           setError(false);
-        //   /katas/champions/:kataId/:championsId
           navigate(`/katas/champions/${response._id}/${championsId}/output`)
         } catch (error) {
           console.error(error)
@@ -112,10 +133,7 @@ export default function ChampionsKataLogic(){
       const createSolution = async (newSolution) => {
         try {
           const response = await solutionService.createSolution(newSolution);
-          if (response) {
-            navigate('/');
-            toast.success('Solution Created!',{style:{backgroundColor:'#1a1e24', color:'white'}})
-          } else {
+          if (!response) {
             toast.error("Sorry we can't create your Solution",{style:{backgroundColor:'#1a1e24', color:'white'}})
           }
         } catch (error) {
@@ -123,14 +141,14 @@ export default function ChampionsKataLogic(){
         }
       }    
 
-      const handleAddSolution = async (newfunction,completed) => {
-        await setNewSolution(prev => {
+      const handleAddSolution = async (newfunction) => {
+        console.log(newfunction)
+        await setNewSolution(prev=>{
           return {
             ...prev,
-            function:newfunction,
-            status:completed
-          }
-        })
+            function:newfunction.function,
+            status:newfunction.status
+          }})
         //SOLUTION
       }
   
@@ -151,8 +169,8 @@ export default function ChampionsKataLogic(){
             <div id='championsOnKata' className={`flex flex-wrap text-white justify-center my-2 py-1 bg-background-lightcolor rounded-full w-full border-1 ${kata.level === 5 ? 'border-color-5':kata.level === 4 ? 'border-color-4':kata.level === 3 ? 'border-color-3':kata.level === 2 ? 'border-color-2':'border-color-1'}`}>     
                   {champions.users.map(elem => {
                       return (
-                          <div className="flex justify-center my-1 w-1/3 items-center mx-1" key={elem._id}>
-                              <img width='20%' className="rounded-lg" src={elem.image} alt={`image_${elem.username}`}/> 
+                          <div className="flex justify-start my-1 w-2/5 items-center mr-1 tall:w-1/5" key={elem._id}>
+                              <img width='14%' className="rounded-full" src={elem.image} alt={`image_${elem.username}`}/> 
                               <p className="w-1/3 px-1">{elem.username}</p>
                           </div>
                       )
@@ -174,12 +192,15 @@ export default function ChampionsKataLogic(){
           <div className='kata_display_2'> 
               <Editor language='javascript' displayName={`Solution => ${kata.name}`} value={js} onChange={setJs} level={kata.level} createSolution={createSolution} newSolution={newSolution}/>
               <Test input={js} 
-              setAddSolution={handleAddSolution} reset={initialState}  setJs={handleReset} test_function={kata.input} output={kata.output} kata={kata} setOutput={handleOutput} initialOutput={initialOutput} level={kata.level}></Test>
+              setAddSolutionChampions={handleAddSolution} champions={true} reset={initialState}  setJs={handleReset} test_function={kata.input} output={kata.output} kata={kata} setOutput={handleOutput} initialOutput={initialOutput} level={kata.level}></Test>
           </div>
         </div>
       </div>          
       }
-      {error && <p>Something went wrong. Couldn't find your kata</p>}     
+      {error && 
+      <div className="flex justify-center text-white">
+        <p className="text-center">Something went wrong. Couldn't find your kata & champions</p>
+      </div>} 
         </>
     )
 }

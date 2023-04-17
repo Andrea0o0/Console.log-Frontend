@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams,Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import authService from '../../services/authService';
 import Loading from '../../assets/images/Logo/Loading.gif'
 import toast from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
-import Avatar from '../../components/Avatar';
+import Avatar from '../../components/User Components/Avatar';
 
 export default function User() {
   const { storeToken, authenticateUser } = useAuth(); 
@@ -76,7 +76,7 @@ export default function User() {
         }
       } catch (error) {
         setLoading(false);
-        console.log(error)
+        setError(true)
       }
     }    
   }

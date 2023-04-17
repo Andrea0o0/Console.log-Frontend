@@ -1,9 +1,8 @@
 import React from "react";
-import Kata from "./Kata";
+import Kata from "../Details Kata/Kata";
 import { Link } from "react-router-dom";
 
 export default function CardInProgress({champions}){
-console.log(`/katas/champions/${champions.kata._id}/${champions._id}`)
 
     return (
         <div className="championsRequest flex flex-wrap text-white justify-center py-6 my-2 bg-background-lightcolor rounded-full w-3/4">

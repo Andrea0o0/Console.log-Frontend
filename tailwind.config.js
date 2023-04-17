@@ -15,6 +15,9 @@ module.exports = {
         'color-3': '#E94792',
         'color-2': '#F6A240',
         'color-1': '#9CC763'
+      },
+      screens: {
+        'tall': '768px' 
       }
     },
   },

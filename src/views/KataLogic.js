@@ -1,12 +1,10 @@
 import React,{useState,useEffect} from "react";
 import { useParams,NavLink, Outlet } from 'react-router-dom';
-import Editor from '../components/Editor'
-// eslint-disable-next-line
-import useLocalStorage from "../hooks/useLocalStorage";
-import Test from "../components/Test";
+import Editor from "../components/Logic Components/Editor";
+import Test from "../components/Logic Components/Test";
 import kataService from "../services/kataService";
 import solutionService from "../services/solutionService";
-import Kata from "../components/Kata";
+import Kata from "../components/Details Kata/Kata";
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import Loading from '../assets/images/Logo/Loading.gif'
@@ -44,9 +42,7 @@ export default function KataLogic(){
       try {
         const response = await solutionService.getSolutionsUserKata(kataId);
         setSolutions(response);
-        console.log(response)
       } catch (error) {
-        console.error(error)
         setLoading(false);
         setError(true)
       }
@@ -68,7 +64,6 @@ export default function KataLogic(){
           setError(false);
           navigate(`/kata/practise/${response._id}/output`)
         } catch (error) {
-          console.error(error)
           setLoading(false);
           setError(true)
         }
@@ -99,16 +94,16 @@ export default function KataLogic(){
           toast.error("Sorry we can't create your Solution",{style:{backgroundColor:'#1a1e24', color:'white'}})
         }
       } catch (error) {
-        console.error(error)
+        setError(true)
       }
     }    
 
-    const handleAddSolution = async (newfunction,completed) => {
+    const handleAddSolution = async (newfunction) => {
       await setNewSolution(prev => {
         return {
           ...prev,
-          function:newfunction,
-          status:completed
+          function:newfunction.function,
+          status:newfunction.status
         }
       })
       //SOLUTION
@@ -143,7 +138,10 @@ export default function KataLogic(){
         </div>
       </div>          
       }
-      {error && <p>Something went wrong. Couldn't find your kata</p>}     
+      {error && 
+      <div className="flex justify-center text-white">
+        <p className="text-center">Something went wrong. Couldn't find your kata</p>
+      </div>}     
         </>
     )
 }

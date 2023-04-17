@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default function Test({ input,setAddSolution,setJs,test_function,output,setOutput,initialOutput,level}) { 
+export default function Test({ input,setAddSolution,setJs,test_function,output,setOutput,initialOutput,level,champions,setAddSolutionChampions}) { 
 
   const [newfunction, setNewFunction] = useState(input);
   const [newoutput,setNewOutput] = useState(initialOutput)
@@ -73,7 +73,7 @@ useEffect(()=> {
   }
 
   const handleSubmit = () => {
-      setAddSolution({function:newfunction,status:true})
+    champions ? setAddSolutionChampions({function:newfunction,status:true}):setAddSolution({function:newfunction,status:true})
     }
 
   const handleBtns = (e) => {

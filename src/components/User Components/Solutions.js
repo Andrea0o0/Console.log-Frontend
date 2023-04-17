@@ -3,19 +3,17 @@ import { Controlled as ControlledEditor } from 'react-codemirror2'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 import 'codemirror/mode/javascript/javascript'
-import solutionService from "../services/solutionService";
-import Loading from '../assets/images/Logo/Loading.gif'
-import { useNavigate, Link } from "react-router-dom";
-import Kata from "./Kata";
-import YodaHappy from "../assets/images/Yoda/Yoda happy.svg"
-import YodaPatience from "../assets/images/Yoda/Yoda patience.svg"
+import solutionService from "../../services/solutionService";
+import Loading from '../../assets/images/Logo/Loading.gif'
+import { Link } from "react-router-dom";
+import Kata from "../Details Kata/Kata";
+import YodaPatience from "../../assets/images/Yoda/Yoda patience.svg"
 
 export default function Solutions(){
     
     const [solutions,setSolutions] = useState(undefined)
     const [loading,setLoading] = useState(true)
     const [error, setError] = useState(false);
-    const navigate = useNavigate();
 
     const getSolutions = async () => {
         try {
@@ -44,7 +42,7 @@ export default function Solutions(){
                     {solutions.true.map((elem,i) => 
                     <div key={i} className="mx-4">
                         <Kata solutions={true} kata={elem.kata}/>
-                        <div className={`${elem.status ? 'solution_green':'solution_red'}`}>
+                        <div className={`border-1 rounded-lg ${elem.kata.level === 5 ? 'border-color-5':elem.kata.level === 4 ? 'border-color-4':elem.kata.level === 3 ? 'border-color-3':elem.kata.level === 2 ? 'border-color-2':'border-color-1'}`}>
                             <ControlledEditor style={{padding:'3%'}} value={elem.function} options={{    lineWrapping:true, mode:'javascript', theme: 'material', readOnly:true}}/> 
                          </div>
                     </div>)}
@@ -58,5 +56,9 @@ export default function Solutions(){
                     </div>
                 </> }
             </>}
+        {error && 
+            <div className="flex justify-center text-white">
+                <p className="text-center">Something went wrong. Couldn't find your kata</p>
+            </div>}     
         </>)
 }
