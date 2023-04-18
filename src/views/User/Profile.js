@@ -5,9 +5,10 @@ export default function Profile(){
     const [activeChampions,setactiveChampions] = useState(undefined)
 
     useEffect(() => {
-        (window.location.pathname.includes('champions')  && setactiveChampions(true))
+        (window.location.pathname.includes('champions') === true)  && setactiveChampions(true)
+        console.log(window.location.pathname.includes('champions'))
         // eslint-disable-next-line
-      },[window.location.pathname])
+      },[window.location.pathname,])
 
     return(
     <>

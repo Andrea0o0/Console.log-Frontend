@@ -200,7 +200,7 @@ export default function NewChampion(){
                     name="searchusers"
                     ref={searchUsersValue}
                     className={`searchbar text-center bg-background-lightcolor w-full ${inputStyle}`} onChange={handleSearch} placeholder="Look for your opponents" />
-                    <div className="overflow-y-auto h-56 tall:h-550">
+                    <div className="overflow-y-auto max-h-56 tall:h-550">
                         {users.length>0 ? 
                         <>
                             {users.filter(elem=>elem.username!==user.username).filter(elem => elem.username.toLowerCase().includes(searchUsers.toLowerCase())).length > 0 ? users.filter(elem=>elem.username!==user.username).filter(elem => elem.username.toLowerCase().includes(searchUsers.toLowerCase())).map(elem => {

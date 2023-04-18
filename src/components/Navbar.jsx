@@ -19,6 +19,14 @@ export default function Navbar() {
   const navRef = useRef()
 
   const [backhover,setHover] = useState(false)
+  const [active,setActive] = useState(undefined)
+
+  useEffect(() => {
+    const result = window.location.pathname.includes('champions') ? 'champions': (window.location.pathname.includes('profile/user') || window.location.pathname.includes('profile/solutions'))  && 'profile'
+    setActive(result)
+      // eslint-disable-next-line
+    },[window.location.pathname])
+
 
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav")
@@ -69,8 +77,8 @@ export default function Navbar() {
           <li onClick={showNavbar}><NavLink to="/">Home</NavLink></li>
           {!isLoggedIn && <li onClick={showNavbar}><NavLink to="/signup">Sign up</NavLink></li>}
           {!isLoggedIn && <li onClick={showNavbar}><NavLink to="/login">Login</NavLink></li>}       
-          {isLoggedIn && <li onClick={showNavbar}><NavLink to="/profile/champions/new">Champions</NavLink></li>}
-          {isLoggedIn && <li onClick={showNavbar}><NavLink to="/profile/user">Profile</NavLink></li>}
+          {isLoggedIn && <li onClick={showNavbar}><NavLink to="/profile/champions/new" className={active === 'champions' ? 'active':''}>Champions</NavLink></li>}
+          {isLoggedIn && <li onClick={showNavbar}><NavLink to="/profile/user" className={active === 'profile' ? 'active':''}>Profile</NavLink></li>}
           {isLoggedIn && <li className='cursor-pointer' onClick={() => { logOutUser();showNavbar()}}>Log out</li>}
           <li onClick={() => {navigate(-1);showNavbar()}} className='flex cursor-pointer items-center justify-center m-0 p-0 w-36' onMouseEnter={() => setHover(prev => !prev)}
         onMouseLeave={() => setHover(prev =>!prev)}>

@@ -38,15 +38,17 @@ export default function Solutions(){
             {!loading && solutions && 
             <>
                 {solutions.true.length > 0 ? 
-                <>
+                <div className="flex justify-center">
                     {solutions.true.map((elem,i) => 
-                    <div key={i} className="mx-4">
-                        <Kata solutions={true} kata={elem.kata}/>
-                        <div className={`border-1 rounded-lg ${elem.kata.level === 5 ? 'border-color-5':elem.kata.level === 4 ? 'border-color-4':elem.kata.level === 3 ? 'border-color-3':elem.kata.level === 2 ? 'border-color-2':'border-color-1'}`}>
+                    <div key={i} className="mx-4 tall:w-3/5 flex justify-center flex-wrap">
+                        <div className="w-4/5">
+                            <Kata solutions={true} kata={elem.kata}/>
+                        </div>
+                        <div className={`w-4/5 border-1 rounded-lg ${elem.kata.level === 5 ? 'border-color-5':elem.kata.level === 4 ? 'border-color-4':elem.kata.level === 3 ? 'border-color-3':elem.kata.level === 2 ? 'border-color-2':'border-color-1'}`}>
                             <ControlledEditor style={{padding:'3%'}} value={elem.function} options={{    lineWrapping:true, mode:'javascript', theme: 'material', readOnly:true}}/> 
                          </div>
                     </div>)}
-                </>:
+                </div>:
                 <>
                     <div className="flex justify-center my-4">
                         <Link to='/' className="flex flex-wrap w-3/4 justify-center p-3 pb-8 rounded-full bg-background-lightcolor hover:w-4/5 yoda">
