@@ -5,6 +5,7 @@
 **Important concepts of the app:**
 
 **Katas**: are unresolved javascript functions with pre-instructions to resolve them by returning what the instructions ask for
+
 **Champions**: Games with users, to solve katas, where there is only one winner
 
 This application is called Console.log(KATA) and it is an application to solve katas, such as function puzzles with instructions
@@ -21,7 +22,7 @@ This application is called Console.log(KATA) and it is an application to solve k
 **SAMPLE .ENV**
 ```bash
 REACT_APP_GITHUB="Client Id Github oath"
-REACT_APP_BACKEND_URL="http://localhost:8080"
+REACT_APP_BACKEND_URL="for example: http://localhost:8080"
 REACT_APP_GITHUB_OAUTH_REDIRECT_URL="url redirect login localhost 3000"
 REACT_APP_GOOGLE="client Id google Oauth"
 REACT_APP_GOOGLE_SECRET="Secret Client Id google Oauth"
@@ -66,7 +67,7 @@ npm run start
 
 ## Useful links
 
-- [Presentation slides]()
+- [Presentation slides](https://slides.com/andrea_0o0_/console-log-kata/fullscreen)
 - [Backend repository](https://github.com/Andrea0o0/Console.log-Backend)
 - [Backend deploy](https://kataapp.fly.dev/)
 - [Deployed app](https://console-log-kata.netlify.app/)
