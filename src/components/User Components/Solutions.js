@@ -38,9 +38,9 @@ export default function Solutions(){
             {!loading && solutions && 
             <>
                 {solutions.true.length > 0 ? 
-                <div className="flex justify-center">
+                <div className="flex justify-center flex-wrap">
                     {solutions.true.map((elem,i) => 
-                    <div key={i} className="mx-4 tall:w-3/5 flex justify-center flex-wrap">
+                    <div key={i} className="mx-4 tall:w-3/5 flex justify-center flex-wrap mb-4">
                         <div className="w-4/5">
                             <Kata solutions={true} kata={elem.kata}/>
                         </div>
