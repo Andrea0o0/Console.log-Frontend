@@ -9,9 +9,9 @@ This application is called Console.log(KATA) and it is an application to solve k
 
 > Add a picture (logo, design, actual screen, gif, etc, whichever you prefer.)
  ![Home page Desktop](/src/assets/images/Readme/Home.png)
- ![Home page Mobile](/src/assets/images/Readme/Home Mobile.png)
- ![Profile Movil](/src/assets/images/Readme/Profile Mobile.png)
- ![Kata Detail Desktop](/src/assets/images/Readme/Kata Detail.png)
+ ![Home page Mobile](/src/assets/images/Readme/Home%20Mobile.png)
+ ![Profile Movil](/src/assets/images/Readme/Profile%20Mobile.png)
+ ![Kata Detail Desktop](/src/assets/images/Readme/Kata%20Detail.png)
  
 
 ---
