@@ -2,12 +2,13 @@
 
 ## Description
 
-Important concepts of the app:
+**Important concepts of the app:**
+
 **Katas**: are unresolved javascript functions with pre-instructions to resolve them by returning what the instructions ask for
+**Champions**: Games with users, to solve katas, where there is only one winner
 
 This application is called Console.log(KATA) and it is an application to solve katas, such as function puzzles with instructions
 
-> Add a picture (logo, design, actual screen, gif, etc, whichever you prefer.)
  ![Home page Desktop](/src/assets/images/Readme/Home.png)
  ![Home page Mobile](/src/assets/images/Readme/Home%20Mobile.png)
  ![Profile Movil](/src/assets/images/Readme/Profile%20Mobile.png)
@@ -57,15 +58,17 @@ npm run start
 - User can create a Champions (to fight with other users)
 - User can edit their avatar and username 
 - User can see your Champions departure requests on Navbar
-
+- User can Accept Champions request
+- User can Start a Champions with other opponents (users)
+- User can win a game and see their finished games
 
 ---
 
 ## Useful links
 
 - [Presentation slides]()
-- [Backend repository]()
-- [Backend deploy]()
-- [Deployed app]()
+- [Backend repository](https://github.com/Andrea0o0/Console.log-Backend)
+- [Backend deploy](https://kataapp.fly.dev/)
+- [Deployed app](https://console-log-kata.netlify.app/)
 
 

@@ -41,13 +41,11 @@ export default function NewChampion(){
             try {
                 if(Object.keys(NewChampion).length === 3 && NewChampion.users_request.length>0){
                 const response = await championsService.createChampions(NewChampion)
-                // console.log(response)
                 setLoading(false);
                 setError(false);
                 if (response.authToken) {
                     storeToken(response.authToken);
                     authenticateUser();
-                    // console.log(user)
                     navigate('/profile/champions/request');
                     toast.success('Champions created!',{style:{backgroundColor:'#1a1e24', color:'white'}})
                 } else {
@@ -136,12 +134,13 @@ export default function NewChampion(){
             const copyChampions = Object.assign({}, NewChampion)
             delete copyChampions.kata
             setNewChampion(copyChampions)
+            setSearchKata('')
             setKatas(initialKatas)
         }
         else{
             setUsers(initialUsers)
             setUsersSelected([])
-            searchUsersValue.current.value = ''
+            if(searchUsersValue.current !== null){ searchUsersValue.current.value = ' '}
             const copyChampions = Object.assign({}, NewChampion)
             copyChampions.users_request = []
             setNewChampion(copyChampions)
@@ -194,6 +193,11 @@ export default function NewChampion(){
                         })}
                 </>}
                     
+                    {usersSelected.length >= 3 ?
+                    <>
+                    <label className='text-sm my-2 flex justify-center'>Sorry you can't add more opponents (Max 3)</label>
+                    </>:
+                    <>
                     <label className='text-sm my-2 flex justify-center'>Add opponents (Max 3)</label>
                     <input 
                     type="text" 
@@ -216,6 +220,7 @@ export default function NewChampion(){
                             }): <div><h2 className='mx-6 text-center text-white'>No users with that username have been found.</h2></div>}
                         </>:<div><h2 className='mx-6 text-center text-white'>There are no more users to fight with, sorry for the inconvenience</h2></div>}
                     </div>
+                    </>}
                 </div>
 
                 
@@ -226,7 +231,8 @@ export default function NewChampion(){
                         <input 
                         type="text" 
                         name="searchkata"
-                        className={`searchbar text-center bg-background-lightcolor w-full ${inputStyle}`} onChange={handleSearch} placeholder="Multiply" />
+                        value={searchKata}
+                        className={`searchbar text-center bg-background-lightcolor w-full ${inputStyle}`} onChange={handleSearch} placeholder='Multiply' />
                     </>
                         :
                         <p className='cursor-pointer text-sm p-1.5 px-6 my-4 bg-background-lightcolor rounded-full border-1 border-background-lightcolor hover:border-white focus:border-white' onClick={() => handleReset('kata')}>Choose another Kata</p>
