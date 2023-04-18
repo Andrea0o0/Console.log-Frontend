@@ -68,7 +68,7 @@ export default function Navbar() {
       <header className='bg-background-lightcolor mb-2 tall:mb-12'>
       <div className='flex items-center justify-around h-20 px-8 text-white'>
       <Link to="/" className='cursor-pointer'><img className='Logo m-0' src={Logo} width='40%' alt='logo'/></Link>
-      {user ? <Link to='profile/champions/new' className='championsbeat'><img src={Champions} alt='Champions Beat' /></Link>: user && request && <Link to='profile/champions/request' className='championsbeat'><img src={ChampionsBeat} alt='Champions Beat' /></Link>}
+      {user && request ? <Link to='profile/champions/request' className='championsbeat'><img src={ChampionsBeat} alt='Champions Beat' /></Link>:user && <Link to='profile/champions/new' className='champions no beat'><img src={Champions} alt='Champions Beat' /></Link>}
       {user ? <Link className='flex cursor-pointer items-center justify-center m-0 pl-2 w-52' to='/profile/user'><li className='flex items-center' referrerPolicy="no-referrer" onMouseEnter={() => setHover(prev => !prev)}
         onMouseLeave={() => setHover(prev =>!prev)}>
         <img width='20%' className='mr-2 rounded-lg' src={user.image} alt='back'/>  {user.username}
