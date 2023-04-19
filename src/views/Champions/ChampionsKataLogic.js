@@ -70,7 +70,6 @@ export default function ChampionsKataLogic(){
         const response = await solutionService.getSolutionsUserKata(kataId);
         setSolutions(response);
       } catch (error) {
-        console.error(error)
         setLoading(false);
         setError(true)
       }
@@ -78,7 +77,6 @@ export default function ChampionsKataLogic(){
 
     const createSolutionChampions = async (solution) => {
       try {
-        console.log(newSolution.function)
         await championsService.winnerChampions(champions._id,{function:newSolution.function})
         navigate('/profile/champions/completed')
         toast.success("Congratulations, You're the WINNER!!",{style:{backgroundColor:'#1a1e24', color:'white'}})
@@ -90,9 +88,7 @@ export default function ChampionsKataLogic(){
     const getChampionsKata = async () => {
       try {
         const response = await championsService.getOneChampion(championsId);
-        console.log(response.winner)
         if(response.winner){ 
-          console.log('in')
           navigate('/profile/champions/completed')
           toast(`Sorry, ${response.winner.username} has won!!`,
           {
@@ -139,7 +135,6 @@ export default function ChampionsKataLogic(){
       }    
 
       const handleAddSolution = async (newfunction) => {
-        console.log(newfunction)
         await setNewSolution(prev=>{
           return {
             ...prev,

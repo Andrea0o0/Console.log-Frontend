@@ -31,7 +31,7 @@ export default function CardRequestChampions({champions, initial_timer,setStatus
             })}
         </div>
         <div className="flex justify-center w-4/5"> 
-            <Kata champions={true} kata={champions.kata}/>
+            <Kata championsRequest={true} kata={champions.kata}/>
         </div>
         <div className="w-4/5 flex justify-center my-2">
         <p>Time Remaining: { minutes === 0 && seconds === 0

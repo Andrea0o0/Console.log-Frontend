@@ -12,7 +12,7 @@ import L4_hover from '../../assets/images/levels/4 HOVER.svg'
 import L5_hover from '../../assets/images/levels/5 HOVER.svg'
 import Champions from '../../assets/images/Champions/no_beat.svg'
 
-export default function Kata({ kata : {name, level, _id},practise,solutions,champions, handleKataChampions,championsProgress,championsfight}) {
+export default function Kata({ kata : {name, level, _id},practise,solutions,champions, handleKataChampions,championsProgress,championsfight,championsRequest}) {
     const [hover,setHover] = useState(false)
     const [srcImage,setSrcImage] = useState('')
 
@@ -32,7 +32,7 @@ export default function Kata({ kata : {name, level, _id},practise,solutions,cham
   return (    
     <div className={`Kata ${hover ? `hover_${level}`:`_${level}`}`} onMouseEnter={handleHover}
     onMouseLeave={handleHover}>
-        {!practise && !solutions && !champions && !championsProgress && !championsfight ? 
+        {!practise && !solutions && !champions && !championsProgress && !championsfight && !championsRequest? 
         (<Link to={`/katas/${_id}`}>
             <div className='level'>
                 <img src={srcImage} alt={`Level${level}`}/>
@@ -46,7 +46,15 @@ export default function Kata({ kata : {name, level, _id},practise,solutions,cham
                 <div className='img_level text-xs'>{`${level}JS`}</div>
             </div>
             <h3 className='text-xl'>{name}</h3> 
-        </Link>):champions ?
+        </Link>):championsRequest?
+          // eslint-disable-next-line
+          (<a id='solutionsKata' className='champions cursor-pointer w-4/5'>
+            <div className='level solution'>
+                <img src={srcImage} alt={`Level${level}`}/>
+                <div className='img_level text-xs'>{`${level}JS`}</div>
+            </div>
+            <h3 className='text-xl'>{name}</h3> 
+        </a>): champions ?
           // eslint-disable-next-line
         (<a id='solutionsKata' className='champions cursor-pointer w-4/5' onClick={()=>handleKataChampions(_id,name,level)}>
             <div className='level solution'>
