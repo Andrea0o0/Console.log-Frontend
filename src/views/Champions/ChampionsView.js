@@ -41,7 +41,7 @@ export default function ChampionsView(){
                 {champions.length > 0 ?
                 <div className="flex flex-wrap justify-center w-full">
                 {champions.map((elem,i) => 
-                <div key={i}  className={`flex flex-wrap text-white justify-center py-6 my-2 bg-background-lightcolor w-4/5 tall:3/4 border-2 rounded-lg ${elem.kata.level === 5 ? 'border-color-5':elem.kata.level === 4 ? 'border-color-4':elem.kata.level === 3 ? 'border-color-3':elem.kata.level === 2 ? 'border-color-2':'border-color-1'}`}>
+                <div key={i}  className={`flex flex-wrap text-white justify-center py-6 my-2 bg-background-lightcolor w-4/5 tall:w-3/4 border-2 rounded-lg ${elem.kata.level === 5 ? 'border-color-5':elem.kata.level === 4 ? 'border-color-4':elem.kata.level === 3 ? 'border-color-3':elem.kata.level === 2 ? 'border-color-2':'border-color-1'}`}>
                   <h3 className="w-full text-center mb-2">{elem.namefight}</h3>             
                   <div className="flex flex-wrap w-full">
                       {elem.users.map(elem => {
