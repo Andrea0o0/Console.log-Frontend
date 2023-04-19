@@ -39,7 +39,7 @@ export default function Solutions(){
             <>
                 {solutions.true.length > 0 ? 
                 <div className="flex justify-center flex-wrap">
-                    {solutions.true.map((elem,i) => 
+                    {solutions.true.sort((a,b)=>a.updatedAt - b.updatedAt).reverse().map((elem,i) => 
                     <div key={i} className="mx-4 tall:w-3/5 flex justify-center flex-wrap mb-4">
                         <div className="w-4/5">
                             <Kata solutions={true} kata={elem.kata}/>

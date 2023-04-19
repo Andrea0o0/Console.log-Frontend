@@ -63,7 +63,7 @@ export default function Discussions(){
                 </div>
                 {discussions.length > 0 ? 
                 <div className="kataDiscussions border-1 rounded-lg">
-                    {discussions.map((elem,i) => {
+                    {discussions.sort((a,b)=>a.updatedAt - b.updatedAt).reverse().map((elem,i) => {
                         return elem.user !== null &&
                         <div key={i} className="m-4 flex flex-wrap justify-center">
                             <div className='w-11/12 flex flex-wrap justify-center'>

@@ -44,7 +44,7 @@ export default function KataSolutions(){
             <>
                 {solutions.length > 0 ? 
                 <>
-                    {solutions.map((elem,i) => {
+                    {solutions.sort((a,b)=>a.updatedAt - b.updatedAt).reverse().map((elem,i) => {
                     return elem.user !== null &&
                     (<div key={i} className="m-4 flex flex-wrap justify-center">
                         <div className='kataSolutions w-11/12 flex flex-wrap justify-center'>
