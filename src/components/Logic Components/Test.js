@@ -22,11 +22,13 @@ useEffect(()=> {
   useEffect(()=> {
     handleOutput(0,'validation',validation)
     },[validation])
+     // eslint-disable-next-line
   
 
   useEffect(()=> {
     setOutput(newoutput)
     },[newoutput])
+     // eslint-disable-next-line
 
   const handleResetOutput = () => {
     setValidation(0)
@@ -36,12 +38,12 @@ useEffect(()=> {
     handleResetOutput()
     const outputValidation = e.nativeEvent.submitter.name === 'Run' ? ([...output].slice(0,3)): [...output]
     try {
-      outputValidation.map((elem,index) => {
+      outputValidation.map(async (elem,index) => {
       let i
       const callfunction = test_function.split('${input}')
       const input = elem[0]
       const function_input = `${newfunction} \n${test_function.includes('noinput') ? `${test_function.replaceAll('noinput','input')}`:`${callfunction[0]}${input}${callfunction[1]}`}`
-      const response = eval(function_input)
+      const response = await eval(function_input)
       let consolesfunction = ''
       if(function_input.includes('return')){
         const toconsoles = function_input.replaceAll('console.log','consoles.push')

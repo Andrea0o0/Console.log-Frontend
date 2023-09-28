@@ -8,7 +8,6 @@ export default function Output(){
     const {output,kata} = useOutletContext();
 
     const [newOutput,setNewOutput] = useState(false)
-    // const [newError,setNewError] = useState('')
     const [newValidation,setNewValidation] = useState(false)
     const [newError,setNewError] = useState(false)
 
@@ -116,7 +115,6 @@ export default function Output(){
                                                 {newOutput[key].consoleslog.map((elem,i) => <p key={i}>{typeof elem === 'object' ? JSON.stringify(elem).split(',').map(elem=><p>{elem}</p>):elem}</p>)}
                                             </div>  
                                         </>}
-                                        
                                     </div>}     
                                     </>}
                                 </div>                           
@@ -124,7 +122,6 @@ export default function Output(){
                         </div>
                     </div>))}
                     </>}
-                
                 </div>
                 {newValidation === Object.keys(newOutput).length && newError === '' && <div className="output_green output_congratulations">{`You have passed all of the tests! :)`}</div>}
             </div>
