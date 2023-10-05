@@ -19,6 +19,10 @@ class CommentService {
     return this.api.get(`/kata/${kataId}`).then(({ data }) => data);
   }
 
+  commentUser(kataId) {
+    return this.api.get(`/user/${kataId}`).then(({ data }) => data).catch(err => console.error(err));
+  }
+
   commentsSolutions(solutionId) {
     return this.api.get(`/solution/${solutionId}`).then(({ data }) => data);
   }
